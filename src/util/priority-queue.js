@@ -38,7 +38,7 @@ class PriorityQueue {
 
   bubbleDown(pos) {
     while (2 * pos <= this._size) {
-      const next = 2 * pos;
+      let next = 2 * pos;
       if (next < this._size && this.comparison(next, next + 1)) next++;
       if (!this.comparison(pos, next)) break;
       this.swap(pos, next);
