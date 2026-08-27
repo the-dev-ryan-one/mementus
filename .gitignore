@@ -7,3 +7,5 @@ NOTES.md
 src/util/queue.js
 
 src/util/priority-queue.js
+
+src/integer-id.js
