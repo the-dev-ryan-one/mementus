@@ -5,3 +5,5 @@ NOTES.md
 .DS_Storesrc/util/queue.js
 
 src/util/queue.js
+
+src/util/priority-queue.js
