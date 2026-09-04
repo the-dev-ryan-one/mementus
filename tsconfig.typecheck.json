@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "include": ["src/node.ts", "test/node.test.js"],
+  "compilerOptions": {
+    "emitDeclarationOnly": false,
+    "noEmit": true,
+    "checkJs": true,
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "noImplicitAny": false
+  }
+}
