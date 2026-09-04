@@ -1,6 +1,5 @@
 // these are the allowed types for the prop keys
-// type propValues =  number | boolean | string[] | number[];
-type propValues =  boolean;
+type propValues =  number | string | boolean | string[] | number[];
 
 // enforces the type/shape of props
 type propKVpairs = Record<string , propValues>;
