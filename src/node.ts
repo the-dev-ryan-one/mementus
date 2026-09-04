@@ -1,5 +1,18 @@
+// these are the allowed types for the prop keys
+// type propValues =  number | boolean | string[] | number[];
+type propValues =  boolean;
+
+// enforces the type/shape of props
+type propKVpairs = Record<string , propValues>;
+
 class Node {
-  constructor({ id, label, props } = {}) {
+
+  readonly id?: number;
+  readonly label? : string;
+  readonly props? : propKVpairs;
+
+// syntactically -> constructor({what the constructor takes/params} : {type of params}= {default})
+  constructor({ id, label, props } : {id?:number, label?:string,  props?:propKVpairs}= {}) {
     this.id = id;
     this.label = label;
     this.props = props || {};
@@ -8,7 +21,7 @@ class Node {
       Object.defineProperty(this, key, {
         enumerable: true,
         writable: false,
-        value: props[key]
+        value: this.props[key]
       });
     }
 

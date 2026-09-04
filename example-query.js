@@ -1,5 +1,5 @@
 import Graph from './src/graph.js';
-import Node from './src/node.js';
+import Node from './src/node.ts';
 import Edge from './src/edge.js';
 
 const graph = new Graph(g => {
