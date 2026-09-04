@@ -3,7 +3,7 @@ import Node from './src/node.js';
 import Edge from './src/edge.js';
 
 const graph = new Graph(g => {
-  const alice = new Node({ id: 1, label: 'person', props: { name: 'Alice', age: 30 } });
+  const alice = new Node({ id: 1, label: 'person', props: { name: 'Age List', age: [30,20,11,22,33] } });
   const bob = new Node({ id: 2, label: 'person', props: { name: 'Bob', age: 25 } });
   const carol = new Node({ id: 3, label: 'person', props: { name: 'Carol', age: 28 } });
 
