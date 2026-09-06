@@ -11,16 +11,15 @@
     "build": "npm run build:bundle && npm run build:compile",
     "build:bundle": "rollup -c",
     "build:compile": "tsc",
-    "test": "ava --verbose 'test/**/*.test.js'"
+    "test": "ava --verbose 'test/**/*.test.{js,ts}'"
   },
   "ava": {
-    "extensions": {
-      "js": true,
-      "ts": "module"
-    },
-    "nodeArguments": [
-      "--import=tsx"
-    ]
+  "extensions": {
+    "js": true,
+    "ts": "module"
+  },
+  "nodeArguments": ["--import=tsx"],
+  "workerThreads": false
   },
   "devDependencies": {
     "@rollup/plugin-json": "^4.1.0",

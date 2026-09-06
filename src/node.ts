@@ -7,6 +7,7 @@ type propKVpairs = Record<string , propValues>;
 // the generic here will enforce that the props provided to the constructor has the form KV pair where key is a string
 class Node <propsGeneric extends propKVpairs> {
 
+  // readonly id?: number;
   readonly id?: number;
   readonly label? : string;
   readonly props? : propsGeneric;
