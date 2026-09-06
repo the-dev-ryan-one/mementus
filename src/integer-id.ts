@@ -2,7 +2,7 @@ class IntegerId {
 
   private currentValue : number;
 
-  constructor(startValue: number =1 ) {
+  constructor(startValue: number = 1 ) {
     this.currentValue = startValue;
   }
 

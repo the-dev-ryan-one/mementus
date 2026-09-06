@@ -16,3 +16,11 @@ test("counts upwards from given start value", t => {
   t.is(generator.nextId(), 101);
   t.is(generator.nextId(), 102);
 });
+
+test("counts upwards from given start value2", t => {
+  const generator = new IntegerId(-5);
+
+  t.is(generator.nextId(), -5);
+  t.is(generator.nextId(), -4);
+  t.is(generator.nextId(), -3);
+});

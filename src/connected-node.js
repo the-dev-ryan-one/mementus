@@ -1,8 +1,8 @@
 class ConnectedNode {
   constructor(node, graph) {
-    this.id = node.id;
-    this.label = node.label;
-    this.props = node.props;
+    this.id = node.id; //number
+    this.label = node.label; // string
+    this.props = node.props; // object
     this.graph = graph;
 
     for (let key of Object.keys(node.props)) {
