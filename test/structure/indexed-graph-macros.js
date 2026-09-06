@@ -1,5 +1,5 @@
 import test from "ava";
-import Node from "../../src/node.js";
+import Node from "../../src/node.ts";
 import Edge from "../../src/edge.js";
 
 function macro(testTitle, exec) {

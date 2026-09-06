@@ -1,6 +1,6 @@
 import test from "ava";
 import Graph from "../src/graph.js";
-import Node from "../src/node.js";
+import Node from "../src/node.ts";
 import Edge from "../src/edge.js";
 
 const node1 = () => new Node({ id: 1, label: "trunk", props: { num: "one" }});

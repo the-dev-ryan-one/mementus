@@ -1,4 +1,4 @@
-import Node from "../../src/node.js";
+import Node from "../../src/node.ts";
 import Edge from "../../src/edge.js";
 
 function outgoingNodes(t, StructureImpl) {

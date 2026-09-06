@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "prepublishOnly": "npm run build",
-    "build": "npm run build:bundle ; npm run build:compile",
+    "build": "npm run build:bundle && npm run build:compile",
     "build:bundle": "rollup -c",
     "build:compile": "tsc",
     "test": "ava --verbose 'test/**/*.test.js'"
@@ -24,11 +24,12 @@
   },
   "devDependencies": {
     "@rollup/plugin-json": "^4.1.0",
-    "ava": "^4.1.0",
+    "@types/node": "^18.19.130",
+    "ava": "^6.4.1",
     "rollup": "^2.70.1",
     "rollup-plugin-terser": "^7.0.2",
-    "typescript": "^4.6.2",
-    "tsx": "^4.0.0"
+    "tsx": "^4.23.13",
+    "typescript": "^7.0.2"
   },
   "module": "src/mementus.js",
   "main": "dist/mementus.bundle.cjs",

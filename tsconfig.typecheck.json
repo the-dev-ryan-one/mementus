@@ -8,6 +8,8 @@
     "module": "ESNext",
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "skipLibCheck": true,
+    "types": []
   }
 }
