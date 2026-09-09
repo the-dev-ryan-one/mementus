@@ -9,7 +9,7 @@
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
 
-    "allowJs": true,
+    "allowJs": false,
     "checkJs": false,
     "allowImportingTsExtensions": true,
 
@@ -17,8 +17,17 @@
     "emitDeclarationOnly": true,
 
     "noEmitOnError": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+
+    "strict": true,
+
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "forceConsistentCasingInFileNames": true
   }
 }

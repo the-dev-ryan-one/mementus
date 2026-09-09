@@ -1,8 +1,0 @@
-26/8/26
-
-cloned a fresh copy of repo.
-of marks pre existing test script ( ava --verbose 'test/**/*.test.js' )
-  111 tests passed
-  1 test skipped
-
-
