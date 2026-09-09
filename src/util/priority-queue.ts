@@ -69,6 +69,14 @@ class PriorityQueue <QueueElementType> {
   }
 
   swap(a : number, b : number) {
+
+    // behaviour added by me (ryan) , likely overly defensive
+    if (this._heap[a] === null || this._heap[a] === undefined ||
+        this._heap[b] === null || this._heap[b] === undefined) 
+    {
+      return;
+    }
+
     const item = this._heap[a];
     this._heap[a] = this._heap[b];
     this._heap[b] = item;
