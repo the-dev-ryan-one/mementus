@@ -41,3 +41,12 @@ test("does not allow mutation of props", t => {
   t.truthy(writeError instanceof TypeError);
   t.regex(writeError.message, /Cannot assign to read only property/);
 });
+
+//---------
+// new test
+//---------
+// test("added by ryan: invalid" , t => {
+
+//   const node = new Node();
+
+// });
