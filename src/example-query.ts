@@ -1,5 +1,5 @@
 // import Graph from 'src/graph.js';
-import Node from './node.ts';
+// import Node from './node.ts';
 // import Edge from './edge.js';
 
 // const graph = new Graph(g => {
@@ -18,7 +18,7 @@ import Node from './node.ts';
 
 // });
 
-const node4 = new Node({ id: "invalid", label: 'person', props: { name: 'Bob', age: 25 } });
+// const node4 = new Node({ id: "invalid", label: 'person', props: { name: 'Bob', age: 25 } });
 
 
 // console.log('All people:');
