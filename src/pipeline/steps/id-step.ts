@@ -1,4 +1,8 @@
+
+interface PipelineStep<T>
+
 class IdStep {
+ 
   constructor(source) {
     this.pipe = source;
   }
@@ -9,7 +13,7 @@ class IdStep {
     }
   }
 
-  toString() {
+  toString() : string {
     return "[IdStep]";
   }
 }
