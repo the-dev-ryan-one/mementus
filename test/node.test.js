@@ -25,6 +25,7 @@ test("returns undefined when missing prop is accessed", t => {
 
 test("initializes with auto props", t => {
   const node = new Node({ props: { title: "Vertex" }});
+  console.log("######################" , node.title);
   t.is(node.title, "Vertex");
 });
 
