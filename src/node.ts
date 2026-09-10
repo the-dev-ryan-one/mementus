@@ -7,7 +7,6 @@ type propKVpairs = Record<string , propValues>;
 // the generic here will enforce that the props provided to the constructor has the form KV pair where key is a string
 class Node <propsGeneric extends propKVpairs> {
 
-  // readonly id?: number;
   readonly id?: number;
   readonly label? : string;
   readonly props? : propsGeneric;
@@ -16,7 +15,7 @@ class Node <propsGeneric extends propKVpairs> {
   constructor({ id, label, props } : {id?:number, label?:string,  props?:propsGeneric}= {}) {
     this.id = id;
     this.label = label;
-    this.props = props || ({} as propsGeneric);
+    this.props = props ?? ({} as propsGeneric);
 
     for (let key of Object.keys(this.props)) {
       Object.defineProperty(this, key, {

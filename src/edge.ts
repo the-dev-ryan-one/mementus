@@ -22,7 +22,7 @@ class Edge <edgePropsGeneric extends propKVpairs>{
 
     this.id = id; // number
     this.label = label; // string
-    this.props = props || ({} as edgePropsGeneric);
+    this.props = props ?? ({} as edgePropsGeneric);
 
     for (let key of Object.keys(this.props)) {
       Object.defineProperty(this, key, {
