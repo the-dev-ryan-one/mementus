@@ -5,7 +5,6 @@ type propKVpairs = Record<string , propValues>;
 
 class ConnectedNode <propGeneric extends propKVpairs>{
 
-  // readonly node: Node<propGeneric>;
   readonly graph: any;
 
   readonly id?: number;
