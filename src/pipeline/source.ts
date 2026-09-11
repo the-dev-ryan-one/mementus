@@ -30,7 +30,7 @@ class Source <sourceElement> implements Pipe<sourceElement>{
     // console.log("***Source***: " , source)
     if (Array.isArray(source)) {
       this.pipe = new CollectionSource(source);
-      // console.log("example of this.pipe $%$: " , this.pipe)
+      console.log("this.pipe example 1: " , this.pipe)
     } else {
       throw new Error("Source must be an array (for now)");
     }
@@ -38,9 +38,11 @@ class Source <sourceElement> implements Pipe<sourceElement>{
 
   connect(step : any , ...args : any[]) {
     this.pipe = new step(this.pipe, ...args);
+     console.log("this.pipe example 2: " , this.pipe)
   }
 
   *process() : Generator<sourceElement> {
+    console.log("this.pipe.process() examples: ", this.pipe.process()) 
     yield* this.pipe.process();
   }
 }

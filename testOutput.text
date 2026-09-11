@@ -3,18 +3,9 @@
 > ava --verbose 'test/**/*.test.{js,ts}'
 
 
-  ✔ edge › should initialize with integer ids
-  ✔ edge › should initialize with node instances
-  ✔ edge › should initialize with label given
-  ✔ edge › returns undefined when missing prop is accessed
-  ✔ edge › initializes with auto props
-  ✔ edge › initializes with props keys
-  ✔ edge › does not allow mutation of props
-  ✔ util › queue › queue starts empty
-  ✔ util › queue › first in, first out
-###################### Vertex
   ✔ util › priority-queue › priority queue starts empty
   ✔ util › priority-queue › min priority queue
+###################### Vertex
   ✔ node › initializes with id
   ✔ node › initializes with label
   ✔ node › initializes with id and label
@@ -22,741 +13,48 @@
   ✔ node › initializes with auto props
   ✔ node › initializes with props keys
   ✔ node › does not allow mutation of props
-example of this.pipe $%$:  CollectionSource { collection: [] }
-example of this.pipe $%$:  CollectionSource { collection: [] }
-****this.pipe****  FilterStep {
-  pipe: CollectionSource { collection: [] },
-  predicate: [Function (anonymous)]
-}
-example of this.pipe $%$:  CollectionSource { collection: [] }
-****this.pipe****  FilterStep {
-  pipe: CollectionSource { collection: [] },
-  predicate: [Function (anonymous)]
-}
-****this.pipe****  IdStep {
-  pipe: FilterStep {
-    pipe: CollectionSource { collection: [] },
-    predicate: [Function (anonymous)]
-  }
-}
-  ✔ pipeline › traversal › composition › Connect collection source
-  ✔ pipeline › traversal › composition › Connect single step
-  ✔ pipeline › traversal › composition › Connect multiple steps
-  ✔ integer-id › counts upwards from 1 by default
-  ✔ integer-id › counts upwards from given start value
-  ✔ integer-id › counts upwards from given start value2
-  ✔ structure › incidence-list › enumerates outgoing nodes
-  ✔ structure › incidence-list › enumerates outgoing edges
-  ✔ structure › incidence-list › enumerates incoming nodes
-  ✔ structure › incidence-list › enumerates incoming edges
-  ✔ structure › incidence-list › starts with empty node list
-  ✔ structure › incidence-list › starts with empty edge list
-  ✔ structure › incidence-list › assigns a node to the graph
-  ✔ structure › incidence-list › assigns an edge to the graph
-  ✔ structure › incidence-list › tests for the presence of a given node by id
-  ✔ structure › incidence-list › tests for the presence of an edge by identity
-  ✔ structure › incidence-list › tests for the presence of an edge by id
-  ✔ structure › incidence-list › tests for the presence of an edge between nodes
-  ✔ structure › incidence-list › finds a node by id
-  ✔ structure › incidence-list › finds a node by prop value
-  ✔ structure › incidence-list › finds a node by label
-  ✔ structure › incidence-list › finds an edge by id
-  ✔ structure › incidence-list › finds an edge by prop value
-  ✔ structure › incidence-list › finds an edge by label
-  ✔ structure › incidence-list › finds all nodes in the graph
-  ✔ structure › incidence-list › finds all edges in the graph
-  ✔ structure › incidence-list › remove all references to a node
-  ✔ structure › incidence-list › removes all references to a node id
-  ✔ structure › incidence-list › removes all references to an edge
-  ✔ structure › incidence-list › removes all references to an edge id
-example of this.pipe $%$:  CollectionSource { collection: [ 1, 2, 3, 4 ] }
-****this.pipe****  DoubleStep {
+this.pipe example 1:  CollectionSource { collection: [ 1, 2, 3, 4 ] }
+this.pipe example 2:  DoubleStep {
   pipe: CollectionSource { collection: [ 1, 2, 3, 4 ] },
   marker: '%'
 }
-****this.pipe****  DoubleStep {
+this.pipe example 2:  DoubleStep {
   pipe: DoubleStep {
     pipe: CollectionSource { collection: [Array] },
     marker: '%'
   },
   marker: '¶'
 }
-****this.pipe****  DoubleStep {
+this.pipe example 2:  DoubleStep {
   pipe: DoubleStep {
     pipe: DoubleStep { pipe: [CollectionSource], marker: '%' },
     marker: '¶'
   },
   marker: '¥'
 }
-example of this.pipe $%$:  CollectionSource { collection: [ 1, 2, 3, 4 ] }
-example of this.pipe $%$:  CollectionSource { collection: [] }
-example of this.pipe $%$:  CollectionSource { collection: [ 'a' ] }
+this.pipe example 1:  CollectionSource { collection: [ 1, 2, 3, 4 ] }
+this.pipe.process() examples:  Object [Generator] {}
+this.pipe example 1:  CollectionSource { collection: [] }
+this.pipe.process() examples:  Object [Generator] {}
+this.pipe example 1:  CollectionSource { collection: [ 'a' ] }
+this.pipe.process() examples:  Object [Generator] {}
   ✔ pipeline › source › Connects a linked list of pipes
   ✔ pipeline › source › Provides values from the process iterator
   ✔ pipeline › source › Returns done when no more values can be provided
   ✔ pipeline › source › creates an isolated iteration context with each process
-  ✔ pipeline › steps › filter-step › Predicate filters passed in values
-example of this.pipe $%$:  CollectionSource { collection: [ 1, 2, 3, 4, 5 ] }
-example of this.pipe $%$:  CollectionSource { collection: [] }
-example of this.pipe $%$:  CollectionSource { collection: [] }
-example of this.pipe $%$:  CollectionSource { collection: [ 1, 2, 3, 4 ] }
-example of this.pipe $%$:  CollectionSource { collection: [ 1, 2, 3, 4 ] }
-example of this.pipe $%$:  CollectionSource { collection: [ 1, 2, 3, 4 ] }
-example of this.pipe $%$:  CollectionSource { collection: [ 1, 2, 3, 4 ] }
-example of this.pipe $%$:  CollectionSource {
-  collection: [
-    1, 2, 3, 4,
-    5, 6, 7, 8
-  ]
-}
-example of this.pipe $%$:  CollectionSource {
-  collection: [
-    1, 2, 3, 4,
-    5, 6, 7, 8
-  ]
-}
-example of this.pipe $%$:  CollectionSource { collection: [ 1, 2, 3, 4 ] }
-  ✔ pipeline › traversal › termination › Terminate with empty source
-  ✔ pipeline › traversal › termination › Terminate with all values
-  ✔ pipeline › traversal › termination › Terminate with one value
-  ✔ pipeline › traversal › termination › Terminate by taking a given number of values
-  ✔ pipeline › traversal › termination › Run the pipeline returning an iterator that can produce values
-example of this.pipe $%$:  CollectionSource { collection: [ 1, 2, 3, 4 ] }
-****this.pipe****  MapStep {
-  pipe: CollectionSource { collection: [ 1, 2, 3, 4 ] },
-  transform: [Function (anonymous)]
-}
-example of this.pipe $%$:  CollectionSource { collection: [ 1, 2, 3, 4 ] }
-example of this.pipe $%$:  CollectionSource { collection: [ 1, 2, 3, 4 ] }
-****this.pipe****  FilterStep {
-  pipe: CollectionSource { collection: [ 1, 2, 3, 4 ] },
-  predicate: [Function (anonymous)]
-}
-example of this.pipe $%$:  CollectionSource { collection: [ 1, 2, 3, 4 ] }
-example of this.pipe $%$:  CollectionSource {
-  collection: [
-    ConnectedNode {
-      id: 1,
-      label: undefined,
-      props: {},
-      graph: [IncidenceList]
-    }
-  ]
-}
-****this.pipe****  OutStep {
-  pipe: CollectionSource { collection: [ [ConnectedNode] ] },
-  graph: Graph {
-    structure: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    },
-    index: Map(0) {}
-  },
-  label: null
-}
-example of this.pipe $%$:  CollectionSource {
-  collection: [
-    ConnectedNode {
-      id: 1,
-      label: undefined,
-      props: {},
-      graph: [IncidenceList]
-    }
-  ]
-}
-example of this.pipe $%$:  CollectionSource {
-  collection: [
-    ConnectedNode {
-      id: 5,
-      label: undefined,
-      props: {},
-      graph: [IncidenceList]
-    }
-  ]
-}
-****this.pipe****  InStep {
-  pipe: CollectionSource { collection: [ [ConnectedNode] ] },
-  graph: Graph {
-    structure: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    },
-    index: Map(0) {}
-  },
-  label: null
-}
-example of this.pipe $%$:  CollectionSource {
-  collection: [
-    ConnectedNode {
-      id: 5,
-      label: undefined,
-      props: {},
-      graph: [IncidenceList]
-    }
-  ]
-}
-example of this.pipe $%$:  CollectionSource {
-  collection: [
-    ConnectedNode {
-      id: 1,
-      label: undefined,
-      props: {},
-      graph: [IncidenceList]
-    }
-  ]
-}
-****this.pipe****  OutEStep {
-  pipe: CollectionSource { collection: [ [ConnectedNode] ] },
-  graph: Graph {
-    structure: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    },
-    index: Map(0) {}
-  }
-}
-example of this.pipe $%$:  CollectionSource {
-  collection: [
-    ConnectedNode {
-      id: 1,
-      label: undefined,
-      props: {},
-      graph: [IncidenceList]
-    }
-  ]
-}
-example of this.pipe $%$:  CollectionSource {
-  collection: [
-    ConnectedNode {
-      id: 5,
-      label: undefined,
-      props: {},
-      graph: [IncidenceList]
-    }
-  ]
-}
-****this.pipe****  InEStep {
-  pipe: CollectionSource { collection: [ [ConnectedNode] ] },
-  graph: Graph {
-    structure: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    },
-    index: Map(0) {}
-  }
-}
-example of this.pipe $%$:  CollectionSource {
-  collection: [
-    ConnectedNode {
-      id: 5,
-      label: undefined,
-      props: {},
-      graph: [IncidenceList]
-    }
-  ]
-}
-example of this.pipe $%$:  CollectionSource {
-  collection: [ { id: 1 }, { id: 2 }, { id: 3 }, { id: 4 } ]
-}
-****this.pipe****  IdStep {
-  pipe: CollectionSource {
-    collection: [ [Object], [Object], [Object], [Object] ]
-  }
-}
-example of this.pipe $%$:  CollectionSource {
-  collection: [ { id: 1 }, { id: 2 }, { id: 3 }, { id: 4 } ]
-}
-example of this.pipe $%$:  CollectionSource {
-  collection: [
-    { id: 1, label: 'aaa' },
-    { id: 2, label: 'aaa' },
-    { id: 3, label: 'bbb' },
-    { id: 4, label: 'ccc' }
-  ]
-}
-****this.pipe****  LabelStep {
-  pipe: CollectionSource {
-    collection: [ [Object], [Object], [Object], [Object] ]
-  }
-}
-example of this.pipe $%$:  CollectionSource {
-  collection: [
-    { id: 1, label: 'aaa' },
-    { id: 2, label: 'aaa' },
-    { id: 3, label: 'bbb' },
-    { id: 4, label: 'ccc' }
-  ]
-}
-example of this.pipe $%$:  CollectionSource {
-  collection: [
-    ConnectedNode {
-      id: 2,
-      label: undefined,
-      props: [Object],
-      graph: [IncidenceList],
-      color: 'red'
-    },
-    ConnectedNode {
-      id: 3,
-      label: undefined,
-      props: [Object],
-      graph: [IncidenceList],
-      color: 'green'
-    },
-    ConnectedNode {
-      id: 4,
-      label: undefined,
-      props: [Object],
-      graph: [IncidenceList],
-      color: 'blue'
-    }
-  ]
-}
-****this.pipe****  PropsStep {
-  pipe: CollectionSource {
-    collection: [ [ConnectedNode], [ConnectedNode], [ConnectedNode] ]
-  }
-}
-example of this.pipe $%$:  CollectionSource {
-  collection: [
-    ConnectedNode {
-      id: 2,
-      label: undefined,
-      props: [Object],
-      graph: [IncidenceList],
-      color: 'red'
-    },
-    ConnectedNode {
-      id: 3,
-      label: undefined,
-      props: [Object],
-      graph: [IncidenceList],
-      color: 'green'
-    },
-    ConnectedNode {
-      id: 4,
-      label: undefined,
-      props: [Object],
-      graph: [IncidenceList],
-      color: 'blue'
-    }
-  ]
-}
-example of this.pipe $%$:  CollectionSource {
-  collection: [
-    ConnectedNode {
-      id: 2,
-      label: undefined,
-      props: [Object],
-      graph: [IncidenceList],
-      color: 'red'
-    },
-    ConnectedNode {
-      id: 3,
-      label: undefined,
-      props: [Object],
-      graph: [IncidenceList],
-      color: 'green'
-    },
-    ConnectedNode {
-      id: 4,
-      label: undefined,
-      props: [Object],
-      graph: [IncidenceList],
-      color: 'blue'
-    }
-  ]
-}
-****this.pipe****  PropStep {
-  pipe: CollectionSource {
-    collection: [ [ConnectedNode], [ConnectedNode], [ConnectedNode] ]
-  },
-  match: 'color'
-}
-example of this.pipe $%$:  CollectionSource {
-  collection: [
-    ConnectedNode {
-      id: 2,
-      label: undefined,
-      props: [Object],
-      graph: [IncidenceList],
-      color: 'red'
-    },
-    ConnectedNode {
-      id: 3,
-      label: undefined,
-      props: [Object],
-      graph: [IncidenceList],
-      color: 'green'
-    },
-    ConnectedNode {
-      id: 4,
-      label: undefined,
-      props: [Object],
-      graph: [IncidenceList],
-      color: 'blue'
-    }
-  ]
-}
-example of this.pipe $%$:  CollectionSource {
-  collection: [
-    ConnectedNode {
-      id: 1,
-      label: undefined,
-      props: {},
-      graph: [IncidenceList]
-    },
-    ConnectedNode {
-      id: 2,
-      label: undefined,
-      props: [Object],
-      graph: [IncidenceList],
-      color: 'red'
-    }
-  ]
-}
-****this.pipe****  WhereStep {
-  pipe: CollectionSource { collection: [ [ConnectedNode], [ConnectedNode] ] },
-  predicate: [Function (anonymous)],
-  graph: Graph {
-    structure: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    },
-    index: Map(0) {}
-  },
-  traverser: [class Traversal]
-}
-****this.pipe****  IdStep {
-  pipe: WhereStep {
-    pipe: CollectionSource { collection: [Array] },
-    predicate: [Function (anonymous)],
-    graph: Graph { structure: [IncidenceList], index: Map(0) {} },
-    traverser: [class Traversal]
-  }
-}
-example of this.pipe $%$:  CollectionSource {
-  collection: [
-    ConnectedNode {
-      id: 1,
-      label: undefined,
-      props: {},
-      graph: [IncidenceList]
-    }
-  ]
-}
-****this.pipe****  IdStep { pipe: CollectionSource { collection: [ [ConnectedNode] ] } }
-example of this.pipe $%$:  CollectionSource {
-  collection: [
-    ConnectedNode {
-      id: 1,
-      label: undefined,
-      props: {},
-      graph: [IncidenceList]
-    }
-  ]
-}
-example of this.pipe $%$:  CollectionSource {
-  collection: [
-    ConnectedNode {
-      id: 2,
-      label: undefined,
-      props: [Object],
-      graph: [IncidenceList],
-      color: 'red'
-    }
-  ]
-}
-****this.pipe****  IdStep { pipe: CollectionSource { collection: [ [ConnectedNode] ] } }
-example of this.pipe $%$:  CollectionSource {
-  collection: [
-    ConnectedNode {
-      id: 2,
-      label: undefined,
-      props: [Object],
-      graph: [IncidenceList],
-      color: 'red'
-    }
-  ]
-}
-example of this.pipe $%$:  CollectionSource {
-  collection: [
-    ConnectedNode {
-      id: 1,
-      label: undefined,
-      props: {},
-      graph: [IncidenceList]
-    },
-    ConnectedNode {
-      id: 2,
-      label: undefined,
-      props: [Object],
-      graph: [IncidenceList],
-      color: 'red'
-    }
-  ]
-}
-example of this.pipe $%$:  CollectionSource {
-  collection: [
-    ConnectedNode {
-      id: 5,
-      label: undefined,
-      props: {},
-      graph: [IncidenceList]
-    },
-    ConnectedNode {
-      id: 6,
-      label: undefined,
-      props: {},
-      graph: [IncidenceList]
-    }
-  ]
-}
-****this.pipe****  UnionStep {
-  pipe: CollectionSource { collection: [ [ConnectedNode], [ConnectedNode] ] },
-  graph: Graph {
-    structure: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    },
-    index: Map(0) {}
-  },
-  base: [Function (anonymous)],
-  other: [Function (anonymous)],
-  traverser: [class Traversal]
-}
-example of this.pipe $%$:  CollectionSource {
-  collection: [
-    ConnectedNode {
-      id: 5,
-      label: undefined,
-      props: {},
-      graph: [IncidenceList]
-    }
-  ]
-}
-****this.pipe****  InStep {
-  pipe: CollectionSource { collection: [ [ConnectedNode] ] },
-  graph: Graph {
-    structure: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    },
-    index: Map(0) {}
-  },
-  label: null
-}
-****this.pipe****  IdStep {
-  pipe: InStep {
-    pipe: CollectionSource { collection: [Array] },
-    graph: Graph { structure: [IncidenceList], index: Map(0) {} },
-    label: null
-  }
-}
-example of this.pipe $%$:  CollectionSource {
-  collection: [
-    ConnectedNode {
-      id: 5,
-      label: undefined,
-      props: {},
-      graph: [IncidenceList]
-    }
-  ]
-}
-example of this.pipe $%$:  CollectionSource {
-  collection: [
-    ConnectedNode {
-      id: 5,
-      label: undefined,
-      props: {},
-      graph: [IncidenceList]
-    }
-  ]
-}
-****this.pipe****  InStep {
-  pipe: CollectionSource { collection: [ [ConnectedNode] ] },
-  graph: Graph {
-    structure: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    },
-    index: Map(0) {}
-  },
-  label: null
-}
-****this.pipe****  IdStep {
-  pipe: InStep {
-    pipe: CollectionSource { collection: [Array] },
-    graph: Graph { structure: [IncidenceList], index: Map(0) {} },
-    label: null
-  }
-}
-example of this.pipe $%$:  CollectionSource {
-  collection: [
-    ConnectedNode {
-      id: 5,
-      label: undefined,
-      props: {},
-      graph: [IncidenceList]
-    }
-  ]
-}
-example of this.pipe $%$:  CollectionSource {
-  collection: [
-    ConnectedNode {
-      id: 6,
-      label: undefined,
-      props: {},
-      graph: [IncidenceList]
-    }
-  ]
-}
-****this.pipe****  InStep {
-  pipe: CollectionSource { collection: [ [ConnectedNode] ] },
-  graph: Graph {
-    structure: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    },
-    index: Map(0) {}
-  },
-  label: null
-}
-****this.pipe****  IdStep {
-  pipe: InStep {
-    pipe: CollectionSource { collection: [Array] },
-    graph: Graph { structure: [IncidenceList], index: Map(0) {} },
-    label: null
-  }
-}
-example of this.pipe $%$:  CollectionSource {
-  collection: [
-    ConnectedNode {
-      id: 6,
-      label: undefined,
-      props: {},
-      graph: [IncidenceList]
-    }
-  ]
-}
-example of this.pipe $%$:  CollectionSource {
-  collection: [
-    ConnectedNode {
-      id: 6,
-      label: undefined,
-      props: {},
-      graph: [IncidenceList]
-    }
-  ]
-}
-****this.pipe****  InStep {
-  pipe: CollectionSource { collection: [ [ConnectedNode] ] },
-  graph: Graph {
-    structure: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    },
-    index: Map(0) {}
-  },
-  label: null
-}
-****this.pipe****  IdStep {
-  pipe: InStep {
-    pipe: CollectionSource { collection: [Array] },
-    graph: Graph { structure: [IncidenceList], index: Map(0) {} },
-    label: null
-  }
-}
-example of this.pipe $%$:  CollectionSource {
-  collection: [
-    ConnectedNode {
-      id: 6,
-      label: undefined,
-      props: {},
-      graph: [IncidenceList]
-    }
-  ]
-}
-example of this.pipe $%$:  CollectionSource {
-  collection: [
-    ConnectedNode {
-      id: 5,
-      label: undefined,
-      props: {},
-      graph: [IncidenceList]
-    },
-    ConnectedNode {
-      id: 6,
-      label: undefined,
-      props: {},
-      graph: [IncidenceList]
-    }
-  ]
-}
-  ✔ pipeline › traversal › api › map
-  ✔ pipeline › traversal › api › filter
-  ✔ pipeline › traversal › api › out
-  ✔ pipeline › traversal › api › in
-  ✔ pipeline › traversal › api › outE
-  ✔ pipeline › traversal › api › inE
-  ✔ pipeline › traversal › api › id
-  ✔ pipeline › traversal › api › label
-  ✔ pipeline › traversal › api › props
-  ✔ pipeline › traversal › api › prop
-  ✔ pipeline › traversal › api › where
-  ✔ pipeline › traversal › api › union
+this.pipe.process() examples:  Object [Generator] {}
+  ✔ integer-id › counts upwards from 1 by default
+  ✔ integer-id › counts upwards from given start value
+  ✔ integer-id › counts upwards from given start value2
+  ✔ edge › should initialize with integer ids
+  ✔ edge › should initialize with node instances
+  ✔ edge › should initialize with label given
+  ✔ edge › returns undefined when missing prop is accessed
+  ✔ edge › initializes with auto props
+  ✔ edge › initializes with props keys
+  ✔ edge › does not allow mutation of props
   - [skip] graph › #hasNode by ref
-example of this.pipe $%$:  CollectionSource {
+this.pipe example 1:  CollectionSource {
   collection: [
     ConnectedNode {
       id: 1,
@@ -767,7 +65,7 @@ example of this.pipe $%$:  CollectionSource {
     }
   ]
 }
-****this.pipe****  OutEStep {
+this.pipe example 2:  OutEStep {
   pipe: CollectionSource { collection: [ [ConnectedNode] ] },
   graph: Graph {
     structure: IncidenceList {
@@ -784,7 +82,7 @@ example of this.pipe $%$:  CollectionSource {
     edgeIds: IntegerId { currentValue: 1 }
   }
 }
-****this.pipe****  PropStep {
+this.pipe example 2:  PropStep {
   pipe: OutEStep {
     pipe: CollectionSource { collection: [Array] },
     graph: Graph {
@@ -796,7 +94,8 @@ example of this.pipe $%$:  CollectionSource {
   },
   match: 'tag'
 }
-example of this.pipe $%$:  CollectionSource {
+this.pipe.process() examples:  Object [Generator] {}
+this.pipe example 1:  CollectionSource {
   collection: [
     ConnectedNode {
       id: 1,
@@ -807,7 +106,7 @@ example of this.pipe $%$:  CollectionSource {
     }
   ]
 }
-example of this.pipe $%$:  CollectionSource {
+this.pipe example 1:  CollectionSource {
   collection: [
     ConnectedNode {
       id: 1,
@@ -832,7 +131,7 @@ example of this.pipe $%$:  CollectionSource {
     }
   ]
 }
-****this.pipe****  OutStep {
+this.pipe example 2:  OutStep {
   pipe: CollectionSource {
     collection: [ [ConnectedNode], [ConnectedNode], [ConnectedNode] ]
   },
@@ -852,7 +151,7 @@ example of this.pipe $%$:  CollectionSource {
   },
   label: null
 }
-****this.pipe****  IdStep {
+this.pipe example 2:  IdStep {
   pipe: OutStep {
     pipe: CollectionSource { collection: [Array] },
     graph: Graph {
@@ -864,7 +163,8 @@ example of this.pipe $%$:  CollectionSource {
     label: null
   }
 }
-example of this.pipe $%$:  CollectionSource {
+this.pipe.process() examples:  Object [Generator] {}
+this.pipe example 1:  CollectionSource {
   collection: [
     ConnectedNode {
       id: 1,
@@ -889,7 +189,7 @@ example of this.pipe $%$:  CollectionSource {
     }
   ]
 }
-example of this.pipe $%$:  CollectionSource {
+this.pipe example 1:  CollectionSource {
   collection: [
     ConnectedNode {
       id: 2,
@@ -907,10 +207,11 @@ example of this.pipe $%$:  CollectionSource {
     }
   ]
 }
-****this.pipe****  IdStep {
+this.pipe example 2:  IdStep {
   pipe: CollectionSource { collection: [ [ConnectedNode], [ConnectedNode] ] }
 }
-example of this.pipe $%$:  CollectionSource {
+this.pipe.process() examples:  Object [Generator] {}
+this.pipe example 1:  CollectionSource {
   collection: [
     ConnectedNode {
       id: 2,
@@ -928,7 +229,7 @@ example of this.pipe $%$:  CollectionSource {
     }
   ]
 }
-example of this.pipe $%$:  CollectionSource {
+this.pipe example 1:  CollectionSource {
   collection: [
     ConnectedNode {
       id: 1,
@@ -939,7 +240,7 @@ example of this.pipe $%$:  CollectionSource {
     }
   ]
 }
-****this.pipe****  OutStep {
+this.pipe example 2:  OutStep {
   pipe: CollectionSource { collection: [ [ConnectedNode] ] },
   graph: Graph {
     structure: IncidenceList {
@@ -957,7 +258,7 @@ example of this.pipe $%$:  CollectionSource {
   },
   label: 'canopy'
 }
-****this.pipe****  IdStep {
+this.pipe example 2:  IdStep {
   pipe: OutStep {
     pipe: CollectionSource { collection: [Array] },
     graph: Graph {
@@ -969,7 +270,8 @@ example of this.pipe $%$:  CollectionSource {
     label: 'canopy'
   }
 }
-example of this.pipe $%$:  CollectionSource {
+this.pipe.process() examples:  Object [Generator] {}
+this.pipe example 1:  CollectionSource {
   collection: [
     ConnectedNode {
       id: 1,
@@ -980,7 +282,7 @@ example of this.pipe $%$:  CollectionSource {
     }
   ]
 }
-example of this.pipe $%$:  CollectionSource {
+this.pipe example 1:  CollectionSource {
   collection: [
     ConnectedNode {
       id: 1,
@@ -991,7 +293,7 @@ example of this.pipe $%$:  CollectionSource {
     }
   ]
 }
-****this.pipe****  OutEStep {
+this.pipe example 2:  OutEStep {
   pipe: CollectionSource { collection: [ [ConnectedNode] ] },
   graph: Graph {
     structure: IncidenceList {
@@ -1008,7 +310,7 @@ example of this.pipe $%$:  CollectionSource {
     edgeIds: IntegerId { currentValue: 1 }
   }
 }
-****this.pipe****  IdStep {
+this.pipe example 2:  IdStep {
   pipe: OutEStep {
     pipe: CollectionSource { collection: [Array] },
     graph: Graph {
@@ -1019,7 +321,25 @@ example of this.pipe $%$:  CollectionSource {
     }
   }
 }
-example of this.pipe $%$:  CollectionSource {
+this.pipe.process() examples:  Object [Generator] {}
+this.pipe example 1:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 4,
+      label: undefined,
+      props: [Object],
+      graph: [IncidenceList],
+      color: 'blue'
+    },
+    ConnectedNode {
+      id: 5,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+this.pipe example 1:  CollectionSource {
   collection: [
     ConnectedNode {
       id: 1,
@@ -1030,7 +350,9 @@ example of this.pipe $%$:  CollectionSource {
     }
   ]
 }
-example of this.pipe $%$:  CollectionSource {
+this.pipe.process() examples:  Object [Generator] {}
+  ✔ pipeline › steps › in-step › Enumerates incoming nodes as a flat map
+this.pipe example 1:  CollectionSource {
   collection: [
     Edge {
       from: [Node],
@@ -1042,8 +364,7 @@ example of this.pipe $%$:  CollectionSource {
     }
   ]
 }
-****this.pipe****  PropsStep { pipe: CollectionSource { collection: [ [Edge] ] } }
-example of this.pipe $%$:  CollectionSource {
+*********:  CollectionSource {
   collection: [
     Edge {
       from: [Node],
@@ -1055,6 +376,20 @@ example of this.pipe $%$:  CollectionSource {
     }
   ]
 }
+this.pipe example 2:  PropsStep { pipe: CollectionSource { collection: [ [Edge] ] } }
+this.pipe example 1:  CollectionSource {
+  collection: [
+    Edge {
+      from: [Node],
+      to: [Node],
+      id: 10,
+      label: undefined,
+      props: [Object],
+      tag: 'marked'
+    }
+  ]
+}
+this.pipe.process() examples:  Object [Generator] {}
   ✔ graph › #new
   ✔ graph › #new with mutable API
   ✔ graph › #setNode
@@ -1086,15 +421,7 @@ example of this.pipe $%$:  CollectionSource {
   ✔ graph › n(label).out(label)
   ✔ graph › n(prop: match)
   ✔ graph › e(id)
-example of this.pipe $%$:  CollectionSource {
-  collection: [ { id: 123, label: 'aaa' }, { id: 987, label: 'bbb' } ]
-}
-  ✔ pipeline › steps › label-step › Deferences labels from input pipe
-example of this.pipe $%$:  CollectionSource { collection: [ { id: 123 }, { id: 987 } ] }
-  ✔ pipeline › steps › map-step › Transforms objects from input pipe
-example of this.pipe $%$:  CollectionSource { collection: [ { id: 123 }, { id: 987 } ] }
-  ✔ pipeline › steps › id-step › Deferences ids from input pipe
-example of this.pipe $%$:  CollectionSource {
+this.pipe example 1:  CollectionSource {
   collection: [
     ConnectedNode {
       id: 5,
@@ -1104,34 +431,44 @@ example of this.pipe $%$:  CollectionSource {
     }
   ]
 }
+this.pipe.process() examples:  Object [Generator] {}
   ✔ pipeline › steps › in-e-step › Enumerates incoming edges as a flat map
-example of this.pipe $%$:  CollectionSource {
-  collection: [
-    { id: 123, props: [Object] },
-    { id: 987, props: [Object] },
-    { id: 456, props: [Object] }
-  ]
-}
-  ✔ pipeline › steps › prop-step › Deferences props from input pipe
-example of this.pipe $%$:  CollectionSource {
-  collection: [
-    ConnectedNode {
-      id: 4,
-      label: undefined,
-      props: [Object],
-      graph: [IncidenceList],
-      color: 'blue'
-    },
-    ConnectedNode {
-      id: 5,
-      label: undefined,
-      props: {},
-      graph: [IncidenceList]
-    }
-  ]
-}
-  ✔ pipeline › steps › in-step › Enumerates incoming nodes as a flat map
-example of this.pipe $%$:  CollectionSource {
+this.pipe example 1:  CollectionSource { collection: [ 1, 2, 3, 4, 5 ] }
+  ✔ util › queue › queue starts empty
+  ✔ util › queue › first in, first out
+this.pipe.process() examples:  Object [Generator] {}
+  ✔ pipeline › steps › filter-step › Predicate filters passed in values
+  ✔ pipeline › steps › id-step › Deferences ids from input pipe
+this.pipe example 1:  CollectionSource { collection: [ { id: 123 }, { id: 987 } ] }
+this.pipe.process() examples:  Object [Generator] {}
+  ✔ structure › incidence-list › enumerates outgoing nodes
+  ✔ structure › incidence-list › enumerates outgoing edges
+  ✔ structure › incidence-list › enumerates incoming nodes
+  ✔ structure › incidence-list › enumerates incoming edges
+  ✔ structure › incidence-list › starts with empty node list
+  ✔ structure › incidence-list › starts with empty edge list
+  ✔ structure › incidence-list › assigns a node to the graph
+  ✔ structure › incidence-list › assigns an edge to the graph
+  ✔ structure › incidence-list › tests for the presence of a given node by id
+  ✔ structure › incidence-list › tests for the presence of an edge by identity
+  ✔ structure › incidence-list › tests for the presence of an edge by id
+  ✔ structure › incidence-list › tests for the presence of an edge between nodes
+  ✔ structure › incidence-list › finds a node by id
+  ✔ structure › incidence-list › finds a node by prop value
+  ✔ structure › incidence-list › finds a node by label
+  ✔ structure › incidence-list › finds an edge by id
+  ✔ structure › incidence-list › finds an edge by prop value
+  ✔ structure › incidence-list › finds an edge by label
+  ✔ structure › incidence-list › finds all nodes in the graph
+  ✔ structure › incidence-list › finds all edges in the graph
+  ✔ structure › incidence-list › remove all references to a node
+  ✔ structure › incidence-list › removes all references to a node id
+  ✔ structure › incidence-list › removes all references to an edge
+  ✔ structure › incidence-list › removes all references to an edge id
+this.pipe example 1:  CollectionSource { collection: [ { id: 123 }, { id: 987 } ] }
+this.pipe.process() examples:  Object [Generator] {}
+  ✔ pipeline › steps › map-step › Transforms objects from input pipe
+this.pipe example 1:  CollectionSource {
   collection: [
     ConnectedNode {
       id: 5,
@@ -1147,7 +484,8 @@ example of this.pipe $%$:  CollectionSource {
     }
   ]
 }
-example of this.pipe $%$:  CollectionSource {
+this.pipe.process() examples:  Object [Generator] {}
+this.pipe example 1:  CollectionSource {
   collection: [
     ConnectedNode {
       id: 5,
@@ -1157,7 +495,7 @@ example of this.pipe $%$:  CollectionSource {
     }
   ]
 }
-****this.pipe****  InStep {
+this.pipe example 2:  InStep {
   pipe: CollectionSource { collection: [ [ConnectedNode] ] },
   graph: Graph {
     structure: IncidenceList {
@@ -1173,14 +511,15 @@ example of this.pipe $%$:  CollectionSource {
   },
   label: null
 }
-****this.pipe****  IdStep {
+this.pipe example 2:  IdStep {
   pipe: InStep {
     pipe: CollectionSource { collection: [Array] },
     graph: Graph { structure: [IncidenceList], index: Map(0) {} },
     label: null
   }
 }
-example of this.pipe $%$:  CollectionSource {
+this.pipe.process() examples:  Object [Generator] {}
+this.pipe example 1:  CollectionSource {
   collection: [
     ConnectedNode {
       id: 5,
@@ -1190,7 +529,7 @@ example of this.pipe $%$:  CollectionSource {
     }
   ]
 }
-example of this.pipe $%$:  CollectionSource {
+this.pipe example 1:  CollectionSource {
   collection: [
     ConnectedNode {
       id: 5,
@@ -1200,7 +539,7 @@ example of this.pipe $%$:  CollectionSource {
     }
   ]
 }
-****this.pipe****  InStep {
+this.pipe example 2:  InStep {
   pipe: CollectionSource { collection: [ [ConnectedNode] ] },
   graph: Graph {
     structure: IncidenceList {
@@ -1216,14 +555,15 @@ example of this.pipe $%$:  CollectionSource {
   },
   label: null
 }
-****this.pipe****  IdStep {
+this.pipe example 2:  IdStep {
   pipe: InStep {
     pipe: CollectionSource { collection: [Array] },
     graph: Graph { structure: [IncidenceList], index: Map(0) {} },
     label: null
   }
 }
-example of this.pipe $%$:  CollectionSource {
+this.pipe.process() examples:  Object [Generator] {}
+this.pipe example 1:  CollectionSource {
   collection: [
     ConnectedNode {
       id: 5,
@@ -1233,7 +573,7 @@ example of this.pipe $%$:  CollectionSource {
     }
   ]
 }
-example of this.pipe $%$:  CollectionSource {
+this.pipe example 1:  CollectionSource {
   collection: [
     ConnectedNode {
       id: 6,
@@ -1243,7 +583,7 @@ example of this.pipe $%$:  CollectionSource {
     }
   ]
 }
-****this.pipe****  InStep {
+this.pipe example 2:  InStep {
   pipe: CollectionSource { collection: [ [ConnectedNode] ] },
   graph: Graph {
     structure: IncidenceList {
@@ -1259,14 +599,15 @@ example of this.pipe $%$:  CollectionSource {
   },
   label: null
 }
-****this.pipe****  IdStep {
+this.pipe example 2:  IdStep {
   pipe: InStep {
     pipe: CollectionSource { collection: [Array] },
     graph: Graph { structure: [IncidenceList], index: Map(0) {} },
     label: null
   }
 }
-example of this.pipe $%$:  CollectionSource {
+this.pipe.process() examples:  Object [Generator] {}
+this.pipe example 1:  CollectionSource {
   collection: [
     ConnectedNode {
       id: 6,
@@ -1276,7 +617,7 @@ example of this.pipe $%$:  CollectionSource {
     }
   ]
 }
-example of this.pipe $%$:  CollectionSource {
+this.pipe example 1:  CollectionSource {
   collection: [
     ConnectedNode {
       id: 6,
@@ -1286,7 +627,7 @@ example of this.pipe $%$:  CollectionSource {
     }
   ]
 }
-****this.pipe****  InStep {
+this.pipe example 2:  InStep {
   pipe: CollectionSource { collection: [ [ConnectedNode] ] },
   graph: Graph {
     structure: IncidenceList {
@@ -1302,14 +643,15 @@ example of this.pipe $%$:  CollectionSource {
   },
   label: null
 }
-****this.pipe****  IdStep {
+this.pipe example 2:  IdStep {
   pipe: InStep {
     pipe: CollectionSource { collection: [Array] },
     graph: Graph { structure: [IncidenceList], index: Map(0) {} },
     label: null
   }
 }
-example of this.pipe $%$:  CollectionSource {
+this.pipe.process() examples:  Object [Generator] {}
+this.pipe example 1:  CollectionSource {
   collection: [
     ConnectedNode {
       id: 6,
@@ -1320,26 +662,20 @@ example of this.pipe $%$:  CollectionSource {
   ]
 }
   ✔ pipeline › steps › union-step › Union of two identical traversals
-example of this.pipe $%$:  CollectionSource {
+this.pipe example 1:  CollectionSource {
   collection: [
     { id: 123, props: [Object] },
     { id: 987, props: [Object] },
     { id: 456, props: [Object] }
   ]
 }
-  ✔ pipeline › steps › props-step › Deferences props from input pipe
-example of this.pipe $%$:  CollectionSource {
-  collection: [
-    ConnectedNode {
-      id: 1,
-      label: undefined,
-      props: {},
-      graph: [IncidenceList]
-    }
-  ]
+this.pipe.process() examples:  Object [Generator] {}
+this.pipe example 1:  CollectionSource {
+  collection: [ { id: 123, label: 'aaa' }, { id: 987, label: 'bbb' } ]
 }
-  ✔ pipeline › steps › out-e-step › Enumerates outgoing edges as a flat map
-example of this.pipe $%$:  CollectionSource {
+this.pipe.process() examples:  Object [Generator] {}
+  ✔ pipeline › steps › prop-step › Deferences props from input pipe
+this.pipe example 1:  CollectionSource {
   collection: [
     ConnectedNode {
       id: 1,
@@ -1356,8 +692,10 @@ example of this.pipe $%$:  CollectionSource {
     }
   ]
 }
+this.pipe.process() examples:  Object [Generator] {}
+  ✔ pipeline › steps › label-step › Deferences labels from input pipe
   ✔ pipeline › steps › out-step › Enumerates outgoing nodes as a flat map
-example of this.pipe $%$:  CollectionSource {
+this.pipe example 1:  CollectionSource {
   collection: [
     ConnectedNode {
       id: 1,
@@ -1374,7 +712,8 @@ example of this.pipe $%$:  CollectionSource {
     }
   ]
 }
-example of this.pipe $%$:  CollectionSource {
+this.pipe.process() examples:  Object [Generator] {}
+this.pipe example 1:  CollectionSource {
   collection: [
     ConnectedNode {
       id: 1,
@@ -1384,8 +723,8 @@ example of this.pipe $%$:  CollectionSource {
     }
   ]
 }
-****this.pipe****  IdStep { pipe: CollectionSource { collection: [ [ConnectedNode] ] } }
-example of this.pipe $%$:  CollectionSource {
+this.pipe example 2:  IdStep { pipe: CollectionSource { collection: [ [ConnectedNode] ] } }
+this.pipe example 1:  CollectionSource {
   collection: [
     ConnectedNode {
       id: 1,
@@ -1395,7 +734,19 @@ example of this.pipe $%$:  CollectionSource {
     }
   ]
 }
-example of this.pipe $%$:  CollectionSource {
+this.pipe.process() examples:  Object [Generator] {}
+this.pipe example 1:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 1,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+this.pipe.process() examples:  Object [Generator] {}
+this.pipe example 1:  CollectionSource {
   collection: [
     ConnectedNode {
       id: 2,
@@ -1406,8 +757,9 @@ example of this.pipe $%$:  CollectionSource {
     }
   ]
 }
-****this.pipe****  IdStep { pipe: CollectionSource { collection: [ [ConnectedNode] ] } }
-example of this.pipe $%$:  CollectionSource {
+this.pipe example 2:  IdStep { pipe: CollectionSource { collection: [ [ConnectedNode] ] } }
+  ✔ pipeline › steps › out-e-step › Enumerates outgoing edges as a flat map
+this.pipe example 1:  CollectionSource {
   collection: [
     ConnectedNode {
       id: 2,
@@ -1418,7 +770,746 @@ example of this.pipe $%$:  CollectionSource {
     }
   ]
 }
+this.pipe.process() examples:  Object [Generator] {}
   ✔ pipeline › steps › where-step › Where predicate filters using a traversal pipe
+this.pipe example 1:  CollectionSource {
+  collection: [
+    { id: 123, props: [Object] },
+    { id: 987, props: [Object] },
+    { id: 456, props: [Object] }
+  ]
+}
+*********:  Source {
+  pipe: CollectionSource { collection: [ [Object], [Object], [Object] ] }
+}
+this.pipe.process() examples:  Object [Generator] {}
+  ✔ pipeline › steps › props-step › Deferences props from input pipe
+this.pipe example 1:  CollectionSource { collection: [ 1, 2, 3, 4 ] }
+this.pipe example 2:  MapStep {
+  pipe: CollectionSource { collection: [ 1, 2, 3, 4 ] },
+  transform: [Function (anonymous)]
+}
+this.pipe.process() examples:  Object [Generator] {}
+this.pipe example 1:  CollectionSource { collection: [ 1, 2, 3, 4 ] }
+this.pipe example 1:  CollectionSource { collection: [ 1, 2, 3, 4 ] }
+this.pipe example 2:  FilterStep {
+  pipe: CollectionSource { collection: [ 1, 2, 3, 4 ] },
+  predicate: [Function (anonymous)]
+}
+this.pipe.process() examples:  Object [Generator] {}
+this.pipe example 1:  CollectionSource { collection: [ 1, 2, 3, 4 ] }
+this.pipe example 1:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 1,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+this.pipe example 2:  OutStep {
+  pipe: CollectionSource { collection: [ [ConnectedNode] ] },
+  graph: Graph {
+    structure: IncidenceList {
+      _outgoing: [Map],
+      _incoming: [Map],
+      outgoingE: [Map],
+      incomingE: [Map],
+      _nodes: [Map],
+      _edges: [Map],
+      isDirected: true
+    },
+    index: Map(0) {}
+  },
+  label: null
+}
+this.pipe.process() examples:  Object [Generator] {}
+this.pipe example 1:  CollectionSource { collection: [] }
+this.pipe example 1:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 1,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+this.pipe example 1:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 5,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+this.pipe example 2:  InStep {
+  pipe: CollectionSource { collection: [ [ConnectedNode] ] },
+  graph: Graph {
+    structure: IncidenceList {
+      _outgoing: [Map],
+      _incoming: [Map],
+      outgoingE: [Map],
+      incomingE: [Map],
+      _nodes: [Map],
+      _edges: [Map],
+      isDirected: true
+    },
+    index: Map(0) {}
+  },
+  label: null
+}
+this.pipe example 1:  CollectionSource { collection: [] }
+this.pipe.process() examples:  Object [Generator] {}
+this.pipe example 1:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 5,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+this.pipe example 2:  FilterStep {
+  pipe: CollectionSource { collection: [] },
+  predicate: [Function (anonymous)]
+}
+this.pipe example 1:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 1,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+this.pipe example 2:  OutEStep {
+  pipe: CollectionSource { collection: [ [ConnectedNode] ] },
+  graph: Graph {
+    structure: IncidenceList {
+      _outgoing: [Map],
+      _incoming: [Map],
+      outgoingE: [Map],
+      incomingE: [Map],
+      _nodes: [Map],
+      _edges: [Map],
+      isDirected: true
+    },
+    index: Map(0) {}
+  }
+}
+this.pipe example 1:  CollectionSource { collection: [] }
+this.pipe.process() examples:  Object [Generator] {}
+this.pipe example 2:  FilterStep {
+  pipe: CollectionSource { collection: [] },
+  predicate: [Function (anonymous)]
+}
+this.pipe example 2:  IdStep {
+  pipe: FilterStep {
+    pipe: CollectionSource { collection: [] },
+    predicate: [Function (anonymous)]
+  }
+}
+this.pipe example 1:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 1,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+this.pipe example 1:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 5,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+this.pipe example 2:  InEStep {
+  pipe: CollectionSource { collection: [ [ConnectedNode] ] },
+  graph: Graph {
+    structure: IncidenceList {
+      _outgoing: [Map],
+      _incoming: [Map],
+      outgoingE: [Map],
+      incomingE: [Map],
+      _nodes: [Map],
+      _edges: [Map],
+      isDirected: true
+    },
+    index: Map(0) {}
+  }
+}
+this.pipe.process() examples:  Object [Generator] {}
+this.pipe example 1:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 5,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+  ✔ pipeline › traversal › composition › Connect collection source
+  ✔ pipeline › traversal › composition › Connect single step
+  ✔ pipeline › traversal › composition › Connect multiple steps
+this.pipe example 1:  CollectionSource {
+  collection: [ { id: 1 }, { id: 2 }, { id: 3 }, { id: 4 } ]
+}
+this.pipe example 2:  IdStep {
+  pipe: CollectionSource {
+    collection: [ [Object], [Object], [Object], [Object] ]
+  }
+}
+this.pipe.process() examples:  Object [Generator] {}
+this.pipe example 1:  CollectionSource {
+  collection: [ { id: 1 }, { id: 2 }, { id: 3 }, { id: 4 } ]
+}
+this.pipe example 1:  CollectionSource {
+  collection: [
+    { id: 1, label: 'aaa' },
+    { id: 2, label: 'aaa' },
+    { id: 3, label: 'bbb' },
+    { id: 4, label: 'ccc' }
+  ]
+}
+this.pipe example 2:  LabelStep {
+  pipe: CollectionSource {
+    collection: [ [Object], [Object], [Object], [Object] ]
+  }
+}
+this.pipe.process() examples:  Object [Generator] {}
+this.pipe example 1:  CollectionSource {
+  collection: [
+    { id: 1, label: 'aaa' },
+    { id: 2, label: 'aaa' },
+    { id: 3, label: 'bbb' },
+    { id: 4, label: 'ccc' }
+  ]
+}
+this.pipe example 1:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 2,
+      label: undefined,
+      props: [Object],
+      graph: [IncidenceList],
+      color: 'red'
+    },
+    ConnectedNode {
+      id: 3,
+      label: undefined,
+      props: [Object],
+      graph: [IncidenceList],
+      color: 'green'
+    },
+    ConnectedNode {
+      id: 4,
+      label: undefined,
+      props: [Object],
+      graph: [IncidenceList],
+      color: 'blue'
+    }
+  ]
+}
+*********:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 2,
+      label: undefined,
+      props: [Object],
+      graph: [IncidenceList],
+      color: 'red'
+    },
+    ConnectedNode {
+      id: 3,
+      label: undefined,
+      props: [Object],
+      graph: [IncidenceList],
+      color: 'green'
+    },
+    ConnectedNode {
+      id: 4,
+      label: undefined,
+      props: [Object],
+      graph: [IncidenceList],
+      color: 'blue'
+    }
+  ]
+}
+this.pipe example 2:  PropsStep {
+  pipe: CollectionSource {
+    collection: [ [ConnectedNode], [ConnectedNode], [ConnectedNode] ]
+  }
+}
+this.pipe.process() examples:  Object [Generator] {}
+this.pipe example 1:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 2,
+      label: undefined,
+      props: [Object],
+      graph: [IncidenceList],
+      color: 'red'
+    },
+    ConnectedNode {
+      id: 3,
+      label: undefined,
+      props: [Object],
+      graph: [IncidenceList],
+      color: 'green'
+    },
+    ConnectedNode {
+      id: 4,
+      label: undefined,
+      props: [Object],
+      graph: [IncidenceList],
+      color: 'blue'
+    }
+  ]
+}
+this.pipe example 1:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 2,
+      label: undefined,
+      props: [Object],
+      graph: [IncidenceList],
+      color: 'red'
+    },
+    ConnectedNode {
+      id: 3,
+      label: undefined,
+      props: [Object],
+      graph: [IncidenceList],
+      color: 'green'
+    },
+    ConnectedNode {
+      id: 4,
+      label: undefined,
+      props: [Object],
+      graph: [IncidenceList],
+      color: 'blue'
+    }
+  ]
+}
+this.pipe example 2:  PropStep {
+  pipe: CollectionSource {
+    collection: [ [ConnectedNode], [ConnectedNode], [ConnectedNode] ]
+  },
+  match: 'color'
+}
+this.pipe.process() examples:  Object [Generator] {}
+this.pipe example 1:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 2,
+      label: undefined,
+      props: [Object],
+      graph: [IncidenceList],
+      color: 'red'
+    },
+    ConnectedNode {
+      id: 3,
+      label: undefined,
+      props: [Object],
+      graph: [IncidenceList],
+      color: 'green'
+    },
+    ConnectedNode {
+      id: 4,
+      label: undefined,
+      props: [Object],
+      graph: [IncidenceList],
+      color: 'blue'
+    }
+  ]
+}
+this.pipe example 1:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 1,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    },
+    ConnectedNode {
+      id: 2,
+      label: undefined,
+      props: [Object],
+      graph: [IncidenceList],
+      color: 'red'
+    }
+  ]
+}
+this.pipe example 2:  WhereStep {
+  pipe: CollectionSource { collection: [ [ConnectedNode], [ConnectedNode] ] },
+  predicate: [Function (anonymous)],
+  graph: Graph {
+    structure: IncidenceList {
+      _outgoing: [Map],
+      _incoming: [Map],
+      outgoingE: [Map],
+      incomingE: [Map],
+      _nodes: [Map],
+      _edges: [Map],
+      isDirected: true
+    },
+    index: Map(0) {}
+  },
+  traverser: [class Traversal]
+}
+this.pipe example 2:  IdStep {
+  pipe: WhereStep {
+    pipe: CollectionSource { collection: [Array] },
+    predicate: [Function (anonymous)],
+    graph: Graph { structure: [IncidenceList], index: Map(0) {} },
+    traverser: [class Traversal]
+  }
+}
+this.pipe.process() examples:  Object [Generator] {}
+this.pipe example 1:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 1,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+this.pipe example 2:  IdStep { pipe: CollectionSource { collection: [ [ConnectedNode] ] } }
+this.pipe example 1:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 1,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+this.pipe.process() examples:  Object [Generator] {}
+this.pipe example 1:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 2,
+      label: undefined,
+      props: [Object],
+      graph: [IncidenceList],
+      color: 'red'
+    }
+  ]
+}
+this.pipe example 2:  IdStep { pipe: CollectionSource { collection: [ [ConnectedNode] ] } }
+this.pipe example 1:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 2,
+      label: undefined,
+      props: [Object],
+      graph: [IncidenceList],
+      color: 'red'
+    }
+  ]
+}
+this.pipe.process() examples:  Object [Generator] {}
+this.pipe example 1:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 1,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    },
+    ConnectedNode {
+      id: 2,
+      label: undefined,
+      props: [Object],
+      graph: [IncidenceList],
+      color: 'red'
+    }
+  ]
+}
+this.pipe example 1:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 5,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    },
+    ConnectedNode {
+      id: 6,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+this.pipe example 2:  UnionStep {
+  pipe: CollectionSource { collection: [ [ConnectedNode], [ConnectedNode] ] },
+  graph: Graph {
+    structure: IncidenceList {
+      _outgoing: [Map],
+      _incoming: [Map],
+      outgoingE: [Map],
+      incomingE: [Map],
+      _nodes: [Map],
+      _edges: [Map],
+      isDirected: true
+    },
+    index: Map(0) {}
+  },
+  base: [Function (anonymous)],
+  other: [Function (anonymous)],
+  traverser: [class Traversal]
+}
+this.pipe.process() examples:  Object [Generator] {}
+this.pipe example 1:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 5,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+this.pipe example 2:  InStep {
+  pipe: CollectionSource { collection: [ [ConnectedNode] ] },
+  graph: Graph {
+    structure: IncidenceList {
+      _outgoing: [Map],
+      _incoming: [Map],
+      outgoingE: [Map],
+      incomingE: [Map],
+      _nodes: [Map],
+      _edges: [Map],
+      isDirected: true
+    },
+    index: Map(0) {}
+  },
+  label: null
+}
+this.pipe example 2:  IdStep {
+  pipe: InStep {
+    pipe: CollectionSource { collection: [Array] },
+    graph: Graph { structure: [IncidenceList], index: Map(0) {} },
+    label: null
+  }
+}
+this.pipe.process() examples:  Object [Generator] {}
+this.pipe example 1:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 5,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+this.pipe example 1:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 5,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+this.pipe example 2:  InStep {
+  pipe: CollectionSource { collection: [ [ConnectedNode] ] },
+  graph: Graph {
+    structure: IncidenceList {
+      _outgoing: [Map],
+      _incoming: [Map],
+      outgoingE: [Map],
+      incomingE: [Map],
+      _nodes: [Map],
+      _edges: [Map],
+      isDirected: true
+    },
+    index: Map(0) {}
+  },
+  label: null
+}
+this.pipe example 2:  IdStep {
+  pipe: InStep {
+    pipe: CollectionSource { collection: [Array] },
+    graph: Graph { structure: [IncidenceList], index: Map(0) {} },
+    label: null
+  }
+}
+this.pipe.process() examples:  Object [Generator] {}
+this.pipe example 1:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 5,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+this.pipe example 1:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 6,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+this.pipe example 2:  InStep {
+  pipe: CollectionSource { collection: [ [ConnectedNode] ] },
+  graph: Graph {
+    structure: IncidenceList {
+      _outgoing: [Map],
+      _incoming: [Map],
+      outgoingE: [Map],
+      incomingE: [Map],
+      _nodes: [Map],
+      _edges: [Map],
+      isDirected: true
+    },
+    index: Map(0) {}
+  },
+  label: null
+}
+this.pipe example 2:  IdStep {
+  pipe: InStep {
+    pipe: CollectionSource { collection: [Array] },
+    graph: Graph { structure: [IncidenceList], index: Map(0) {} },
+    label: null
+  }
+}
+this.pipe.process() examples:  Object [Generator] {}
+this.pipe example 1:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 6,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+this.pipe example 1:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 6,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+this.pipe example 2:  InStep {
+  pipe: CollectionSource { collection: [ [ConnectedNode] ] },
+  graph: Graph {
+    structure: IncidenceList {
+      _outgoing: [Map],
+      _incoming: [Map],
+      outgoingE: [Map],
+      incomingE: [Map],
+      _nodes: [Map],
+      _edges: [Map],
+      isDirected: true
+    },
+    index: Map(0) {}
+  },
+  label: null
+}
+this.pipe example 2:  IdStep {
+  pipe: InStep {
+    pipe: CollectionSource { collection: [Array] },
+    graph: Graph { structure: [IncidenceList], index: Map(0) {} },
+    label: null
+  }
+}
+this.pipe.process() examples:  Object [Generator] {}
+this.pipe example 1:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 6,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+this.pipe example 1:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 5,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    },
+    ConnectedNode {
+      id: 6,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+  ✔ pipeline › traversal › api › map
+  ✔ pipeline › traversal › api › filter
+  ✔ pipeline › traversal › api › out
+  ✔ pipeline › traversal › api › in
+  ✔ pipeline › traversal › api › outE
+  ✔ pipeline › traversal › api › inE
+  ✔ pipeline › traversal › api › id
+  ✔ pipeline › traversal › api › label
+  ✔ pipeline › traversal › api › props
+  ✔ pipeline › traversal › api › prop
+  ✔ pipeline › traversal › api › where
+  ✔ pipeline › traversal › api › union
+this.pipe example 1:  CollectionSource { collection: [] }
+this.pipe.process() examples:  Object [Generator] {}
+this.pipe example 1:  CollectionSource { collection: [] }
+this.pipe example 1:  CollectionSource { collection: [ 1, 2, 3, 4 ] }
+this.pipe.process() examples:  Object [Generator] {}
+this.pipe example 1:  CollectionSource { collection: [ 1, 2, 3, 4 ] }
+this.pipe example 1:  CollectionSource { collection: [ 1, 2, 3, 4 ] }
+this.pipe example 1:  CollectionSource { collection: [ 1, 2, 3, 4 ] }
+this.pipe.process() examples:  Object [Generator] {}
+this.pipe example 1:  CollectionSource {
+  collection: [
+    1, 2, 3, 4,
+    5, 6, 7, 8
+  ]
+}
+this.pipe example 1:  CollectionSource {
+  collection: [
+    1, 2, 3, 4,
+    5, 6, 7, 8
+  ]
+}
+this.pipe.process() examples:  Object [Generator] {}
+this.pipe example 1:  CollectionSource { collection: [ 1, 2, 3, 4 ] }
+this.pipe.process() examples:  Object [Generator] {}
+  ✔ pipeline › traversal › termination › Terminate with empty source
+  ✔ pipeline › traversal › termination › Terminate with all values
+  ✔ pipeline › traversal › termination › Terminate with one value
+  ✔ pipeline › traversal › termination › Terminate by taking a given number of values
+  ✔ pipeline › traversal › termination › Run the pipeline returning an iterator that can produce values
   ─
 
   112 tests passed

@@ -35,4 +35,4 @@ import Edge from './edge.ts';
 
 const testEdge = new Edge({from:6, to:3, label: "77", props: {"exampelString" : [222,12,122,33]} });
 
-console.log(testEdge)
+//console.log(testEdge)
