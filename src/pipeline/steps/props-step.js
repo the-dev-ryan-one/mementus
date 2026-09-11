@@ -1,3 +1,6 @@
+
+
+
 class PropsStep {
   constructor(source) {
     this.pipe = source;
@@ -5,6 +8,7 @@ class PropsStep {
 
   *process() {
     for (const node of this.pipe.process()) {
+      // console.log("here $")
       yield node.props;
     }
   }
