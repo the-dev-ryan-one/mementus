@@ -1,5 +1,8 @@
+interface Pipe<T> {
+  process() : Generator<T>;
+}
 
-class CollectionSource <collectionElement> {
+class CollectionSource <collectionElement> implements Pipe<collectionElement>{
 
   collection : collectionElement[];
 
@@ -19,12 +22,12 @@ class CollectionSource <collectionElement> {
   }
 }
 
-class Source <sourceElement>{
+class Source <sourceElement> implements Pipe<sourceElement>{
 
-  pipe : CollectionSource<sourceElement>;
+  pipe : Pipe<sourceElement>;
 
   constructor(source : sourceElement[]) {
-    console.log("***Source***: " , source)
+    // console.log("***Source***: " , source)
     if (Array.isArray(source)) {
       this.pipe = new CollectionSource(source);
       // console.log("example of this.pipe $%$: " , this.pipe)
@@ -33,11 +36,11 @@ class Source <sourceElement>{
     }
   }
 
-  connect(step, ...args) {
+  connect(step : any , ...args : any[]) {
     this.pipe = new step(this.pipe, ...args);
   }
 
-  *process() {
+  *process() : Generator<sourceElement> {
     yield* this.pipe.process();
   }
 }

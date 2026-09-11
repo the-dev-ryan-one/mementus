@@ -3,41 +3,774 @@
 > ava --verbose 'test/**/*.test.{js,ts}'
 
 
+  ✔ edge › should initialize with integer ids
+  ✔ edge › should initialize with node instances
+  ✔ edge › should initialize with label given
+  ✔ edge › returns undefined when missing prop is accessed
+  ✔ edge › initializes with auto props
+  ✔ edge › initializes with props keys
+  ✔ edge › does not allow mutation of props
+  ✔ util › queue › queue starts empty
+  ✔ util › queue › first in, first out
+###################### Vertex
   ✔ util › priority-queue › priority queue starts empty
   ✔ util › priority-queue › min priority queue
-***Source***:  []
-***Source***:  []
-***Source***:  [ 1, 2, 3, 4 ]
-***Source***:  [ 1, 2, 3, 4 ]
-***Source***:  [ 1, 2, 3, 4 ]
-***Source***:  [ 1, 2, 3, 4 ]
-***Source***:  [
-  1, 2, 3, 4,
-  5, 6, 7, 8
-]
-***Source***:  []
-***Source***:  []
-***Source***:  []
-***Source***:  [
-  1, 2, 3, 4,
-  5, 6, 7, 8
-]
-***Source***:  [ 1, 2, 3, 4 ]
+  ✔ node › initializes with id
+  ✔ node › initializes with label
+  ✔ node › initializes with id and label
+  ✔ node › returns undefined when missing prop is accessed
+  ✔ node › initializes with auto props
+  ✔ node › initializes with props keys
+  ✔ node › does not allow mutation of props
+example of this.pipe $%$:  CollectionSource { collection: [] }
+example of this.pipe $%$:  CollectionSource { collection: [] }
+****this.pipe****  FilterStep {
+  pipe: CollectionSource { collection: [] },
+  predicate: [Function (anonymous)]
+}
+example of this.pipe $%$:  CollectionSource { collection: [] }
+****this.pipe****  FilterStep {
+  pipe: CollectionSource { collection: [] },
+  predicate: [Function (anonymous)]
+}
+****this.pipe****  IdStep {
+  pipe: FilterStep {
+    pipe: CollectionSource { collection: [] },
+    predicate: [Function (anonymous)]
+  }
+}
   ✔ pipeline › traversal › composition › Connect collection source
   ✔ pipeline › traversal › composition › Connect single step
   ✔ pipeline › traversal › composition › Connect multiple steps
+  ✔ integer-id › counts upwards from 1 by default
+  ✔ integer-id › counts upwards from given start value
+  ✔ integer-id › counts upwards from given start value2
+  ✔ structure › incidence-list › enumerates outgoing nodes
+  ✔ structure › incidence-list › enumerates outgoing edges
+  ✔ structure › incidence-list › enumerates incoming nodes
+  ✔ structure › incidence-list › enumerates incoming edges
+  ✔ structure › incidence-list › starts with empty node list
+  ✔ structure › incidence-list › starts with empty edge list
+  ✔ structure › incidence-list › assigns a node to the graph
+  ✔ structure › incidence-list › assigns an edge to the graph
+  ✔ structure › incidence-list › tests for the presence of a given node by id
+  ✔ structure › incidence-list › tests for the presence of an edge by identity
+  ✔ structure › incidence-list › tests for the presence of an edge by id
+  ✔ structure › incidence-list › tests for the presence of an edge between nodes
+  ✔ structure › incidence-list › finds a node by id
+  ✔ structure › incidence-list › finds a node by prop value
+  ✔ structure › incidence-list › finds a node by label
+  ✔ structure › incidence-list › finds an edge by id
+  ✔ structure › incidence-list › finds an edge by prop value
+  ✔ structure › incidence-list › finds an edge by label
+  ✔ structure › incidence-list › finds all nodes in the graph
+  ✔ structure › incidence-list › finds all edges in the graph
+  ✔ structure › incidence-list › remove all references to a node
+  ✔ structure › incidence-list › removes all references to a node id
+  ✔ structure › incidence-list › removes all references to an edge
+  ✔ structure › incidence-list › removes all references to an edge id
+example of this.pipe $%$:  CollectionSource { collection: [ 1, 2, 3, 4 ] }
+****this.pipe****  DoubleStep {
+  pipe: CollectionSource { collection: [ 1, 2, 3, 4 ] },
+  marker: '%'
+}
+****this.pipe****  DoubleStep {
+  pipe: DoubleStep {
+    pipe: CollectionSource { collection: [Array] },
+    marker: '%'
+  },
+  marker: '¶'
+}
+****this.pipe****  DoubleStep {
+  pipe: DoubleStep {
+    pipe: DoubleStep { pipe: [CollectionSource], marker: '%' },
+    marker: '¶'
+  },
+  marker: '¥'
+}
+example of this.pipe $%$:  CollectionSource { collection: [ 1, 2, 3, 4 ] }
+example of this.pipe $%$:  CollectionSource { collection: [] }
+example of this.pipe $%$:  CollectionSource { collection: [ 'a' ] }
+  ✔ pipeline › source › Connects a linked list of pipes
+  ✔ pipeline › source › Provides values from the process iterator
+  ✔ pipeline › source › Returns done when no more values can be provided
+  ✔ pipeline › source › creates an isolated iteration context with each process
+  ✔ pipeline › steps › filter-step › Predicate filters passed in values
+example of this.pipe $%$:  CollectionSource { collection: [ 1, 2, 3, 4, 5 ] }
+example of this.pipe $%$:  CollectionSource { collection: [] }
+example of this.pipe $%$:  CollectionSource { collection: [] }
+example of this.pipe $%$:  CollectionSource { collection: [ 1, 2, 3, 4 ] }
+example of this.pipe $%$:  CollectionSource { collection: [ 1, 2, 3, 4 ] }
+example of this.pipe $%$:  CollectionSource { collection: [ 1, 2, 3, 4 ] }
+example of this.pipe $%$:  CollectionSource { collection: [ 1, 2, 3, 4 ] }
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    1, 2, 3, 4,
+    5, 6, 7, 8
+  ]
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    1, 2, 3, 4,
+    5, 6, 7, 8
+  ]
+}
+example of this.pipe $%$:  CollectionSource { collection: [ 1, 2, 3, 4 ] }
   ✔ pipeline › traversal › termination › Terminate with empty source
   ✔ pipeline › traversal › termination › Terminate with all values
   ✔ pipeline › traversal › termination › Terminate with one value
   ✔ pipeline › traversal › termination › Terminate by taking a given number of values
   ✔ pipeline › traversal › termination › Run the pipeline returning an iterator that can produce values
+example of this.pipe $%$:  CollectionSource { collection: [ 1, 2, 3, 4 ] }
+****this.pipe****  MapStep {
+  pipe: CollectionSource { collection: [ 1, 2, 3, 4 ] },
+  transform: [Function (anonymous)]
+}
+example of this.pipe $%$:  CollectionSource { collection: [ 1, 2, 3, 4 ] }
+example of this.pipe $%$:  CollectionSource { collection: [ 1, 2, 3, 4 ] }
+****this.pipe****  FilterStep {
+  pipe: CollectionSource { collection: [ 1, 2, 3, 4 ] },
+  predicate: [Function (anonymous)]
+}
+example of this.pipe $%$:  CollectionSource { collection: [ 1, 2, 3, 4 ] }
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 1,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+****this.pipe****  OutStep {
+  pipe: CollectionSource { collection: [ [ConnectedNode] ] },
+  graph: Graph {
+    structure: IncidenceList {
+      _outgoing: [Map],
+      _incoming: [Map],
+      outgoingE: [Map],
+      incomingE: [Map],
+      _nodes: [Map],
+      _edges: [Map],
+      isDirected: true
+    },
+    index: Map(0) {}
+  },
+  label: null
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 1,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 5,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+****this.pipe****  InStep {
+  pipe: CollectionSource { collection: [ [ConnectedNode] ] },
+  graph: Graph {
+    structure: IncidenceList {
+      _outgoing: [Map],
+      _incoming: [Map],
+      outgoingE: [Map],
+      incomingE: [Map],
+      _nodes: [Map],
+      _edges: [Map],
+      isDirected: true
+    },
+    index: Map(0) {}
+  },
+  label: null
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 5,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 1,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+****this.pipe****  OutEStep {
+  pipe: CollectionSource { collection: [ [ConnectedNode] ] },
+  graph: Graph {
+    structure: IncidenceList {
+      _outgoing: [Map],
+      _incoming: [Map],
+      outgoingE: [Map],
+      incomingE: [Map],
+      _nodes: [Map],
+      _edges: [Map],
+      isDirected: true
+    },
+    index: Map(0) {}
+  }
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 1,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 5,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+****this.pipe****  InEStep {
+  pipe: CollectionSource { collection: [ [ConnectedNode] ] },
+  graph: Graph {
+    structure: IncidenceList {
+      _outgoing: [Map],
+      _incoming: [Map],
+      outgoingE: [Map],
+      incomingE: [Map],
+      _nodes: [Map],
+      _edges: [Map],
+      isDirected: true
+    },
+    index: Map(0) {}
+  }
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 5,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [ { id: 1 }, { id: 2 }, { id: 3 }, { id: 4 } ]
+}
+****this.pipe****  IdStep {
+  pipe: CollectionSource {
+    collection: [ [Object], [Object], [Object], [Object] ]
+  }
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [ { id: 1 }, { id: 2 }, { id: 3 }, { id: 4 } ]
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    { id: 1, label: 'aaa' },
+    { id: 2, label: 'aaa' },
+    { id: 3, label: 'bbb' },
+    { id: 4, label: 'ccc' }
+  ]
+}
+****this.pipe****  LabelStep {
+  pipe: CollectionSource {
+    collection: [ [Object], [Object], [Object], [Object] ]
+  }
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    { id: 1, label: 'aaa' },
+    { id: 2, label: 'aaa' },
+    { id: 3, label: 'bbb' },
+    { id: 4, label: 'ccc' }
+  ]
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 2,
+      label: undefined,
+      props: [Object],
+      graph: [IncidenceList],
+      color: 'red'
+    },
+    ConnectedNode {
+      id: 3,
+      label: undefined,
+      props: [Object],
+      graph: [IncidenceList],
+      color: 'green'
+    },
+    ConnectedNode {
+      id: 4,
+      label: undefined,
+      props: [Object],
+      graph: [IncidenceList],
+      color: 'blue'
+    }
+  ]
+}
+****this.pipe****  PropsStep {
+  pipe: CollectionSource {
+    collection: [ [ConnectedNode], [ConnectedNode], [ConnectedNode] ]
+  }
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 2,
+      label: undefined,
+      props: [Object],
+      graph: [IncidenceList],
+      color: 'red'
+    },
+    ConnectedNode {
+      id: 3,
+      label: undefined,
+      props: [Object],
+      graph: [IncidenceList],
+      color: 'green'
+    },
+    ConnectedNode {
+      id: 4,
+      label: undefined,
+      props: [Object],
+      graph: [IncidenceList],
+      color: 'blue'
+    }
+  ]
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 2,
+      label: undefined,
+      props: [Object],
+      graph: [IncidenceList],
+      color: 'red'
+    },
+    ConnectedNode {
+      id: 3,
+      label: undefined,
+      props: [Object],
+      graph: [IncidenceList],
+      color: 'green'
+    },
+    ConnectedNode {
+      id: 4,
+      label: undefined,
+      props: [Object],
+      graph: [IncidenceList],
+      color: 'blue'
+    }
+  ]
+}
+****this.pipe****  PropStep {
+  pipe: CollectionSource {
+    collection: [ [ConnectedNode], [ConnectedNode], [ConnectedNode] ]
+  },
+  match: 'color'
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 2,
+      label: undefined,
+      props: [Object],
+      graph: [IncidenceList],
+      color: 'red'
+    },
+    ConnectedNode {
+      id: 3,
+      label: undefined,
+      props: [Object],
+      graph: [IncidenceList],
+      color: 'green'
+    },
+    ConnectedNode {
+      id: 4,
+      label: undefined,
+      props: [Object],
+      graph: [IncidenceList],
+      color: 'blue'
+    }
+  ]
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 1,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    },
+    ConnectedNode {
+      id: 2,
+      label: undefined,
+      props: [Object],
+      graph: [IncidenceList],
+      color: 'red'
+    }
+  ]
+}
+****this.pipe****  WhereStep {
+  pipe: CollectionSource { collection: [ [ConnectedNode], [ConnectedNode] ] },
+  predicate: [Function (anonymous)],
+  graph: Graph {
+    structure: IncidenceList {
+      _outgoing: [Map],
+      _incoming: [Map],
+      outgoingE: [Map],
+      incomingE: [Map],
+      _nodes: [Map],
+      _edges: [Map],
+      isDirected: true
+    },
+    index: Map(0) {}
+  },
+  traverser: [class Traversal]
+}
+****this.pipe****  IdStep {
+  pipe: WhereStep {
+    pipe: CollectionSource { collection: [Array] },
+    predicate: [Function (anonymous)],
+    graph: Graph { structure: [IncidenceList], index: Map(0) {} },
+    traverser: [class Traversal]
+  }
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 1,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+****this.pipe****  IdStep { pipe: CollectionSource { collection: [ [ConnectedNode] ] } }
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 1,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 2,
+      label: undefined,
+      props: [Object],
+      graph: [IncidenceList],
+      color: 'red'
+    }
+  ]
+}
+****this.pipe****  IdStep { pipe: CollectionSource { collection: [ [ConnectedNode] ] } }
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 2,
+      label: undefined,
+      props: [Object],
+      graph: [IncidenceList],
+      color: 'red'
+    }
+  ]
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 1,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    },
+    ConnectedNode {
+      id: 2,
+      label: undefined,
+      props: [Object],
+      graph: [IncidenceList],
+      color: 'red'
+    }
+  ]
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 5,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    },
+    ConnectedNode {
+      id: 6,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+****this.pipe****  UnionStep {
+  pipe: CollectionSource { collection: [ [ConnectedNode], [ConnectedNode] ] },
+  graph: Graph {
+    structure: IncidenceList {
+      _outgoing: [Map],
+      _incoming: [Map],
+      outgoingE: [Map],
+      incomingE: [Map],
+      _nodes: [Map],
+      _edges: [Map],
+      isDirected: true
+    },
+    index: Map(0) {}
+  },
+  base: [Function (anonymous)],
+  other: [Function (anonymous)],
+  traverser: [class Traversal]
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 5,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+****this.pipe****  InStep {
+  pipe: CollectionSource { collection: [ [ConnectedNode] ] },
+  graph: Graph {
+    structure: IncidenceList {
+      _outgoing: [Map],
+      _incoming: [Map],
+      outgoingE: [Map],
+      incomingE: [Map],
+      _nodes: [Map],
+      _edges: [Map],
+      isDirected: true
+    },
+    index: Map(0) {}
+  },
+  label: null
+}
+****this.pipe****  IdStep {
+  pipe: InStep {
+    pipe: CollectionSource { collection: [Array] },
+    graph: Graph { structure: [IncidenceList], index: Map(0) {} },
+    label: null
+  }
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 5,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 5,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+****this.pipe****  InStep {
+  pipe: CollectionSource { collection: [ [ConnectedNode] ] },
+  graph: Graph {
+    structure: IncidenceList {
+      _outgoing: [Map],
+      _incoming: [Map],
+      outgoingE: [Map],
+      incomingE: [Map],
+      _nodes: [Map],
+      _edges: [Map],
+      isDirected: true
+    },
+    index: Map(0) {}
+  },
+  label: null
+}
+****this.pipe****  IdStep {
+  pipe: InStep {
+    pipe: CollectionSource { collection: [Array] },
+    graph: Graph { structure: [IncidenceList], index: Map(0) {} },
+    label: null
+  }
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 5,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 6,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+****this.pipe****  InStep {
+  pipe: CollectionSource { collection: [ [ConnectedNode] ] },
+  graph: Graph {
+    structure: IncidenceList {
+      _outgoing: [Map],
+      _incoming: [Map],
+      outgoingE: [Map],
+      incomingE: [Map],
+      _nodes: [Map],
+      _edges: [Map],
+      isDirected: true
+    },
+    index: Map(0) {}
+  },
+  label: null
+}
+****this.pipe****  IdStep {
+  pipe: InStep {
+    pipe: CollectionSource { collection: [Array] },
+    graph: Graph { structure: [IncidenceList], index: Map(0) {} },
+    label: null
+  }
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 6,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 6,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+****this.pipe****  InStep {
+  pipe: CollectionSource { collection: [ [ConnectedNode] ] },
+  graph: Graph {
+    structure: IncidenceList {
+      _outgoing: [Map],
+      _incoming: [Map],
+      outgoingE: [Map],
+      incomingE: [Map],
+      _nodes: [Map],
+      _edges: [Map],
+      isDirected: true
+    },
+    index: Map(0) {}
+  },
+  label: null
+}
+****this.pipe****  IdStep {
+  pipe: InStep {
+    pipe: CollectionSource { collection: [Array] },
+    graph: Graph { structure: [IncidenceList], index: Map(0) {} },
+    label: null
+  }
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 6,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 5,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    },
+    ConnectedNode {
+      id: 6,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+  ✔ pipeline › traversal › api › map
+  ✔ pipeline › traversal › api › filter
+  ✔ pipeline › traversal › api › out
+  ✔ pipeline › traversal › api › in
+  ✔ pipeline › traversal › api › outE
+  ✔ pipeline › traversal › api › inE
+  ✔ pipeline › traversal › api › id
+  ✔ pipeline › traversal › api › label
+  ✔ pipeline › traversal › api › props
+  ✔ pipeline › traversal › api › prop
+  ✔ pipeline › traversal › api › where
+  ✔ pipeline › traversal › api › union
   - [skip] graph › #hasNode by ref
-***Source***:  [
-  ConnectedNode {
-    id: 1,
-    label: 'trunk',
-    props: { num: 'one' },
-    graph: IncidenceList {
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 1,
+      label: 'trunk',
+      props: [Object],
+      graph: [IncidenceList],
+      num: 'one'
+    }
+  ]
+}
+****this.pipe****  OutEStep {
+  pipe: CollectionSource { collection: [ [ConnectedNode] ] },
+  graph: Graph {
+    structure: IncidenceList {
       _outgoing: [Map],
       _incoming: [Map],
       outgoingE: [Map],
@@ -46,62 +779,65 @@
       _edges: [Map],
       isDirected: true
     },
-    num: 'one'
+    index: Map(0) {},
+    nodeIds: IntegerId { currentValue: 1 },
+    edgeIds: IntegerId { currentValue: 1 }
   }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 1,
-    label: 'trunk',
-    props: { num: 'one' },
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    },
-    num: 'one'
-  }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 1,
-    label: 'trunk',
-    props: { num: 'one' },
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    },
-    num: 'one'
+}
+****this.pipe****  PropStep {
+  pipe: OutEStep {
+    pipe: CollectionSource { collection: [Array] },
+    graph: Graph {
+      structure: [IncidenceList],
+      index: Map(0) {},
+      nodeIds: [IntegerId],
+      edgeIds: [IntegerId]
+    }
   },
-  ConnectedNode {
-    id: 2,
-    label: 'twig',
-    props: { num: 'two' },
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
+  match: 'tag'
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 1,
+      label: 'trunk',
+      props: [Object],
+      graph: [IncidenceList],
+      num: 'one'
+    }
+  ]
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 1,
+      label: 'trunk',
+      props: [Object],
+      graph: [IncidenceList],
+      num: 'one'
     },
-    num: 'two'
+    ConnectedNode {
+      id: 2,
+      label: 'twig',
+      props: [Object],
+      graph: [IncidenceList],
+      num: 'two'
+    },
+    ConnectedNode {
+      id: 3,
+      label: 'twig',
+      props: [Object],
+      graph: [IncidenceList],
+      num: 'three'
+    }
+  ]
+}
+****this.pipe****  OutStep {
+  pipe: CollectionSource {
+    collection: [ [ConnectedNode], [ConnectedNode], [ConnectedNode] ]
   },
-  ConnectedNode {
-    id: 3,
-    label: 'twig',
-    props: { num: 'three' },
-    graph: IncidenceList {
+  graph: Graph {
+    structure: IncidenceList {
       _outgoing: [Map],
       _incoming: [Map],
       outgoingE: [Map],
@@ -110,30 +846,103 @@
       _edges: [Map],
       isDirected: true
     },
-    num: 'three'
-  }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 1,
-    label: 'trunk',
-    props: { num: 'one' },
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    },
-    num: 'one'
+    index: Map(0) {},
+    nodeIds: IntegerId { currentValue: 1 },
+    edgeIds: IntegerId { currentValue: 1 }
   },
-  ConnectedNode {
-    id: 2,
-    label: 'twig',
-    props: { num: 'two' },
-    graph: IncidenceList {
+  label: null
+}
+****this.pipe****  IdStep {
+  pipe: OutStep {
+    pipe: CollectionSource { collection: [Array] },
+    graph: Graph {
+      structure: [IncidenceList],
+      index: Map(0) {},
+      nodeIds: [IntegerId],
+      edgeIds: [IntegerId]
+    },
+    label: null
+  }
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 1,
+      label: 'trunk',
+      props: [Object],
+      graph: [IncidenceList],
+      num: 'one'
+    },
+    ConnectedNode {
+      id: 2,
+      label: 'twig',
+      props: [Object],
+      graph: [IncidenceList],
+      num: 'two'
+    },
+    ConnectedNode {
+      id: 3,
+      label: 'twig',
+      props: [Object],
+      graph: [IncidenceList],
+      num: 'three'
+    }
+  ]
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 2,
+      label: 'twig',
+      props: [Object],
+      graph: [IncidenceList],
+      num: 'two'
+    },
+    ConnectedNode {
+      id: 3,
+      label: 'twig',
+      props: [Object],
+      graph: [IncidenceList],
+      num: 'three'
+    }
+  ]
+}
+****this.pipe****  IdStep {
+  pipe: CollectionSource { collection: [ [ConnectedNode], [ConnectedNode] ] }
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 2,
+      label: 'twig',
+      props: [Object],
+      graph: [IncidenceList],
+      num: 'two'
+    },
+    ConnectedNode {
+      id: 3,
+      label: 'twig',
+      props: [Object],
+      graph: [IncidenceList],
+      num: 'three'
+    }
+  ]
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 1,
+      label: 'trunk',
+      props: [Object],
+      graph: [IncidenceList],
+      num: 'one'
+    }
+  ]
+}
+****this.pipe****  OutStep {
+  pipe: CollectionSource { collection: [ [ConnectedNode] ] },
+  graph: Graph {
+    structure: IncidenceList {
       _outgoing: [Map],
       _incoming: [Map],
       outgoingE: [Map],
@@ -142,13 +951,50 @@
       _edges: [Map],
       isDirected: true
     },
-    num: 'two'
+    index: Map(0) {},
+    nodeIds: IntegerId { currentValue: 1 },
+    edgeIds: IntegerId { currentValue: 1 }
   },
-  ConnectedNode {
-    id: 3,
-    label: 'twig',
-    props: { num: 'three' },
-    graph: IncidenceList {
+  label: 'canopy'
+}
+****this.pipe****  IdStep {
+  pipe: OutStep {
+    pipe: CollectionSource { collection: [Array] },
+    graph: Graph {
+      structure: [IncidenceList],
+      index: Map(0) {},
+      nodeIds: [IntegerId],
+      edgeIds: [IntegerId]
+    },
+    label: 'canopy'
+  }
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 1,
+      label: 'trunk',
+      props: [Object],
+      graph: [IncidenceList],
+      num: 'one'
+    }
+  ]
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 1,
+      label: 'trunk',
+      props: [Object],
+      graph: [IncidenceList],
+      num: 'one'
+    }
+  ]
+}
+****this.pipe****  OutEStep {
+  pipe: CollectionSource { collection: [ [ConnectedNode] ] },
+  graph: Graph {
+    structure: IncidenceList {
       _outgoing: [Map],
       _incoming: [Map],
       outgoingE: [Map],
@@ -157,449 +1003,58 @@
       _edges: [Map],
       isDirected: true
     },
-    num: 'three'
+    index: Map(0) {},
+    nodeIds: IntegerId { currentValue: 1 },
+    edgeIds: IntegerId { currentValue: 1 }
   }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 2,
-    label: 'twig',
-    props: { num: 'two' },
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    },
-    num: 'two'
-  },
-  ConnectedNode {
-    id: 3,
-    label: 'twig',
-    props: { num: 'three' },
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    },
-    num: 'three'
-  }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 2,
-    label: 'twig',
-    props: { num: 'two' },
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    },
-    num: 'two'
-  },
-  ConnectedNode {
-    id: 3,
-    label: 'twig',
-    props: { num: 'three' },
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    },
-    num: 'three'
-  }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 1,
-    label: 'trunk',
-    props: { num: 'one' },
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    },
-    num: 'one'
-  }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 1,
-    label: 'trunk',
-    props: { num: 'one' },
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    },
-    num: 'one'
-  }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 1,
-    label: 'trunk',
-    props: { num: 'one' },
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    },
-    num: 'one'
-  }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 1,
-    label: 'trunk',
-    props: { num: 'one' },
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    },
-    num: 'one'
-  }
-]
-***Source***:  [
-  Edge {
-    from: Node { id: 1, label: 'trunk', props: [Object], num: 'one' },
-    to: Node { id: 2, label: 'twig', props: [Object], num: 'two' },
-    id: 10,
-    label: undefined,
-    props: { tag: 'marked' },
-    tag: 'marked'
-  }
-]
-***Source***:  [
-  Edge {
-    from: Node { id: 1, label: 'trunk', props: [Object], num: 'one' },
-    to: Node { id: 2, label: 'twig', props: [Object], num: 'two' },
-    id: 10,
-    label: undefined,
-    props: { tag: 'marked' },
-    tag: 'marked'
-  }
-]
-***Source***:  [ 1, 2, 3, 4, 5 ]
-***Source***:  [ 1, 2, 3, 4 ]
-***Source***:  [ 1, 2, 3, 4 ]
-***Source***:  [ 1, 2, 3, 4 ]
-***Source***:  [ 1, 2, 3, 4 ]
-***Source***:  [
-  ConnectedNode {
-    id: 1,
-    label: undefined,
-    props: {},
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
+}
+****this.pipe****  IdStep {
+  pipe: OutEStep {
+    pipe: CollectionSource { collection: [Array] },
+    graph: Graph {
+      structure: [IncidenceList],
+      index: Map(0) {},
+      nodeIds: [IntegerId],
+      edgeIds: [IntegerId]
     }
   }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 1,
-    label: undefined,
-    props: {},
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 1,
+      label: 'trunk',
+      props: [Object],
+      graph: [IncidenceList],
+      num: 'one'
     }
-  }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 5,
-    label: undefined,
-    props: {},
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
+  ]
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    Edge {
+      from: [Node],
+      to: [Node],
+      id: 10,
+      label: undefined,
+      props: [Object],
+      tag: 'marked'
     }
-  }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 5,
-    label: undefined,
-    props: {},
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
+  ]
+}
+****this.pipe****  PropsStep { pipe: CollectionSource { collection: [ [Edge] ] } }
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    Edge {
+      from: [Node],
+      to: [Node],
+      id: 10,
+      label: undefined,
+      props: [Object],
+      tag: 'marked'
     }
-  }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 1,
-    label: undefined,
-    props: {},
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    }
-  }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 1,
-    label: undefined,
-    props: {},
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    }
-  }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 5,
-    label: undefined,
-    props: {},
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    }
-  }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 5,
-    label: undefined,
-    props: {},
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    }
-  }
-]
-***Source***:  [ { id: 1 }, { id: 2 }, { id: 3 }, { id: 4 } ]
-***Source***:  [ { id: 1 }, { id: 2 }, { id: 3 }, { id: 4 } ]
-***Source***:  [
-  { id: 1, label: 'aaa' },
-  { id: 2, label: 'aaa' },
-  { id: 3, label: 'bbb' },
-  { id: 4, label: 'ccc' }
-]
-***Source***:  [
-  { id: 1, label: 'aaa' },
-  { id: 2, label: 'aaa' },
-  { id: 3, label: 'bbb' },
-  { id: 4, label: 'ccc' }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 2,
-    label: undefined,
-    props: { color: 'red' },
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    },
-    color: 'red'
-  },
-  ConnectedNode {
-    id: 3,
-    label: undefined,
-    props: { color: 'green' },
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    },
-    color: 'green'
-  },
-  ConnectedNode {
-    id: 4,
-    label: undefined,
-    props: { color: 'blue' },
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    },
-    color: 'blue'
-  }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 2,
-    label: undefined,
-    props: { color: 'red' },
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    },
-    color: 'red'
-  },
-  ConnectedNode {
-    id: 3,
-    label: undefined,
-    props: { color: 'green' },
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    },
-    color: 'green'
-  },
-  ConnectedNode {
-    id: 4,
-    label: undefined,
-    props: { color: 'blue' },
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    },
-    color: 'blue'
-  }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 2,
-    label: undefined,
-    props: { color: 'red' },
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    },
-    color: 'red'
-  },
-  ConnectedNode {
-    id: 3,
-    label: undefined,
-    props: { color: 'green' },
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    },
-    color: 'green'
-  },
-  ConnectedNode {
-    id: 4,
-    label: undefined,
-    props: { color: 'blue' },
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    },
-    color: 'blue'
-  }
-]
+  ]
+}
   ✔ graph › #new
   ✔ graph › #new with mutable API
   ✔ graph › #setNode
@@ -631,807 +1086,339 @@
   ✔ graph › n(label).out(label)
   ✔ graph › n(prop: match)
   ✔ graph › e(id)
-  ✔ util › queue › queue starts empty
-  ✔ util › queue › first in, first out
-  ✔ pipeline › steps › filter-step › Predicate filters passed in values
-  ✔ node › initializes with id
-  ✔ node › initializes with label
-  ✔ node › initializes with id and label
-  ✔ node › returns undefined when missing prop is accessed
-  ✔ node › initializes with auto props
-  ✔ node › initializes with props keys
-  ✔ node › does not allow mutation of props
-###################### Vertex
-***Source***:  [
-  ConnectedNode {
-    id: 2,
-    label: undefined,
-    props: { color: 'red' },
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    },
-    color: 'red'
-  },
-  ConnectedNode {
-    id: 3,
-    label: undefined,
-    props: { color: 'green' },
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    },
-    color: 'green'
-  },
-  ConnectedNode {
-    id: 4,
-    label: undefined,
-    props: { color: 'blue' },
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    },
-    color: 'blue'
-  }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 1,
-    label: undefined,
-    props: {},
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    }
-  },
-  ConnectedNode {
-    id: 2,
-    label: undefined,
-    props: { color: 'red' },
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    },
-    color: 'red'
-  }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 1,
-    label: undefined,
-    props: {},
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    }
-  }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 1,
-    label: undefined,
-    props: {},
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    }
-  }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 2,
-    label: undefined,
-    props: { color: 'red' },
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    },
-    color: 'red'
-  }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 2,
-    label: undefined,
-    props: { color: 'red' },
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    },
-    color: 'red'
-  }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 1,
-    label: undefined,
-    props: {},
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    }
-  },
-  ConnectedNode {
-    id: 2,
-    label: undefined,
-    props: { color: 'red' },
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    },
-    color: 'red'
-  }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 5,
-    label: undefined,
-    props: {},
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    }
-  },
-  ConnectedNode {
-    id: 6,
-    label: undefined,
-    props: {},
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    }
-  }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 5,
-    label: undefined,
-    props: {},
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    }
-  }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 5,
-    label: undefined,
-    props: {},
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    }
-  }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 5,
-    label: undefined,
-    props: {},
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    }
-  }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 5,
-    label: undefined,
-    props: {},
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    }
-  }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 6,
-    label: undefined,
-    props: {},
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    }
-  }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 6,
-    label: undefined,
-    props: {},
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    }
-  }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 6,
-    label: undefined,
-    props: {},
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    }
-  }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 6,
-    label: undefined,
-    props: {},
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    }
-  }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 5,
-    label: undefined,
-    props: {},
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    }
-  },
-  ConnectedNode {
-    id: 6,
-    label: undefined,
-    props: {},
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    }
-  }
-]
-  ✔ pipeline › traversal › api › map
-  ✔ pipeline › traversal › api › filter
-  ✔ pipeline › traversal › api › out
-  ✔ pipeline › traversal › api › in
-  ✔ pipeline › traversal › api › outE
-  ✔ pipeline › traversal › api › inE
-  ✔ pipeline › traversal › api › id
-  ✔ pipeline › traversal › api › label
-  ✔ pipeline › traversal › api › props
-  ✔ pipeline › traversal › api › prop
-  ✔ pipeline › traversal › api › where
-  ✔ pipeline › traversal › api › union
-  ✔ structure › incidence-list › enumerates outgoing nodes
-  ✔ structure › incidence-list › enumerates outgoing edges
-  ✔ structure › incidence-list › enumerates incoming nodes
-  ✔ structure › incidence-list › enumerates incoming edges
-  ✔ structure › incidence-list › starts with empty node list
-  ✔ structure › incidence-list › starts with empty edge list
-  ✔ structure › incidence-list › assigns a node to the graph
-  ✔ structure › incidence-list › assigns an edge to the graph
-  ✔ structure › incidence-list › tests for the presence of a given node by id
-  ✔ structure › incidence-list › tests for the presence of an edge by identity
-  ✔ structure › incidence-list › tests for the presence of an edge by id
-  ✔ structure › incidence-list › tests for the presence of an edge between nodes
-  ✔ structure › incidence-list › finds a node by id
-  ✔ structure › incidence-list › finds a node by prop value
-  ✔ structure › incidence-list › finds a node by label
-  ✔ structure › incidence-list › finds an edge by id
-  ✔ structure › incidence-list › finds an edge by prop value
-  ✔ structure › incidence-list › finds an edge by label
-  ✔ structure › incidence-list › finds all nodes in the graph
-  ✔ structure › incidence-list › finds all edges in the graph
-  ✔ structure › incidence-list › remove all references to a node
-  ✔ structure › incidence-list › removes all references to a node id
-  ✔ structure › incidence-list › removes all references to an edge
-  ✔ structure › incidence-list › removes all references to an edge id
-  ✔ edge › should initialize with integer ids
-  ✔ edge › should initialize with node instances
-  ✔ edge › should initialize with label given
-  ✔ edge › returns undefined when missing prop is accessed
-  ✔ edge › initializes with auto props
-  ✔ edge › initializes with props keys
-  ✔ edge › does not allow mutation of props
-  ✔ pipeline › source › Connects a linked list of pipes
-  ✔ pipeline › source › Provides values from the process iterator
-  ✔ pipeline › source › Returns done when no more values can be provided
-  ✔ pipeline › source › creates an isolated iteration context with each process
-***Source***:  [ 1, 2, 3, 4 ]
-***Source***:  [ 1, 2, 3, 4 ]
-***Source***:  []
-***Source***:  [ 'a' ]
-  ✔ integer-id › counts upwards from 1 by default
-  ✔ integer-id › counts upwards from given start value
-  ✔ integer-id › counts upwards from given start value2
-***Source***:  [ { id: 123 }, { id: 987 } ]
-  ✔ pipeline › steps › id-step › Deferences ids from input pipe
-***Source***:  [
-  ConnectedNode {
-    id: 4,
-    label: undefined,
-    props: { color: 'blue' },
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    },
-    color: 'blue'
-  },
-  ConnectedNode {
-    id: 5,
-    label: undefined,
-    props: {},
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    }
-  }
-]
-  ✔ pipeline › steps › in-step › Enumerates incoming nodes as a flat map
-***Source***:  [
-  ConnectedNode {
-    id: 5,
-    label: undefined,
-    props: {},
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    }
-  }
-]
-  ✔ pipeline › steps › in-e-step › Enumerates incoming edges as a flat map
-***Source***:  [
-  { id: 123, props: { color: 'red' } },
-  { id: 987, props: { color: 'green' } },
-  { id: 456, props: { color: 'blue' } }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 1,
-    label: undefined,
-    props: {},
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    }
-  }
-]
-  ✔ pipeline › steps › out-e-step › Enumerates outgoing edges as a flat map
-  ✔ pipeline › steps › prop-step › Deferences props from input pipe
-***Source***:  [
-  ConnectedNode {
-    id: 1,
-    label: undefined,
-    props: {},
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    }
-  },
-  ConnectedNode {
-    id: 3,
-    label: undefined,
-    props: { color: 'green' },
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    },
-    color: 'green'
-  }
-]
-  ✔ pipeline › steps › out-step › Enumerates outgoing nodes as a flat map
-***Source***:  [ { id: 123, label: 'aaa' }, { id: 987, label: 'bbb' } ]
+example of this.pipe $%$:  CollectionSource {
+  collection: [ { id: 123, label: 'aaa' }, { id: 987, label: 'bbb' } ]
+}
   ✔ pipeline › steps › label-step › Deferences labels from input pipe
-***Source***:  [
-  { id: 123, props: { color: 'red' } },
-  { id: 987, props: { color: 'green' } },
-  { id: 456, props: { color: 'blue' } }
-]
-  ✔ pipeline › steps › props-step › Deferences props from input pipe
-***Source***:  [
-  ConnectedNode {
-    id: 1,
-    label: undefined,
-    props: {},
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    }
-  },
-  ConnectedNode {
-    id: 2,
-    label: undefined,
-    props: { color: 'red' },
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    },
-    color: 'red'
-  }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 1,
-    label: undefined,
-    props: {},
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    }
-  }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 1,
-    label: undefined,
-    props: {},
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    }
-  }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 2,
-    label: undefined,
-    props: { color: 'red' },
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    },
-    color: 'red'
-  }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 2,
-    label: undefined,
-    props: { color: 'red' },
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    },
-    color: 'red'
-  }
-]
-  ✔ pipeline › steps › where-step › Where predicate filters using a traversal pipe
-***Source***:  [
-  ConnectedNode {
-    id: 5,
-    label: undefined,
-    props: {},
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    }
-  },
-  ConnectedNode {
-    id: 6,
-    label: undefined,
-    props: {},
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    }
-  }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 5,
-    label: undefined,
-    props: {},
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    }
-  }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 5,
-    label: undefined,
-    props: {},
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    }
-  }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 5,
-    label: undefined,
-    props: {},
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    }
-  }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 5,
-    label: undefined,
-    props: {},
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    }
-  }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 6,
-    label: undefined,
-    props: {},
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    }
-  }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 6,
-    label: undefined,
-    props: {},
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    }
-  }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 6,
-    label: undefined,
-    props: {},
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    }
-  }
-]
-***Source***:  [
-  ConnectedNode {
-    id: 6,
-    label: undefined,
-    props: {},
-    graph: IncidenceList {
-      _outgoing: [Map],
-      _incoming: [Map],
-      outgoingE: [Map],
-      incomingE: [Map],
-      _nodes: [Map],
-      _edges: [Map],
-      isDirected: true
-    }
-  }
-]
-  ✔ pipeline › steps › union-step › Union of two identical traversals
-***Source***:  [ { id: 123 }, { id: 987 } ]
+example of this.pipe $%$:  CollectionSource { collection: [ { id: 123 }, { id: 987 } ] }
   ✔ pipeline › steps › map-step › Transforms objects from input pipe
+example of this.pipe $%$:  CollectionSource { collection: [ { id: 123 }, { id: 987 } ] }
+  ✔ pipeline › steps › id-step › Deferences ids from input pipe
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 5,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+  ✔ pipeline › steps › in-e-step › Enumerates incoming edges as a flat map
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    { id: 123, props: [Object] },
+    { id: 987, props: [Object] },
+    { id: 456, props: [Object] }
+  ]
+}
+  ✔ pipeline › steps › prop-step › Deferences props from input pipe
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 4,
+      label: undefined,
+      props: [Object],
+      graph: [IncidenceList],
+      color: 'blue'
+    },
+    ConnectedNode {
+      id: 5,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+  ✔ pipeline › steps › in-step › Enumerates incoming nodes as a flat map
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 5,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    },
+    ConnectedNode {
+      id: 6,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 5,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+****this.pipe****  InStep {
+  pipe: CollectionSource { collection: [ [ConnectedNode] ] },
+  graph: Graph {
+    structure: IncidenceList {
+      _outgoing: [Map],
+      _incoming: [Map],
+      outgoingE: [Map],
+      incomingE: [Map],
+      _nodes: [Map],
+      _edges: [Map],
+      isDirected: true
+    },
+    index: Map(0) {}
+  },
+  label: null
+}
+****this.pipe****  IdStep {
+  pipe: InStep {
+    pipe: CollectionSource { collection: [Array] },
+    graph: Graph { structure: [IncidenceList], index: Map(0) {} },
+    label: null
+  }
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 5,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 5,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+****this.pipe****  InStep {
+  pipe: CollectionSource { collection: [ [ConnectedNode] ] },
+  graph: Graph {
+    structure: IncidenceList {
+      _outgoing: [Map],
+      _incoming: [Map],
+      outgoingE: [Map],
+      incomingE: [Map],
+      _nodes: [Map],
+      _edges: [Map],
+      isDirected: true
+    },
+    index: Map(0) {}
+  },
+  label: null
+}
+****this.pipe****  IdStep {
+  pipe: InStep {
+    pipe: CollectionSource { collection: [Array] },
+    graph: Graph { structure: [IncidenceList], index: Map(0) {} },
+    label: null
+  }
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 5,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 6,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+****this.pipe****  InStep {
+  pipe: CollectionSource { collection: [ [ConnectedNode] ] },
+  graph: Graph {
+    structure: IncidenceList {
+      _outgoing: [Map],
+      _incoming: [Map],
+      outgoingE: [Map],
+      incomingE: [Map],
+      _nodes: [Map],
+      _edges: [Map],
+      isDirected: true
+    },
+    index: Map(0) {}
+  },
+  label: null
+}
+****this.pipe****  IdStep {
+  pipe: InStep {
+    pipe: CollectionSource { collection: [Array] },
+    graph: Graph { structure: [IncidenceList], index: Map(0) {} },
+    label: null
+  }
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 6,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 6,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+****this.pipe****  InStep {
+  pipe: CollectionSource { collection: [ [ConnectedNode] ] },
+  graph: Graph {
+    structure: IncidenceList {
+      _outgoing: [Map],
+      _incoming: [Map],
+      outgoingE: [Map],
+      incomingE: [Map],
+      _nodes: [Map],
+      _edges: [Map],
+      isDirected: true
+    },
+    index: Map(0) {}
+  },
+  label: null
+}
+****this.pipe****  IdStep {
+  pipe: InStep {
+    pipe: CollectionSource { collection: [Array] },
+    graph: Graph { structure: [IncidenceList], index: Map(0) {} },
+    label: null
+  }
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 6,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+  ✔ pipeline › steps › union-step › Union of two identical traversals
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    { id: 123, props: [Object] },
+    { id: 987, props: [Object] },
+    { id: 456, props: [Object] }
+  ]
+}
+  ✔ pipeline › steps › props-step › Deferences props from input pipe
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 1,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+  ✔ pipeline › steps › out-e-step › Enumerates outgoing edges as a flat map
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 1,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    },
+    ConnectedNode {
+      id: 3,
+      label: undefined,
+      props: [Object],
+      graph: [IncidenceList],
+      color: 'green'
+    }
+  ]
+}
+  ✔ pipeline › steps › out-step › Enumerates outgoing nodes as a flat map
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 1,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    },
+    ConnectedNode {
+      id: 2,
+      label: undefined,
+      props: [Object],
+      graph: [IncidenceList],
+      color: 'red'
+    }
+  ]
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 1,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+****this.pipe****  IdStep { pipe: CollectionSource { collection: [ [ConnectedNode] ] } }
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 1,
+      label: undefined,
+      props: {},
+      graph: [IncidenceList]
+    }
+  ]
+}
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 2,
+      label: undefined,
+      props: [Object],
+      graph: [IncidenceList],
+      color: 'red'
+    }
+  ]
+}
+****this.pipe****  IdStep { pipe: CollectionSource { collection: [ [ConnectedNode] ] } }
+example of this.pipe $%$:  CollectionSource {
+  collection: [
+    ConnectedNode {
+      id: 2,
+      label: undefined,
+      props: [Object],
+      graph: [IncidenceList],
+      color: 'red'
+    }
+  ]
+}
+  ✔ pipeline › steps › where-step › Where predicate filters using a traversal pipe
   ─
 
   112 tests passed
