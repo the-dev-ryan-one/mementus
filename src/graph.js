@@ -1,7 +1,7 @@
-import GraphBuilder from "./graph-builder.js";
+import GraphBuilder from "./graph-builder.ts";
 import Traversal from "./pipeline/traversal.js";
 import Mutators from "./mutators.js";
-import IntegerId from "./integer-id.js";
+import IntegerId from "./integer-id.ts";
 
 const defaultOptions = {
   isMutable: false,
@@ -9,6 +9,7 @@ const defaultOptions = {
 }
 
 class Graph {
+
   constructor(initializer, options={}) {
     const initialOptions = Object.assign(defaultOptions, options);
 
