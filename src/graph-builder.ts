@@ -3,21 +3,26 @@ import IntegerId from "./integer-id.js";
 import Mutators from "./mutators.js";
 
 class GraphBuilder {
+
+  structure : IncidenceList;
+  nodeIds : IntegerId;
+  edgeIds : IntegerId;
+
   constructor() {
     this.structure = new IncidenceList();
     this.nodeIds = new IntegerId();
     this.edgeIds = new IntegerId();
   }
 
-  nextNodeId() {
+  nextNodeId() : number {
     return this.nodeIds.nextId();
   }
 
-  nextEdgeId() {
+  nextEdgeId() : number {
     return this.edgeIds.nextId();
   }
 
-  graph() {
+  graph() : IncidenceList{
     return this.structure;
   }
 }

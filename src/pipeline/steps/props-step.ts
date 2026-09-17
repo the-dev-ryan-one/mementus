@@ -1,17 +1,18 @@
-// interface Pipe<T> {
-//   process() : Generator<T>;
-// }
+interface Pipe<T> {
+  process(): Generator<T>;
+}
 
-class PropsStep {
+class PropsStep<T> implements Pipe<T>{
 
-  constructor(source) { 
+  pipe : Pipe<T>
+
+  constructor(source : Pipe<T>) { 
     this.pipe = source;
-    console.log("*********: " , this.pipe);
+    //console.log("*********: " , this.pipe);
   }
 
   *process() {
     for (const node of this.pipe.process()) {
-      // console.log("**node.props**: " , node.props)
       yield node.props;
     }
   }

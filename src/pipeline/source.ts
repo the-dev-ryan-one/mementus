@@ -1,17 +1,18 @@
-interface Pipe<T> {
-  process() : Generator<T>;
+interface Pipe<T1> {
+  process() : Generator<T1>;
 }
 
-class CollectionSource <collectionElement> implements Pipe<collectionElement>{
+class CollectionSource <T> implements Pipe<T>{
 
-  collection : collectionElement[];
+  collection : T[];
 
-  constructor(collection : collectionElement[]) {
+  constructor(collection : T[]) {
     this.collection = collection;
-    // console.log("example of this.collection: " , this.collection);
+    // console.log("***************** example of this.collection: " , this.collection);
   }
 
-  *process() : Generator<collectionElement> {
+  // yield* will yield a single item from this.collection
+  *process() : Generator<T> {
     // console.log("yield delegation: " , this.collection);
     // note : yield * is yield delegation , will yield one collectionElement no the whole array
     yield * this.collection;
@@ -22,27 +23,29 @@ class CollectionSource <collectionElement> implements Pipe<collectionElement>{
   }
 }
 
-class Source <sourceElement> implements Pipe<sourceElement>{
+class Source <T> implements Pipe<T>{
 
-  pipe : Pipe<sourceElement>;
+  pipe : Pipe<T>;
 
-  constructor(source : sourceElement[]) {
+  constructor(source : T[]) {
     // console.log("***Source***: " , source)
     if (Array.isArray(source)) {
       this.pipe = new CollectionSource(source);
-      console.log("this.pipe example 1: " , this.pipe)
+      // console.log("this.pipe example 1: " , this.pipe)
     } else {
       throw new Error("Source must be an array (for now)");
     }
   }
 
-  connect(step : any , ...args : any[]) {
+  connect(step : any , ...args : any ) {
+    // console.log("step: " , step)
+    // console.log("args: " , args)
     this.pipe = new step(this.pipe, ...args);
-     console.log("this.pipe example 2: " , this.pipe)
+    // console.log("this.pipe example 2: " , this.pipe)
   }
 
-  *process() : Generator<sourceElement> {
-    console.log("this.pipe.process() examples: ", this.pipe.process()) 
+  *process() : Generator<T> {
+    // console.log("this.pipe.process() examples: ", this.pipe.process()) 
     yield* this.pipe.process();
   }
 }
