@@ -2,16 +2,18 @@
 // IdStep takes a new instance of the source class
 // new IdStep(new Source([{id: 123}, {id: 987}]));
 
-interface Pipe<T1> {
-  process(): Generator<T1>;
+interface Pipe<T> {
+  process(): Generator<T>;
 }
 
-class IdStep<T2 extends {id : number}> implements Pipe<number>{
+// T must extend {id:number} because item.id must work for every item from this.pipe.process()
+class IdStep<T extends {id : number}> implements Pipe<number>{
 
-  pipe : Pipe<T2>;
+  pipe : Pipe<T>;
 
-  constructor(source : Pipe<T2>) {
-    // console.log("source:" , source)
+  constructor(source : Pipe<T>) {
+    // console.log("------$$$$--------->  ---- source ----- " , source)
+    // console.log("&&&&& ---> " , source.process().next())
     this.pipe = source;
   }
 

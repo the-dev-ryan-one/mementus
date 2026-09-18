@@ -2,7 +2,11 @@ interface Pipe<T> {
   process(): Generator<T>;
 }
 
-class PropsStep<T> implements Pipe<T>{
+interface HasProps<P> {
+  props : P
+}
+
+class PropsStep<T extends HasProps<P> , P = Record<string , unknown>> implements Pipe<P>{
 
   pipe : Pipe<T>
 
@@ -11,8 +15,9 @@ class PropsStep<T> implements Pipe<T>{
     //console.log("*********: " , this.pipe);
   }
 
-  *process() {
+  *process() : Generator<P> {
     for (const node of this.pipe.process()) {
+      console.log("---------> node.props --- " , node.props)
       yield node.props;
     }
   }
