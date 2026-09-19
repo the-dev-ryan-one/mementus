@@ -17,7 +17,7 @@ class PropsStep<T extends HasProps<P> , P = Record<string , unknown>> implements
 
   *process() : Generator<P> {
     for (const node of this.pipe.process()) {
-      console.log("---------> node.props --- " , node.props)
+      //console.log("---------> node.props --- " , node.props)
       yield node.props;
     }
   }

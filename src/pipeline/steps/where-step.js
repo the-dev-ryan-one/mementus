@@ -1,3 +1,4 @@
+
 class WhereStep {
   constructor(source, predicate, graph, traverser) {
     this.pipe = source;
