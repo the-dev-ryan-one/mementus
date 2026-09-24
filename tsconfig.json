@@ -9,7 +9,7 @@
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
 
-    "allowJs": false,
+    "allowJs": true,
     "checkJs": false,
     "allowImportingTsExtensions": true,
 

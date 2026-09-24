@@ -1,13 +1,24 @@
 import Node from "../node.ts";
-import Edge from "../edge.js";
-import ConnectedNode from "../connected-node.js";
+import Edge from "../edge.ts";
+import ConnectedNode from "../connected-node.ts";
 
 const DIR_OUT = true;
 const DIR_IN = false;
 
 class IncidenceList {
-  constructor(isDirected=true) {
+
+  _outgoing : Map<number , number[]>;
+  _incoming : Map<number , number[]>;
+  outgoingE : Map<number , number[]>;
+  incomingE : Map<number , number[]>;
+  _nodes : Map<number , ConnectedNode>;
+  _edges : Map<number , Edge>;
+  isDirected : Boolean;
+
+  constructor(isDirected : Boolean =true) {
+
     this._outgoing = new Map();
+    //console.log("------------------>>> " , this._outgoing)
     this._incoming = new Map();
     this.outgoingE = new Map();
     this.incomingE = new Map();
@@ -16,36 +27,51 @@ class IncidenceList {
     this.isDirected = isDirected;
   }
 
-  get nodesCount() {
+  get nodesCount() : number {
+    //console.log("@@@@@@@@@@@@@@@@@@@: " , this._nodes.size)
     return this._nodes.size;
   }
 
-  get edgesCount() {
+  get edgesCount() : number {
     return this._edges.size;
   }
 
-  hasNode(node) {
+  hasNode(node : number | Node | ConnectedNode) : boolean {
+    //console.log("@@@@@@@@@@@@@@@@@@@: " , node)
     if (node instanceof Node || node instanceof ConnectedNode) {
+      //------
+      if (node.id === undefined) {
+        throw new Error("hasNode: node must have an ID");
+      }
+      //------
       return this._nodes.get(node.id) === node;
     } else {
       return this._nodes.has(node);
     }
   }
 
-  hasEdge(edge, target=null) {
+  hasEdge(edge : Edge, target: number | null = null) {
+
+    //console.log("111111111111111111111: " , edge.id)
+    //console.log("++++++++++++++++: " , target)
+
     if (target) {
       if (!this.node(edge)) return false;
       return this.outgoing(edge).some(n => n.id == target);
     }
 
+    //console.log("22222222222222222222: " , edge.id)
+    //console.log("++++++++++++++++555555555555555: " , target)
+
     if (edge instanceof Edge) {
+      //console.log("33333333333333333: " , edge.id)
       return this._edges.get(edge.id) === edge;
     } else {
       return this._edges.has(edge);
     }
   }
 
-  setEdge(edge) {
+  setEdge(edge : Edge) {
     if (!this.hasNode(edge.from.id)) {
       this.setNode(edge.from);
     }
@@ -61,7 +87,10 @@ class IncidenceList {
     this.incomingE.get(edge.to.id).push(edge.id);
   }
 
-  setNode(node) {
+  setNode(node : Node) {
+  
+    //console.log("%%%%%%%%%%%%%%%%%%%% " , node)
+
     this._nodes.set(node.id, new ConnectedNode(node, this));
     this._outgoing.set(node.id, []);
     this._incoming.set(node.id, []);
@@ -69,11 +98,12 @@ class IncidenceList {
     this.incomingE.set(node.id, []);
   }
 
-  node(id) {
+  node(id : number) : ConnectedNode | undefined {
+    //console.log("$$$$$$$$$$$$$$$$$$$$$$: " , this._nodes.get(id))
     return this._nodes.get(id);
   }
 
-  edge(id) {
+  edge(id : number) : Edge | undefined {
     return this._edges.get(id);
   }
 

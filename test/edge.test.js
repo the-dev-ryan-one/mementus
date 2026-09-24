@@ -4,7 +4,7 @@ import Node from "../src/node.ts";
 
 test("should initialize with integer ids", t => {
   const edge = new Edge({ from: 1, to: 2 });
-
+  
   t.true(edge.from instanceof Node);
   t.is(edge.from.id, 1);
 

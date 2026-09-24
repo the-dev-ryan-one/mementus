@@ -3,7 +3,7 @@ import Node from "./node.ts";
 type propValues =  number | string | boolean | string[] | number[];
 type propKVpairs = Record<string , propValues>;
 
-class ConnectedNode <propGeneric extends propKVpairs>{
+class ConnectedNode <propGeneric extends propKVpairs = propKVpairs>{
 
   readonly graph: any;
 

@@ -1,3 +1,6 @@
+import Graph from "../../graph.js";
+import Traversal from "../traversal.js";
+
 class UnionStep {
   constructor(source, graph, base, other, traverser) {
     this.pipe = source;

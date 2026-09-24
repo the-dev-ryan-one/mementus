@@ -2,6 +2,9 @@ import GraphBuilder from "./graph-builder.ts";
 import Traversal from "./pipeline/traversal.js";
 import Mutators from "./mutators.js";
 import IntegerId from "./integer-id.ts";
+import IncidenceList from "./structure/incidence-list.ts";
+import ConnectedNode from "./connected-node.ts";
+import Edge from "./edge.ts";
 
 const defaultOptions = {
   isMutable: false,
@@ -10,9 +13,13 @@ const defaultOptions = {
 
 class Graph {
 
+  structure : IncidenceList;
+  index : Map<KeyType, ValueType>;
+
   constructor(initializer, options={}) {
     const initialOptions = Object.assign(defaultOptions, options);
 
+    // builder is an instance of GraphBuilder
     const builder = new GraphBuilder();
 
     if (initializer) {
@@ -29,15 +36,15 @@ class Graph {
     }
   }
 
-  get nodesCount() {
+  get nodesCount() : number {
     return this.structure.nodesCount;
   }
 
-  get edgesCount() {
+  get edgesCount() : number {
     return this.structure.edgesCount;
   }
 
-  node(id) {
+  node(id : number) : ConnectedNode | undefined {
     return this.structure.node(id);
   }
 
@@ -45,7 +52,7 @@ class Graph {
     return this.structure.nodes(match);
   }
 
-  edge(id) {
+  edge(id : number) : Edge | undefined {
     return this.structure.edge(id);
   }
 
@@ -53,7 +60,8 @@ class Graph {
     return this.structure.edges(match);
   }
 
-  hasNode(node) {
+  hasNode(node : number | Node | ConnectedNode) : boolean {
+    console.log("******##****** " , node)
     return this.structure.hasNode(node);
   }
 

@@ -2,6 +2,14 @@ interface Pipe<T> {
   process() : Generator<T>;
 }
 
+type Step <Tin,Tout> = {
+
+  pipe : Pipe<Tin>;
+  process() : Generator<Tout>;
+  toString() : string;
+
+}
+
 class CollectionSource <T> implements Pipe<T>{
 
   collection : T[];
@@ -24,10 +32,12 @@ class CollectionSource <T> implements Pipe<T>{
 
 }
 
-
 // difficult part of the port , will revisit
-class Source {
-  constructor(source) {
+class Source<T , U> {
+
+  pipe : Pipe<T>
+  
+  constructor(source : T[]) {
     if (Array.isArray(source)) {
       this.pipe = new CollectionSource(source);
     } else {
@@ -35,11 +45,11 @@ class Source {
     }
   }
 
-  connect(step, ...args) {
+  connect(step : Step<Tin,Tout>, ...args : U[]) {
     this.pipe = new step(this.pipe, ...args);
   }
 
-  *process() {
+  *process() : Generator<T> {
     yield* this.pipe.process();
   }
 }

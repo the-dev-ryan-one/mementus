@@ -5,7 +5,7 @@ type propValues =  number | string | boolean | string[] | number[];
 // enforces the type/shape of props
 type propKVpairs = Record<string , propValues>;
 
-class Edge <edgePropsGeneric extends propKVpairs>{
+class Edge <edgePropsGeneric extends propKVpairs = propKVpairs>{
 
   //-----------------------
   // unsure about below

@@ -1,4 +1,4 @@
-import IncidenceList from "./structure/incidence-list.js";
+import IncidenceList from "./structure/incidence-list.ts";
 import IntegerId from "./integer-id.js";
 import Mutators from "./mutators.js";
 
