@@ -2,8 +2,8 @@ import Node from "../node.ts";
 import Edge from "../edge.ts";
 import ConnectedNode from "../connected-node.ts";
 
-const DIR_OUT = true;
-const DIR_IN = false;
+const DIR_OUT : boolean = true;
+const DIR_IN : boolean = false;
 
 class IncidenceList {
 
@@ -17,8 +17,7 @@ class IncidenceList {
 
   constructor(isDirected : Boolean =true) {
 
-    this._outgoing = new Map();
-    //console.log("------------------>>> " , this._outgoing)
+    this._outgoing = new Map(); 
     this._incoming = new Map();
     this.outgoingE = new Map();
     this.incomingE = new Map();
@@ -28,7 +27,6 @@ class IncidenceList {
   }
 
   get nodesCount() : number {
-    //console.log("@@@@@@@@@@@@@@@@@@@: " , this._nodes.size)
     return this._nodes.size;
   }
 
@@ -37,9 +35,9 @@ class IncidenceList {
   }
 
   hasNode(node : number | Node | ConnectedNode) : boolean {
-    //console.log("@@@@@@@@@@@@@@@@@@@: " , node)
+
     if (node instanceof Node || node instanceof ConnectedNode) {
-      //------
+      //-----
       if (node.id === undefined) {
         throw new Error("hasNode: node must have an ID");
       }
@@ -88,9 +86,6 @@ class IncidenceList {
   }
 
   setNode(node : Node) {
-  
-    //console.log("%%%%%%%%%%%%%%%%%%%% " , node)
-
     this._nodes.set(node.id, new ConnectedNode(node, this));
     this._outgoing.set(node.id, []);
     this._incoming.set(node.id, []);
@@ -99,7 +94,6 @@ class IncidenceList {
   }
 
   node(id : number) : ConnectedNode | undefined {
-    //console.log("$$$$$$$$$$$$$$$$$$$$$$: " , this._nodes.get(id))
     return this._nodes.get(id);
   }
 
@@ -107,7 +101,9 @@ class IncidenceList {
     return this._edges.get(id);
   }
 
-  nodes(match) {
+  nodes(match) : ConnectedNode[] {
+
+    console.log("@@@@@@@@@@@@@@@@@>>>" , [...this._nodes.values()] )
     if (!match) return [...this._nodes.values()];
 
     if (typeof(match) === "string") {
@@ -157,11 +153,12 @@ class IncidenceList {
     }, []);
   }
 
-  outgoing(id, label=null) {
+  outgoing(id : number , label=null) : ConnectedNode[] {
+    //console.log("###################: " , this.adjacent(id, DIR_OUT, label));
     return this.adjacent(id, DIR_OUT, label);
   }
 
-  incoming(id, label=null) {
+  incoming(id : number, label=null) {
     return this.adjacent(id, DIR_IN, label);
   }
 
@@ -173,11 +170,12 @@ class IncidenceList {
     return directionalIndex.get(id).map(adj => this._edges.get(adj));
   }
 
-  outgoingEdges(id) {
+  outgoingEdges(id : number) : Edge[] {
+    //console.log("###################: " , this.incidentEdges(id, DIR_OUT));
     return this.incidentEdges(id, DIR_OUT);
   }
 
-  incomingEdges(id) {
+  incomingEdges(id : number) : Edge[] {
     return this.incidentEdges(id, DIR_IN);
   }
 
@@ -211,10 +209,18 @@ class IncidenceList {
     this._nodes.delete(nodeId);
   }
 
-  removeEdge(edge) {
+  removeEdge(edge : number | Edge ) {
+    
     const edgeId = edge instanceof Edge ? edge.id : edge;
-    const { to, from } = this._edges.get(edgeId);
 
+    if (edgeId === undefined) return;
+    const retrivedEdge = this._edges.get(edgeId);
+    if (retrivedEdge === undefined) return;
+
+    //const { to, from } = this._edges.get(edgeId);
+    const { to, from } = retrivedEdge;
+
+    // const toIndex = this._outgoing.get(from.id).indexOf(to.id);
     const toIndex = this._outgoing.get(from.id).indexOf(to.id);
     this._outgoing.get(from.id).splice(toIndex, 1);
 

@@ -9,8 +9,8 @@ class Edge <edgePropsGeneric extends propKVpairs = propKVpairs>{
 
   //-----------------------
   // unsure about below
-  readonly from: Node<propKVpairs> | number;
-  readonly to: Node<propKVpairs> | number;
+  readonly from: Node<propKVpairs>;
+  readonly to: Node<propKVpairs>;
   // ----------------------
   readonly id?: number;
   readonly label?: string;

@@ -61,7 +61,6 @@ class Graph {
   }
 
   hasNode(node : number | Node | ConnectedNode) : boolean {
-    console.log("******##****** " , node)
     return this.structure.hasNode(node);
   }
 

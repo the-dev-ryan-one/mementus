@@ -25,6 +25,7 @@ class Traversal {
 
   id() {
     this.chain.connect(IdStep);
+    //console.log(".id() output -------------------> " , this );
     return this;
   }
 
@@ -50,6 +51,7 @@ class Traversal {
 
   inc(label=null) {
     this.chain.connect(InStep, this.graph, label);
+    //console.log(".inc() output -------------------> " , this );
     return this;
   }
 
@@ -97,6 +99,7 @@ class Traversal {
   all() {
     const result = [...this.chain.process()];
     this.reset();
+    //console.log(".all() output ------------------->" , result );
     return result;
   }
 

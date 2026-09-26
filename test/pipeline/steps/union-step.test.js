@@ -9,8 +9,8 @@ test("Union of two identical traversals", t => {
   const unionStep = new UnionStep(
     source,
     fanOutEdges,
-    p => p.inc().id().all(),
-    p => p.inc().id().all(),
+    p => p.inc().id().one(),
+    p => p.inc().id().one(),
     Traversal
   );
 

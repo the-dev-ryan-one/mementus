@@ -9,11 +9,11 @@ interface Pipe<T> {
 class WhereStep<T> implements Pipe<T> {
 
   pipe : Pipe<T>;
-  predicate : (input: InstanceType<typeof Traversal>) => boolean;
+  predicate : (input : Traversal) => boolean;
   graph : Graph;
   traverser : typeof Traversal;
 
-  constructor(source:Pipe<T>, predicate : (input: InstanceType<typeof Traversal> ) => boolean , graph:Graph , traverser:typeof Traversal ) {
+  constructor(source:Pipe<T>, predicate : (input : Traversal ) => boolean , graph:Graph , traverser:typeof Traversal ) {
     this.pipe = source;
     this.predicate = predicate;
     this.graph = graph;
