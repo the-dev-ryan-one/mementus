@@ -7,11 +7,17 @@ class ConnectedNode <propGeneric extends propKVpairs = propKVpairs>{
 
   readonly graph: any;
 
-  readonly id?: number;
+  readonly id: number;
   readonly label? : string;
   readonly props?: propGeneric;
 
   constructor(node: Node<propGeneric>, graph: any) {
+
+    // ------------------
+    if (node.id === undefined) {
+      throw new Error("Cannot make Connected node from node without ID")
+    }
+    // ------------------
     this.id = node.id;
     this.label = node.label;
     this.props = node.props ?? ({} as propGeneric);

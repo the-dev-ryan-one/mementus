@@ -4,7 +4,13 @@ import Edge from "../../src/edge.js";
 function outgoingNodes(t, StructureImpl) {
   const structure = new StructureImpl();
 
+  // const edge = new Edge({
+  //   from: new Node({ id: 1}),
+  //   to: new Node({ id: 2})
+  // });
+
   const edge = new Edge({
+    id : 43,
     from: new Node({ id: 1}),
     to: new Node({ id: 2})
   });
@@ -33,10 +39,17 @@ outgoingEdges.title = () => "enumerates outgoing edges";
 function incomingNodes(t, StructureImpl) {
   const structure = new StructureImpl();
 
+  // const edge = new Edge({
+  //   from: new Node({ id: 1}),
+  //   to: new Node({ id: 2})
+  // });
+
   const edge = new Edge({
+    id : 413,
     from: new Node({ id: 1}),
     to: new Node({ id: 2})
   });
+
 
   structure.setEdge(edge);
 
