@@ -1,21 +1,19 @@
 import Node from "./node.ts";
 
-type propValues =  number | string | boolean | string[] | number[];
-type propKVpairs = Record<string , propValues>;
+type propValues = number | string | boolean | string[] | number[];
+type propKVpairs = Record<string, propValues>;
 
-class ConnectedNode <propGeneric extends propKVpairs = propKVpairs>{
-
+class ConnectedNode<propGeneric extends propKVpairs = propKVpairs> {
   readonly graph: any;
 
   readonly id: number;
-  readonly label? : string;
+  readonly label?: string;
   readonly props?: propGeneric;
 
   constructor(node: Node<propGeneric>, graph: any) {
-
     // ------------------
     if (node.id === undefined) {
-      throw new Error("Cannot make Connected node from node without ID")
+      throw new Error("Cannot make Connected node from node without ID");
     }
     // ------------------
     this.id = node.id;
@@ -27,7 +25,7 @@ class ConnectedNode <propGeneric extends propKVpairs = propKVpairs>{
       Object.defineProperty(this, key, {
         enumerable: true,
         writable: false,
-        value: this.props[key]
+        value: this.props[key],
       });
     }
 

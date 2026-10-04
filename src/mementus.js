@@ -9,12 +9,4 @@ function createGraph(initializer) {
   return new Graph(initializer);
 }
 
-export {
-  createGraph,
-  Graph,
-  Node,
-  Edge,
-  Queue,
-  PriorityQueue,
-  Mutators,
-}
+export { createGraph, Graph, Node, Edge, Queue, PriorityQueue, Mutators };

@@ -3,7 +3,7 @@ import Node from "../../src/node.ts";
 import Edge from "../../src/edge.js";
 
 const node1 = () => new Node({ id: 1 });
-const node2 = () => new Node({ id: 2, props: { color: "red" }});
+const node2 = () => new Node({ id: 2, props: { color: "red" } });
 const node3 = () => new Node({ id: 3, props: { color: "green" } });
 const node4 = () => new Node({ id: 4, props: { color: "blue" } });
 const node5 = () => new Node({ id: 5 });
@@ -15,7 +15,7 @@ const edge2to5 = () => new Edge({ id: 40, from: node2(), to: node5() });
 const edge3to5 = () => new Edge({ id: 50, from: node3(), to: node5() });
 const edge3to6 = () => new Edge({ id: 60, from: node3(), to: node6() });
 
-const fanOutEdges = new Graph(g => {
+const fanOutEdges = new Graph((g) => {
   g.setEdge(edge1to2());
   g.setEdge(edge1to3());
   g.setEdge(edge1to4());
@@ -24,6 +24,4 @@ const fanOutEdges = new Graph(g => {
   g.setEdge(edge3to6());
 });
 
-export {
-  fanOutEdges
-}
+export { fanOutEdges };

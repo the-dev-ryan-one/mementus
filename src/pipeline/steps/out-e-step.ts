@@ -8,21 +8,20 @@ import Edge from "../../edge.ts";
 // incidence-list , will take a look at that
 
 interface Pipe<T> {
-  process() : Generator<T>
+  process(): Generator<T>;
 }
 
-class OutEStep<Tin extends {id:number}> implements Pipe<Edge>{
+class OutEStep<Tin extends { id: number }> implements Pipe<Edge> {
+  pipe: Pipe<Tin>;
+  graph: Graph;
 
-  pipe : Pipe<Tin>;
-  graph : Graph;
-
-  constructor(pipe : Pipe<Tin>, graph : Graph) {
+  constructor(pipe: Pipe<Tin>, graph: Graph) {
     this.pipe = pipe;
     this.graph = graph;
     //console.log("+++++++++++++++++++++>" , this.graph )
   }
 
-  *process() : Generator<Edge> {
+  *process(): Generator<Edge> {
     for (const node of this.pipe.process()) {
       //console.log("+++++++++++++++++++++>" , node )
       //console.log("**********************>>> " , this.graph.outgoingEdges(node.id))
@@ -31,7 +30,7 @@ class OutEStep<Tin extends {id:number}> implements Pipe<Edge>{
     }
   }
 
-  toString() : string {
+  toString(): string {
     return "[OutEStep]";
   }
 }

@@ -10,9 +10,9 @@ function outgoingNodes(t, StructureImpl) {
   // });
 
   const edge = new Edge({
-    id : 43,
-    from: new Node({ id: 1}),
-    to: new Node({ id: 2})
+    id: 43,
+    from: new Node({ id: 1 }),
+    to: new Node({ id: 2 }),
   });
 
   structure.setEdge(edge);
@@ -26,8 +26,8 @@ function outgoingEdges(t, StructureImpl) {
 
   const edge = new Edge({
     id: 3,
-    from: new Node({ id: 1}),
-    to: new Node({ id: 2})
+    from: new Node({ id: 1 }),
+    to: new Node({ id: 2 }),
   });
 
   structure.setEdge(edge);
@@ -45,11 +45,10 @@ function incomingNodes(t, StructureImpl) {
   // });
 
   const edge = new Edge({
-    id : 413,
-    from: new Node({ id: 1}),
-    to: new Node({ id: 2})
+    id: 413,
+    from: new Node({ id: 1 }),
+    to: new Node({ id: 2 }),
   });
-
 
   structure.setEdge(edge);
 
@@ -62,8 +61,8 @@ function incomingEdges(t, StructureImpl) {
 
   const edge = new Edge({
     id: 3,
-    from: new Node({ id: 1}),
-    to: new Node({ id: 2})
+    from: new Node({ id: 1 }),
+    to: new Node({ id: 2 }),
   });
 
   structure.setEdge(edge);
@@ -72,9 +71,4 @@ function incomingEdges(t, StructureImpl) {
 }
 incomingEdges.title = () => "enumerates incoming edges";
 
-export default [
-  outgoingNodes,
-  outgoingEdges,
-  incomingNodes,
-  incomingEdges
-]
+export default [outgoingNodes, outgoingEdges, incomingNodes, incomingEdges];

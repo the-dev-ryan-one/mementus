@@ -1,16 +1,18 @@
 import Node from "./node.ts";
-import Edge from "./edge.js";
+import Edge from "./edge.ts";
+import GraphBuilder from "./graph-builder.ts";
+import Graph from "./graph.ts";
 
 const Mutators = {
-  setNode(node) {
+  setNode(this: Graph, node: Node) {
     this.structure.setNode(node);
   },
 
-  setEdge(edge) {
+  setEdge(this: Graph, edge: Edge) {
     this.structure.setEdge(edge);
   },
 
-  addNode(object={}) {
+  addNode(this: Graph, object = {}) {
     if (!object.id) {
       object.id = this.nodeIds.nextId();
     }
@@ -19,7 +21,7 @@ const Mutators = {
     return node;
   },
 
-  addEdge(object={}) {
+  addEdge(this: Graph, object = {}) {
     if (!object.id) {
       object.id = this.edgeIds.nextId();
     }
@@ -37,7 +39,7 @@ const Mutators = {
     return edge;
   },
 
-  createNode(builder) {
+  createNode(this: Graph, builder) {
     const object = { id: null, label: null, props: {} };
 
     builder(object);
@@ -45,13 +47,13 @@ const Mutators = {
     this.structure.setNode(new Node(object));
   },
 
-  createEdge(builder) {
+  createEdge(this: Graph, builder) {
     const object = { id: null, label: null, props: {}, from: null, to: null };
 
     builder(object);
 
     this.structure.setEdge(new Edge(object));
-  }
-}
+  },
+};
 
 export default Mutators;

@@ -1,9 +1,8 @@
-
 Testing process to check a ported file ( JS -> TS )
 
-1) compile with   npx tsc
+1. compile with npx tsc
 
-    use a strict tsconfig.js :
+   use a strict tsconfig.js :
 
         {
         "include": ["src/**/*"],
@@ -39,8 +38,6 @@ Testing process to check a ported file ( JS -> TS )
             }
         }
 
-2) run the AVA test script : npm test
-
+2. run the AVA test script : npm test
 
 npm run build:compile and npm run test both work (as of 10/9/26)
-

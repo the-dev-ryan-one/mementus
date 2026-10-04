@@ -1,7 +1,7 @@
 import test from "ava";
 import IntegerId from "../src/integer-id.js";
 
-test("counts upwards from 1 by default", t => {
+test("counts upwards from 1 by default", (t) => {
   const generator = new IntegerId();
 
   t.is(generator.nextId(), 1);
@@ -9,7 +9,7 @@ test("counts upwards from 1 by default", t => {
   t.is(generator.nextId(), 3);
 });
 
-test("counts upwards from given start value", t => {
+test("counts upwards from given start value", (t) => {
   const generator = new IntegerId(100);
 
   t.is(generator.nextId(), 100);
@@ -17,7 +17,7 @@ test("counts upwards from given start value", t => {
   t.is(generator.nextId(), 102);
 });
 
-test("counts upwards from given start value2", t => {
+test("counts upwards from given start value2", (t) => {
   const generator = new IntegerId(-5);
 
   t.is(generator.nextId(), -5);

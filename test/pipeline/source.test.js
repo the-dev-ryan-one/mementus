@@ -8,12 +8,12 @@ class DoubleStep {
   }
 
   *process() {
-    yield (this.pipe * 2);
+    yield this.pipe * 2;
   }
 }
 
-test("Connects a linked list of pipes", t => {
-  const source = new Source([1,2,3,4]);
+test("Connects a linked list of pipes", (t) => {
+  const source = new Source([1, 2, 3, 4]);
   source.connect(DoubleStep, "%");
   source.connect(DoubleStep, "¶");
   source.connect(DoubleStep, "¥");
@@ -23,8 +23,8 @@ test("Connects a linked list of pipes", t => {
   t.is(source.pipe.pipe.pipe.marker, "%");
 });
 
-test("Provides values from the process iterator", t => {
-  const source = new Source([1,2,3,4]);
+test("Provides values from the process iterator", (t) => {
+  const source = new Source([1, 2, 3, 4]);
   const process = source.process();
 
   t.is(process.next().value, 1);
@@ -33,13 +33,13 @@ test("Provides values from the process iterator", t => {
   t.is(process.next().value, 4);
 });
 
-test("Returns done when no more values can be provided", t => {
+test("Returns done when no more values can be provided", (t) => {
   const source = new Source([]);
 
   t.is(source.process().next().done, true);
 });
 
-test("creates an isolated iteration context with each process", t => {
+test("creates an isolated iteration context with each process", (t) => {
   const source = new Source(["a"]);
 
   const seq1 = source.process();

@@ -10,9 +10,13 @@ const edge1to3 = () => new Edge({ id: 2, from: node1(), to: node3() });
 function removeNodeByRef(t, StructureImpl) {
   const structure = new StructureImpl();
   const node = node1();
-  structure.setEdge(new Edge({ id: 10, from: node, to: node2()}));
-  structure.setEdge(new Edge({ id: 20, props: { tag: "checked" }, from: node, to: node3()}));
-  structure.setEdge(new Edge({ id: 30, props: { tag: "checked" }, from: node2(), to: node3()}));
+  structure.setEdge(new Edge({ id: 10, from: node, to: node2() }));
+  structure.setEdge(
+    new Edge({ id: 20, props: { tag: "checked" }, from: node, to: node3() }),
+  );
+  structure.setEdge(
+    new Edge({ id: 30, props: { tag: "checked" }, from: node2(), to: node3() }),
+  );
 
   t.is(structure.nodesCount, 3);
   t.is(structure.edgesCount, 3);
@@ -23,13 +27,17 @@ function removeNodeByRef(t, StructureImpl) {
   t.is(structure.edgesCount, 1);
 }
 
-removeNodeByRef.title = () => "remove all references to a node"
+removeNodeByRef.title = () => "remove all references to a node";
 
 function removeNodeById(t, StructureImpl) {
   const structure = new StructureImpl();
-  structure.setEdge(new Edge({ id: 10, from: node1(), to: node2()}));
-  structure.setEdge(new Edge({ id: 20, props: { tag: "checked" }, from: node1(), to: node3()}));
-  structure.setEdge(new Edge({ id: 30, props: { tag: "checked" }, from: node2(), to: node3()}));
+  structure.setEdge(new Edge({ id: 10, from: node1(), to: node2() }));
+  structure.setEdge(
+    new Edge({ id: 20, props: { tag: "checked" }, from: node1(), to: node3() }),
+  );
+  structure.setEdge(
+    new Edge({ id: 30, props: { tag: "checked" }, from: node2(), to: node3() }),
+  );
 
   structure.removeNode(1);
 
@@ -41,8 +49,8 @@ removeNodeById.title = () => "removes all references to a node id";
 
 function removeEdgeByRef(t, StructureImpl) {
   const structure = new StructureImpl();
-  const edge1 = new Edge({ id: 10, from: node1(), to: node2()});
-  const edge2 = new Edge({ id: 20, from: node2(), to: node3()});
+  const edge1 = new Edge({ id: 10, from: node1(), to: node2() });
+  const edge2 = new Edge({ id: 20, from: node2(), to: node3() });
   structure.setEdge(edge1);
   structure.setEdge(edge2);
 
@@ -52,12 +60,12 @@ function removeEdgeByRef(t, StructureImpl) {
   t.is(structure.edgesCount, 1);
 }
 
-removeEdgeByRef.title = () => "removes all references to an edge"
+removeEdgeByRef.title = () => "removes all references to an edge";
 
 function removeEdgeById(t, StructureImpl) {
   const structure = new StructureImpl();
-  const edge1 = new Edge({ id: 10, from: node1(), to: node2()});
-  const edge2 = new Edge({ id: 20, from: node2(), to: node3()});
+  const edge1 = new Edge({ id: 10, from: node1(), to: node2() });
+  const edge2 = new Edge({ id: 20, from: node2(), to: node3() });
   structure.setEdge(edge1);
   structure.setEdge(edge2);
 
@@ -67,11 +75,11 @@ function removeEdgeById(t, StructureImpl) {
   t.is(structure.edgesCount, 1);
 }
 
-removeEdgeById.title = () => "removes all references to an edge id"
+removeEdgeById.title = () => "removes all references to an edge id";
 
 export default [
   removeNodeByRef,
   removeNodeById,
   removeEdgeByRef,
-  removeEdgeById
+  removeEdgeById,
 ];

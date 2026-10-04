@@ -5,23 +5,22 @@ interface Pipe<T> {
   process(): Generator<T>;
 }
 
-class InEStep<T extends {id : number}> implements Pipe<Edge> {
+class InEStep<T extends { id: number }> implements Pipe<Edge> {
+  pipe: Pipe<T>;
+  graph: Graph;
 
-  pipe : Pipe<T>;
-  graph : Graph;
-
-  constructor(pipe : Pipe<T> , graph : Graph) {
+  constructor(pipe: Pipe<T>, graph: Graph) {
     this.pipe = pipe;
     this.graph = graph;
   }
 
-  *process() : Generator<Edge> {
+  *process(): Generator<Edge> {
     for (const node of this.pipe.process()) {
       yield* this.graph.incomingEdges(node.id);
     }
   }
 
-  toString() : string {
+  toString(): string {
     return "[InEStep]";
   }
 }

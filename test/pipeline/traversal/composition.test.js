@@ -1,22 +1,22 @@
 import test from "ava";
 import Traversal from "../../../src/pipeline/traversal.js";
 
-test("Connect collection source", t => {
+test("Connect collection source", (t) => {
   const traversal = new Traversal([]);
 
   t.is(traversal.toString(), "[CollectionSource]");
 });
 
-test("Connect single step", t => {
+test("Connect single step", (t) => {
   const traversal = new Traversal([]);
-  traversal.filter(i => i);
+  traversal.filter((i) => i);
 
   t.is(traversal.toString(), "[CollectionSource]->[FilterStep]");
 });
 
-test("Connect multiple steps", t => {
+test("Connect multiple steps", (t) => {
   const traversal = new Traversal([]);
-  traversal.filter(i => i).id();
+  traversal.filter((i) => i).id();
 
   t.is(traversal.toString(), "[CollectionSource]->[FilterStep]->[IdStep]");
 });

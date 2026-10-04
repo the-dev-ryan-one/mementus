@@ -5,7 +5,11 @@ import indexedGraphMacros from "./indexed-graph-macros.js";
 import mutableGraphMacros from "./mutable-graph-macros.js";
 
 for (const directedGraphMacro of directedGraphMacros) {
-  test(directedGraphMacro.title(), test.macro(directedGraphMacro), IncidenceList);
+  test(
+    directedGraphMacro.title(),
+    test.macro(directedGraphMacro),
+    IncidenceList,
+  );
 }
 
 for (const indexedGraphMacro of indexedGraphMacros) {

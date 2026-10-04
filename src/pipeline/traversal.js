@@ -44,18 +44,18 @@ class Traversal {
     return this;
   }
 
-  out(label=null) {
+  out(label = null) {
     this.chain.connect(OutStep, this.graph, label);
     return this;
   }
 
-  inc(label=null) {
+  inc(label = null) {
     this.chain.connect(InStep, this.graph, label);
     //console.log(".inc() output -------------------> " , this );
     return this;
   }
 
-  in(label=null) {
+  in(label = null) {
     this.chain.connect(InStep, this.graph, label);
     return this;
   }
@@ -109,7 +109,7 @@ class Traversal {
 
     const result = [];
 
-    for (let n=0; n<num; n++) {
+    for (let n = 0; n < num; n++) {
       const current = producer.next();
       if (current.done) break;
       result.push(current.value);

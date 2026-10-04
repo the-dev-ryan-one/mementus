@@ -1,8 +1,7 @@
 class AdjacencyList {
-
   isDirected: boolean;
 
-  constructor(isDirected : boolean) {
+  constructor(isDirected: boolean) {
     this.isDirected = isDirected;
   }
 }

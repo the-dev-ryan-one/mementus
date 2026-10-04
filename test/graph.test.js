@@ -3,20 +3,20 @@ import Graph from "../src/graph.js";
 import Node from "../src/node.ts";
 import Edge from "../src/edge.js";
 
-const node1 = () => new Node({ id: 1, label: "trunk", props: { num: "one" }});
-const node2 = () => new Node({ id: 2, label: "twig", props: { num: "two" }});
-const node3 = () => new Node({ id: 3, label: "twig", props: { num: "three" }});
+const node1 = () => new Node({ id: 1, label: "trunk", props: { num: "one" } });
+const node2 = () => new Node({ id: 2, label: "twig", props: { num: "two" } });
+const node3 = () => new Node({ id: 3, label: "twig", props: { num: "three" } });
 const edge1to2 = () => new Edge({ id: 1, from: node1(), to: node2() });
 const edge1to3 = () => new Edge({ id: 2, from: node1(), to: node3() });
 
-test("#new", t => {
+test("#new", (t) => {
   const graph = new Graph();
 
   t.is(graph.nodesCount, 0);
   t.is(graph.edgesCount, 0);
 });
 
-test("#new with mutable API", t => {
+test("#new with mutable API", (t) => {
   const graph = new Graph(false, { isMutable: true });
 
   graph.addEdge({ from: node1(), to: node2() });
@@ -29,8 +29,8 @@ test("#new with mutable API", t => {
   t.is(graph.node(2).label, "twig");
 });
 
-test("#setNode", t => {
-  const graph = new Graph(g => {
+test("#setNode", (t) => {
+  const graph = new Graph((g) => {
     g.setNode(node1());
   });
 
@@ -38,8 +38,8 @@ test("#setNode", t => {
   t.is(graph.edgesCount, 0);
 });
 
-test("#addNode", t => {
-  const graph = new Graph(g => {
+test("#addNode", (t) => {
+  const graph = new Graph((g) => {
     g.addNode({ id: 1 });
   });
 
@@ -48,34 +48,34 @@ test("#addNode", t => {
   t.is(graph.node(1).id, 1);
 });
 
-test("#addNode with auto id", t => {
-  const graph = new Graph(g => {
+test("#addNode with auto id", (t) => {
+  const graph = new Graph((g) => {
     g.addNode();
   });
 
   t.is(graph.node(1).id, 1);
 });
 
-test("#addNode returns generated node", t => {
+test("#addNode returns generated node", (t) => {
   let node;
-  const graph = new Graph(g => {
+  const graph = new Graph((g) => {
     node = g.addNode();
   });
 
   t.is(graph.node(node.id).id, node.id);
 });
 
-test("#addNode with props", t => {
-  const graph = new Graph(g => {
-    g.addNode({ id: 1, props: { title: "Vertex" }});
+test("#addNode with props", (t) => {
+  const graph = new Graph((g) => {
+    g.addNode({ id: 1, props: { title: "Vertex" } });
   });
 
   t.is(graph.node(1).props.title, "Vertex");
 });
 
-test("#createNode", t => {
-  const graph = new Graph(g => {
-    g.createNode(n => {
+test("#createNode", (t) => {
+  const graph = new Graph((g) => {
+    g.createNode((n) => {
       n.id = 20;
       n.label = "vertex";
       n.props.title = "Vertex";
@@ -91,8 +91,8 @@ test("#createNode", t => {
   t.is(node.props.title, "Vertex");
 });
 
-test("#setEdge", t => {
-  const graph = new Graph(g => {
+test("#setEdge", (t) => {
+  const graph = new Graph((g) => {
     g.setEdge(edge1to2());
   });
 
@@ -102,8 +102,8 @@ test("#setEdge", t => {
   t.is(graph.node(2).id, 2);
 });
 
-test("#addEdge", t => {
-  const graph = new Graph(g => {
+test("#addEdge", (t) => {
+  const graph = new Graph((g) => {
     g.addEdge({ id: 3, from: node1(), to: node2() });
   });
 
@@ -114,43 +114,47 @@ test("#addEdge", t => {
   t.is(graph.edge(3).id, 3);
 });
 
-test("#addEdge with auto id", t => {
-  const graph = new Graph(g => {
+test("#addEdge with auto id", (t) => {
+  const graph = new Graph((g) => {
     g.addEdge({ from: node1(), to: node2() });
   });
 
   t.is(graph.edge(1).id, 1);
 });
 
-test("#addEdge returns generated node", t => {
+test("#addEdge returns generated node", (t) => {
   let edge;
-  const graph = new Graph(g => {
+  const graph = new Graph((g) => {
     edge = g.addEdge();
   });
 
   t.is(graph.edge(edge.id).id, edge.id);
 });
 
-test("#addEdge with props", t => {
-  const graph = new Graph(g => {
-    g.addEdge({ from: node1(), to: node2(), props: {
-      title: "Relationship"
-    }});
+test("#addEdge with props", (t) => {
+  const graph = new Graph((g) => {
+    g.addEdge({
+      from: node1(),
+      to: node2(),
+      props: {
+        title: "Relationship",
+      },
+    });
   });
 
   t.is(graph.edge(1).props.title, "Relationship");
 });
 
-test("#createEdge", t => {
-  const graph = new Graph(g => {
-    g.createEdge(e => {
+test("#createEdge", (t) => {
+  const graph = new Graph((g) => {
+    g.createEdge((e) => {
       e.id = 123;
       e.label = "relationship";
       e.from = node1();
       e.to = node2();
       e.props = {
-        title: "Relationship"
-      }
+        title: "Relationship",
+      };
     });
   });
 
@@ -165,9 +169,9 @@ test("#createEdge", t => {
   t.is(edge.props.title, "Relationship");
 });
 
-test.skip("#hasNode by ref", t => {
+test.skip("#hasNode by ref", (t) => {
   const node = node1();
-  const graph = new Graph(g => {
+  const graph = new Graph((g) => {
     g.setNode(node);
   });
 
@@ -175,8 +179,8 @@ test.skip("#hasNode by ref", t => {
   t.is(graph.hasNode(node1()), false);
 });
 
-test("#hasNode by id", t => {
-  const graph = new Graph(g => {
+test("#hasNode by id", (t) => {
+  const graph = new Graph((g) => {
     g.setNode(node1());
   });
 
@@ -184,9 +188,9 @@ test("#hasNode by id", t => {
   t.is(graph.hasNode(44), false);
 });
 
-test("#hasEdge by ref", t => {
+test("#hasEdge by ref", (t) => {
   const edge = edge1to2();
-  const graph = new Graph(g => {
+  const graph = new Graph((g) => {
     g.setEdge(edge);
   });
 
@@ -194,8 +198,8 @@ test("#hasEdge by ref", t => {
   t.is(graph.hasEdge(edge1to2()), false);
 });
 
-test("#hasEdge by id", t => {
-  const graph = new Graph(g => {
+test("#hasEdge by id", (t) => {
+  const graph = new Graph((g) => {
     g.setEdge(edge1to2());
   });
 
@@ -203,8 +207,8 @@ test("#hasEdge by id", t => {
   t.is(graph.hasEdge(44), false);
 });
 
-test("#node(id)", t => {
-  const graph = new Graph(g => {
+test("#node(id)", (t) => {
+  const graph = new Graph((g) => {
     g.setEdge(edge1to2());
   });
 
@@ -212,8 +216,8 @@ test("#node(id)", t => {
   t.is(graph.node(2).id, 2);
 });
 
-test("#edge(id)", t => {
-  const graph = new Graph(g => {
+test("#edge(id)", (t) => {
+  const graph = new Graph((g) => {
     g.setEdge(edge1to2());
   });
 
@@ -222,8 +226,8 @@ test("#edge(id)", t => {
   t.is(graph.edge(1).to.id, 2);
 });
 
-test("#nodes", t => {
-  const graph = new Graph(g => {
+test("#nodes", (t) => {
+  const graph = new Graph((g) => {
     g.setEdge(edge1to2());
     g.setEdge(edge1to3());
   });
@@ -235,11 +239,11 @@ test("#nodes", t => {
   t.is(nodes[2].id, 3);
 });
 
-test("#nodes(label)", t => {
-  const graph = new Graph(g => {
+test("#nodes(label)", (t) => {
+  const graph = new Graph((g) => {
     g.setEdge(edge1to2());
-    g.addNode({id: 3, label: "checked"});
-    g.addNode({id: 4, label: "checked"});
+    g.addNode({ id: 3, label: "checked" });
+    g.addNode({ id: 4, label: "checked" });
   });
 
   const nodes = graph.nodes("checked");
@@ -248,11 +252,11 @@ test("#nodes(label)", t => {
   t.is(nodes[1].id, 4);
 });
 
-test("#nodes(props: match)", t => {
-  const graph = new Graph(g => {
+test("#nodes(props: match)", (t) => {
+  const graph = new Graph((g) => {
     g.setEdge(edge1to2());
-    g.addNode({id: 3, props: { tag: "numeral" }});
-    g.addNode({id: 4, props: { tag: "numeral" }});
+    g.addNode({ id: 3, props: { tag: "numeral" } });
+    g.addNode({ id: 4, props: { tag: "numeral" } });
   });
 
   const nodes = graph.nodes({ tag: "numeral" });
@@ -261,8 +265,8 @@ test("#nodes(props: match)", t => {
   t.is(nodes[1].props.tag, "numeral");
 });
 
-test("#edges", t => {
-  const graph = new Graph(g => {
+test("#edges", (t) => {
+  const graph = new Graph((g) => {
     g.setEdge(edge1to2());
     g.setEdge(edge1to3());
   });
@@ -273,11 +277,11 @@ test("#edges", t => {
   t.is(edges[1].id, 2);
 });
 
-test("#edges(label)", t => {
-  const graph = new Graph(g => {
-    g.addEdge({ id: 10, from: node1(), to: node2()});
-    g.addEdge({ id: 20, label: "checked", from: node1(), to: node3()});
-    g.addEdge({ id: 30, label: "checked", from: node2(), to: node3()});
+test("#edges(label)", (t) => {
+  const graph = new Graph((g) => {
+    g.addEdge({ id: 10, from: node1(), to: node2() });
+    g.addEdge({ id: 20, label: "checked", from: node1(), to: node3() });
+    g.addEdge({ id: 30, label: "checked", from: node2(), to: node3() });
   });
 
   const edges = graph.edges("checked");
@@ -286,79 +290,109 @@ test("#edges(label)", t => {
   t.is(edges[1].id, 30);
 });
 
-test("#edges(props: match)", t => {
-  const graph = new Graph(g => {
-    g.addEdge({ id: 10, from: node1(), to: node2()});
-    g.addEdge({ id: 20, props: { tag: "checked" }, from: node1(), to: node3()});
-    g.addEdge({ id: 30, props: { tag: "checked" }, from: node2(), to: node3()});
+test("#edges(props: match)", (t) => {
+  const graph = new Graph((g) => {
+    g.addEdge({ id: 10, from: node1(), to: node2() });
+    g.addEdge({
+      id: 20,
+      props: { tag: "checked" },
+      from: node1(),
+      to: node3(),
+    });
+    g.addEdge({
+      id: 30,
+      props: { tag: "checked" },
+      from: node2(),
+      to: node3(),
+    });
   });
 
-  const edges = graph.edges({tag: "checked"});
+  const edges = graph.edges({ tag: "checked" });
   t.is(edges.length, 2);
   t.is(edges[0].id, 20);
   t.is(edges[1].id, 30);
 });
 
-test("n(id)", t => {
-  const graph = new Graph(g => {
-    g.addEdge({ id: 10, props: { tag: "marked" }, from: node1(), to: node2()});
-    g.addEdge({ id: 20, props: { tag: "checked" }, from: node1(), to: node3()});
-    g.addEdge({ id: 30, props: { tag: "checked" }, from: node2(), to: node3()});
+test("n(id)", (t) => {
+  const graph = new Graph((g) => {
+    g.addEdge({ id: 10, props: { tag: "marked" }, from: node1(), to: node2() });
+    g.addEdge({
+      id: 20,
+      props: { tag: "checked" },
+      from: node1(),
+      to: node3(),
+    });
+    g.addEdge({
+      id: 30,
+      props: { tag: "checked" },
+      from: node2(),
+      to: node3(),
+    });
   });
 
   const result = graph.n(1).outE().prop("tag").all();
   t.deepEqual(result, ["marked", "checked"]);
 });
 
-test("n()", t => {
-  const graph = new Graph(g => {
-    g.addEdge({ id: 10, from: node1(), to: node2()});
-    g.addEdge({ id: 20, from: node1(), to: node3()});
-    g.addEdge({ id: 30, from: node2(), to: node3()});
+test("n()", (t) => {
+  const graph = new Graph((g) => {
+    g.addEdge({ id: 10, from: node1(), to: node2() });
+    g.addEdge({ id: 20, from: node1(), to: node3() });
+    g.addEdge({ id: 30, from: node2(), to: node3() });
   });
 
   const result = graph.n().out().id().all();
-  t.deepEqual(result, [2,3,3]);
+  t.deepEqual(result, [2, 3, 3]);
 });
 
-test("n(label)", t => {
-  const graph = new Graph(g => {
-    g.addEdge({ id: 10, from: node1(), to: node2()});
-    g.addEdge({ id: 20, from: node1(), to: node3()});
-    g.addEdge({ id: 30, from: node2(), to: node3()});
+test("n(label)", (t) => {
+  const graph = new Graph((g) => {
+    g.addEdge({ id: 10, from: node1(), to: node2() });
+    g.addEdge({ id: 20, from: node1(), to: node3() });
+    g.addEdge({ id: 30, from: node2(), to: node3() });
   });
 
   const result = graph.n("twig").id().all();
-  t.deepEqual(result, [2,3]);
+  t.deepEqual(result, [2, 3]);
 });
 
-test("n(label).out(label)", t => {
-  const graph = new Graph(g => {
-    g.addEdge({ id: 10, label: "habit", from: node1(), to: node2()});
-    g.addEdge({ id: 20, label: "canopy", from: node1(), to: node3()});
-    g.addEdge({ id: 30, label: "canopy", from: node2(), to: node3()});
+test("n(label).out(label)", (t) => {
+  const graph = new Graph((g) => {
+    g.addEdge({ id: 10, label: "habit", from: node1(), to: node2() });
+    g.addEdge({ id: 20, label: "canopy", from: node1(), to: node3() });
+    g.addEdge({ id: 30, label: "canopy", from: node2(), to: node3() });
   });
 
   const result = graph.n("trunk").out("canopy").id().all();
   t.deepEqual(result, [3]);
 });
 
-test("n(prop: match)", t => {
-  const graph = new Graph(g => {
-    g.addEdge({ id: 10, from: node1(), to: node2()});
-    g.addEdge({ id: 20, from: node1(), to: node3()});
-    g.addEdge({ id: 30, from: node2(), to: node3()});
+test("n(prop: match)", (t) => {
+  const graph = new Graph((g) => {
+    g.addEdge({ id: 10, from: node1(), to: node2() });
+    g.addEdge({ id: 20, from: node1(), to: node3() });
+    g.addEdge({ id: 30, from: node2(), to: node3() });
   });
 
-  const result = graph.n({num: "one"}).outE().id().all();
+  const result = graph.n({ num: "one" }).outE().id().all();
   t.deepEqual(result, [10, 20]);
 });
 
-test("e(id)", t => {
-  const graph = new Graph(g => {
-    g.addEdge({ id: 10, props: { tag: "marked" }, from: node1(), to: node2()});
-    g.addEdge({ id: 20, props: { tag: "checked" }, from: node1(), to: node3()});
-    g.addEdge({ id: 30, props: { tag: "checked" }, from: node2(), to: node3()});
+test("e(id)", (t) => {
+  const graph = new Graph((g) => {
+    g.addEdge({ id: 10, props: { tag: "marked" }, from: node1(), to: node2() });
+    g.addEdge({
+      id: 20,
+      props: { tag: "checked" },
+      from: node1(),
+      to: node3(),
+    });
+    g.addEdge({
+      id: 30,
+      props: { tag: "checked" },
+      from: node2(),
+      to: node3(),
+    });
   });
 
   const result = graph.e(10).props().one();

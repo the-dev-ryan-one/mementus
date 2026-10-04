@@ -3,10 +3,9 @@ import IntegerId from "./integer-id.js";
 import Mutators from "./mutators.js";
 
 class GraphBuilder {
-
-  structure : IncidenceList;
-  nodeIds : IntegerId;
-  edgeIds : IntegerId;
+  structure: IncidenceList;
+  nodeIds: IntegerId;
+  edgeIds: IntegerId;
 
   constructor() {
     this.structure = new IncidenceList();
@@ -14,19 +13,21 @@ class GraphBuilder {
     this.edgeIds = new IntegerId();
   }
 
-  nextNodeId() : number {
+  nextNodeId(): number {
     return this.nodeIds.nextId();
   }
 
-  nextEdgeId() : number {
+  nextEdgeId(): number {
     return this.edgeIds.nextId();
   }
 
-  graph() : IncidenceList{
+  graph(): IncidenceList {
     return this.structure;
   }
 }
 
+console.log("$$$$$$$$$$ ---- ", GraphBuilder.prototype);
+console.log("$$$$$$$$$$ ---- ", Mutators);
 Object.assign(GraphBuilder.prototype, Mutators);
 
 export default GraphBuilder;
