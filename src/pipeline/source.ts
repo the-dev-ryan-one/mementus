@@ -8,10 +8,9 @@ interface Step<Tin, Tout> {
   toString(): string;
 }
 
-type stepConstructor<Tin, Tout> = new (
-  input: Pipe<Tin>,
-  ...args: unknown[]
-) => Step<Tin, Tout>;
+type StepParams<T> = { source: Pipe<T> } | { pipe: Pipe<T> };
+
+type StepConstructor<Tin, Tout> = new (param: StepParams<Tin>) => Step<Tin, Tout>;
 
 // Notes : the correct typing on Pipe in Source is difficult , leave for now
 
@@ -36,10 +35,13 @@ class CollectionSource<T> implements Pipe<T> {
 }
 
 // difficult part of the port , will revisit
-class Source<T, StepTin, StepTout> {
-  pipe: Pipe<T>;
+class Source<T, U, StepIn, StepOut> {
+  // this.pipe can be a collection source or a step , this.pipe.process must be valid , steps dont always
+  // return the same type as they recived (sometimes they mutate before passing on) so pipe shouldnt have that constraint
+  pipe: Pipe<StepIn>;
 
-  constructor(source: T[]) {
+  constructor(source: StepIn[]) {
+    //console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%% ", source);
     if (Array.isArray(source)) {
       this.pipe = new CollectionSource(source);
       //console.log("&&&&&&&&&&&&&&>>>> " , this.pipe.process().next())
@@ -48,12 +50,12 @@ class Source<T, StepTin, StepTout> {
     }
   }
 
-  connect(step: stepConstructor<StepTin, StepTout>, ...args: unknown[]) {
+  connect(step: StepConstructor<StepIn, StepOut>, ...args) {
     //console.log("-------------------------->>>> " , args)
     this.pipe = new step(this.pipe, ...args);
   }
 
-  *process(): Generator<T> {
+  *process() {
     yield* this.pipe.process();
   }
 }

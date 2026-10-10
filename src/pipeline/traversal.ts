@@ -1,18 +1,21 @@
-import Source from "./source.js";
-import MapStep from "./steps/map-step.js";
-import FilterStep from "./steps/filter-step.js";
-import WhereStep from "./steps/where-step.js";
-import UnionStep from "./steps/union-step.js";
-import IdStep from "./steps/id-step.js";
-import LabelStep from "./steps/label-step.js";
-import PropsStep from "./steps/props-step.js";
-import PropStep from "./steps/prop-step.js";
-import OutStep from "./steps/out-step.js";
-import InStep from "./steps/in-step.js";
-import OutEStep from "./steps/out-e-step.js";
-import InEStep from "./steps/in-e-step.js";
+import Source from "./source.ts";
+import MapStep from "./steps/map-step.ts";
+import FilterStep from "./steps/filter-step.ts";
+import WhereStep from "./steps/where-step.ts";
+import UnionStep from "./steps/union-step.ts";
+import IdStep from "./steps/id-step.ts";
+import LabelStep from "./steps/label-step.ts";
+import PropsStep from "./steps/props-step.ts";
+import PropStep from "./steps/prop-step.ts";
+import OutStep from "./steps/out-step.ts";
+import InStep from "./steps/in-step.ts";
+import OutEStep from "./steps/out-e-step.ts";
+import InEStep from "./steps/in-e-step.ts";
 
 class Traversal {
+  // input
+  // graph
+
   constructor(input, graph) {
     this.input = input;
     this.graph = graph;
@@ -25,7 +28,6 @@ class Traversal {
 
   id() {
     this.chain.connect(IdStep);
-    //console.log(".id() output -------------------> " , this );
     return this;
   }
 
@@ -39,12 +41,14 @@ class Traversal {
     return this;
   }
 
-  prop(name) {
+  prop(name: string) {
+    //console.log("333333333333333333", typeof name);
     this.chain.connect(PropStep, name);
     return this;
   }
 
   out(label = null) {
+    //console.log("333333333333333333", label);
     this.chain.connect(OutStep, this.graph, label);
     return this;
   }
@@ -103,7 +107,7 @@ class Traversal {
     return result;
   }
 
-  take(num) {
+  take(num: number): number[] {
     const producer = this.chain.process();
     this.reset();
 
@@ -122,7 +126,7 @@ class Traversal {
     return this.chain.process();
   }
 
-  toString() {
+  toString(): string {
     let out = [];
     let pipe = this.chain.pipe;
     while (pipe != null) {

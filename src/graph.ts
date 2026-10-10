@@ -23,10 +23,7 @@ class Graph {
   nodeIds?: IntegerId;
   edgeIds?: IntegerId;
 
-  constructor(
-    initializer?: (builder: GraphBuilder) => void,
-    options: object = {},
-  ) {
+  constructor(initializer?: (builder: GraphBuilder) => void, options: object = {}) {
     const initialOptions = Object.assign(defaultOptions, options);
     const builder = new GraphBuilder();
 
@@ -37,7 +34,16 @@ class Graph {
     this.structure = builder.graph();
     this.index = new Map();
 
+    ///////////////////////////////////////////////////////////////////////////
+    //
+    // TODO : after this : Object.assign(Graph.prototype, Mutators);
+    //        all subsequent Graph instances have the mutator methods
+    //        regardless of isMutable ??
+    //        is this right ???? (see experiment2.js)
+    //
+    ///////////////////////////////////////////////////////////////////////////
     if (initialOptions.isMutable) {
+      // uses Mutators as a mixin applied to the Graph class conditionaly
       Object.assign(Graph.prototype, Mutators);
       this.nodeIds = new IntegerId(builder.nextNodeId());
       this.edgeIds = new IntegerId(builder.nextEdgeId());
@@ -92,20 +98,16 @@ class Graph {
     return this.structure.incomingEdges(id);
   }
 
-  n(match: null | number = null): Traversal {
+  n(match: null | number | string | propKVpairs = null): Traversal {
     const sequence =
-      typeof match === "number"
-        ? [this.structure.node(match)]
-        : this.structure.nodes(match);
+      typeof match === "number" ? [this.structure.node(match)] : this.structure.nodes(match);
 
     return new Traversal(sequence, this);
   }
 
   e(match: null | number = null): Traversal {
     const sequence =
-      typeof match === "number"
-        ? [this.structure.edge(match)]
-        : this.structure.edges(match);
+      typeof match === "number" ? [this.structure.edge(match)] : this.structure.edges(match);
 
     return new Traversal(sequence, this);
   }

@@ -1,3 +1,5 @@
+// @ts-check
+
 import test from "ava";
 import Graph from "../src/graph.js";
 import Node from "../src/node.ts";

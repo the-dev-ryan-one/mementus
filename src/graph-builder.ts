@@ -26,8 +26,11 @@ class GraphBuilder {
   }
 }
 
-console.log("$$$$$$$$$$ ---- ", GraphBuilder.prototype);
-console.log("$$$$$$$$$$ ---- ", Mutators);
+// console.log("GraphBuilder.prototype ------- ", GraphBuilder.prototype);
+// console.log("Mutators ----------- ", Mutators);
+// sets the prototype of the graphbuilder class to Mutators
+// net result is that Graphbuilder instances have access to the methods in
+// mutators (ie Mutators is a mixin).
 Object.assign(GraphBuilder.prototype, Mutators);
 
 export default GraphBuilder;

@@ -22,7 +22,7 @@ class Queue<QueueElementType> {
   }
 
   dequeue(): QueueElementType | undefined {
-    if (this._entries.length == 0) return;
+    if (this._entries.length === 0) return undefined;
 
     const entry = this._entries[this._offset];
 
