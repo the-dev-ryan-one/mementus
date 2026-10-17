@@ -1,0 +1,8 @@
+API Extension Ideas
+
+- render graph or view graph method would be nice even just as a debug , could probably just make a call to JS equivilent of matplotlib
+
+- a function that could be called by the user to SET the allowed node and edge values in a graph
+  for example if a user was making a graph of people or a social network they could call
+  SET ( "coworker" , "friend" , "spouse" ) and then the only allowed edge properiets could be
+  props : { relationship : "coworker"|"friend"|"spouse"} or something like that

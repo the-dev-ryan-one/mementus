@@ -1,15 +1,20 @@
-import Graph from "./src/graph";
+import Graph from "./src/graph.ts";
+import Node from "./src/node.ts";
+import Edge from "./src/edge.ts";
+import Traversal from "./src/pipeline/traversal.ts";
 
-const graph1 = new Graph();
+const socialNetworkGraph = new Graph((g) => {
+  g.addNode({ id: 1, props: { gender: "male" } });
+  g.addNode({ id: 2, props: { gender: "female" } });
+  g.addNode({ id: 3, props: { gender: "male" } });
 
-console.log("helloooo");
+  g.addEdge({ id: 10, from: 1, to: 2, props: { relationship: "friend" } });
+  g.addEdge({ id: 20, from: 1, to: 2, props: { relationship: "coworker" } });
+  g.addEdge({ id: 30, from: 2, to: 3, props: { relationship: "friend" } });
+  g.addEdge({ id: 40, from: 2, to: 3, props: { relationship: "spouse" } });
+});
 
-console.log("graph 1", typeof graph1.addNode);
+const predicate = (x) => x.props["gender"] == "male";
 
-const graph2 = new Graph(undefined, { isMutable: true });
-
-console.log("graph 2: ", typeof graph1.addNode);
-
-// graph3 wasnt passed isMutable so graph3.addNode should be undefined?
-const graph3 = new Graph();
-console.log("graph 3", typeof graph3.addNode);
+const result = socialNetworkGraph.n().prop("gender").filter(predicate).all();
+console.log(result);

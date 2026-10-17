@@ -10,7 +10,7 @@ interface Step<Tin, Tout> {
 
 type StepParams<T> = { source: Pipe<T> } | { pipe: Pipe<T> };
 
-type StepConstructor<Tin, Tout> = new (param: StepParams<Tin>) => Step<Tin, Tout>;
+type StepConstructor<Tin, Tout, U> = new (param: StepParams<Tin>, ...args: U[]) => Step<Tin, Tout>;
 
 // Notes : the correct typing on Pipe in Source is difficult , leave for now
 
@@ -21,6 +21,7 @@ class CollectionSource<T> implements Pipe<T> {
     // this.collection is an array because  new CollectionSource(source) in Source
     this.collection = collection;
     // console.log("***************** example of this.collection: " , this.collection);
+    //console.log(Object.getOwnPropertyNames(Object.getPrototypeOf(this)));
   }
 
   // the collection source class has a generator method which will yield
@@ -33,6 +34,9 @@ class CollectionSource<T> implements Pipe<T> {
     return "[CollectionSource]";
   }
 }
+
+// typing pipe.
+//
 
 // difficult part of the port , will revisit
 class Source<T, U, StepIn, StepOut> {
@@ -50,8 +54,9 @@ class Source<T, U, StepIn, StepOut> {
     }
   }
 
-  connect(step: StepConstructor<StepIn, StepOut>, ...args) {
-    //console.log("-------------------------->>>> " , args)
+  connect(step: StepConstructor<StepIn, StepOut, U>, ...args: U[]) {
+    console.log("------------$$$-------------->>>> ", this.pipe);
+
     this.pipe = new step(this.pipe, ...args);
   }
 

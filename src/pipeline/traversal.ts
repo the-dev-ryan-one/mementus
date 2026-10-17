@@ -15,6 +15,7 @@ import InEStep from "./steps/in-e-step.ts";
 class Traversal {
   // input
   // graph
+  chain: Source;
 
   constructor(input, graph) {
     this.input = input;
