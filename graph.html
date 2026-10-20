@@ -1,0 +1,38 @@
+<!doctype html>
+    <meta charset="utf-8">
+    <meta name="color-scheme" content="light dark">
+    <title>graph</title>
+    <style>
+    html, body, #cy { height: 100%; margin: 0; }
+    body { background: #ffffff; }
+    @media (prefers-color-scheme: dark) { body { background: #1e1e1e; } }
+    </style>
+    <div id="cy"></div>
+    <script src="https://cdn.jsdelivr.net/npm/cytoscape@3.30.2/dist/cytoscape.min.js"></script>
+    <script>
+    const dark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const c = dark
+    ? { text: "#e6e6e6", nodeBg: "#2d3b55", nodeBorder: "#6ea8ff", edge: "#8a8a8a", labelBg: "#1e1e1e" }
+    : { text: "#1a1a1a", nodeBg: "#dbe8ff", nodeBorder: "#4f8ef7", edge: "#999999", labelBg: "#ffffff" };
+
+    cytoscape({
+    container: document.getElementById("cy"),
+    elements: [{"data":{"id":"n1","label":"1\ngender: \"male\""}},{"data":{"id":"n2","label":"2\ngender: \"female\""}},{"data":{"id":"n3","label":"3\ngender: \"male\""}},{"data":{"id":"e10","source":"n1","target":"n2","label":"[10]\nrelationship: \"friend\""}},{"data":{"id":"e20","source":"n1","target":"n2","label":"[20]\nrelationship: \"coworker\""}},{"data":{"id":"e30","source":"n2","target":"n3","label":"[30]\nrelationship: \"friend\""}},{"data":{"id":"e40","source":"n2","target":"n3","label":"[40]\nrelationship: \"spouse\""}}],
+    layout: { name: "cose", animate: false, nodeDimensionsIncludeLabels: true,
+                nodeRepulsion: 1000000, idealEdgeLength: 200, padding: 40 },
+    style: [
+        { selector: "node", style: {
+            label: "data(label)", color: c.text, "text-wrap": "wrap", "text-valign": "center",
+            shape: "round-rectangle", width: "label", height: "label", padding: "10px",
+            "background-color": c.nodeBg, "border-width": 1, "border-color": c.nodeBorder,
+            "font-size": 12 } },
+        { selector: "edge", style: {
+            label: "data(label)", color: c.text, "text-wrap": "wrap",
+            "text-background-color": c.labelBg, "text-background-opacity": 1,
+            "text-background-padding": "2px",
+            "font-size": 10, width: 2, "line-color": c.edge,
+            "target-arrow-shape": "triangle", "target-arrow-color": c.edge,
+            "curve-style": "bezier", "control-point-step-size": 60 } },
+    ],
+    });
+    </script>

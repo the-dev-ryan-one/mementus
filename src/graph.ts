@@ -99,15 +99,14 @@ class Graph {
   }
 
   n(match: null | number | string | propKVpairs = null): Traversal {
-    const sequence =
-      typeof match === "number" ? [this.structure.node(match)] : this.structure.nodes(match);
+    console.log("here 1");
+    const sequence = typeof match === "number" ? [this.structure.node(match)] : this.structure.nodes(match);
 
     return new Traversal(sequence, this);
   }
 
   e(match: null | number = null): Traversal {
-    const sequence =
-      typeof match === "number" ? [this.structure.edge(match)] : this.structure.edges(match);
+    const sequence = typeof match === "number" ? [this.structure.edge(match)] : this.structure.edges(match);
 
     return new Traversal(sequence, this);
   }

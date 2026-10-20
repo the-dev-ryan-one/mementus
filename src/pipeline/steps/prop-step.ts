@@ -4,9 +4,7 @@ interface Pipe<T> {
 
 type propValues = number | string | boolean | string[] | number[];
 
-class PropStep<
-  T extends { props: Record<string, propValues> },
-> implements Pipe<propValues> {
+class PropStep<T extends { props: Record<string, propValues> }> implements Pipe<propValues> {
   pipe: Pipe<T>;
   match: string;
 

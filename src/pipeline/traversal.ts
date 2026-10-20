@@ -12,12 +12,15 @@ import InStep from "./steps/in-step.ts";
 import OutEStep from "./steps/out-e-step.ts";
 import InEStep from "./steps/in-e-step.ts";
 
-class Traversal {
-  // input
-  // graph
-  chain: Source;
+import { isStep } from "./source.ts";
+import Graph from "../graph.ts";
 
-  constructor(input, graph) {
+class Traversal {
+  chain!: Source;
+  graph?: Graph;
+  input: unknown[];
+
+  constructor(input: unknown[], graph?: Graph) {
     this.input = input;
     this.graph = graph;
     this.reset();
@@ -27,88 +30,95 @@ class Traversal {
     this.chain = new Source(this.input);
   }
 
-  id() {
+  id(): Traversal {
+    // this.chain is a Source . connect is called and ||| this.pipe = new step(this.pipe, ...args);
+    //console.log("before connect :     ", this.chain.pipe);
     this.chain.connect(IdStep);
+    //console.log("After connect :     ", this.chain.pipe);
     return this;
   }
 
-  label() {
+  label(): Traversal {
     this.chain.connect(LabelStep);
     return this;
   }
 
-  props() {
+  props(): Traversal {
     this.chain.connect(PropsStep);
     return this;
   }
 
-  prop(name: string) {
-    //console.log("333333333333333333", typeof name);
+  prop(name: string): Traversal {
+    //console.log("-----------------");
+    console.log("here 2");
     this.chain.connect(PropStep, name);
+    //console.log("----------this-------> ", this);
+    //console.log("-----------------");
     return this;
   }
 
-  out(label = null) {
+  out(label = null): Traversal {
     //console.log("333333333333333333", label);
     this.chain.connect(OutStep, this.graph, label);
     return this;
   }
 
-  inc(label = null) {
+  inc(label = null): Traversal {
     this.chain.connect(InStep, this.graph, label);
     //console.log(".inc() output -------------------> " , this );
     return this;
   }
 
-  in(label = null) {
+  in(label = null): Traversal {
     this.chain.connect(InStep, this.graph, label);
     return this;
   }
 
-  outE() {
+  outE(): Traversal {
     this.chain.connect(OutEStep, this.graph);
     return this;
   }
 
-  inE() {
+  inE(): Traversal {
     this.chain.connect(InEStep, this.graph);
     return this;
   }
 
-  map(transform) {
+  map<InType, OutType>(transform: (input: InType) => OutType): Traversal {
     this.chain.connect(MapStep, transform);
     return this;
   }
 
-  where(predicate) {
+  where(predicate: (input: Traversal) => boolean): Traversal {
     this.chain.connect(WhereStep, predicate, this.graph, Traversal);
     return this;
   }
 
-  filter(predicate) {
+  filter(predicate: (input: Traversal) => boolean): Traversal {
     this.chain.connect(FilterStep, predicate);
     return this;
   }
 
-  union(base, other) {
+  union<Tout>(base: (input: Traversal) => Tout | Tout[], other: (input: Traversal) => Tout | Tout[]): Traversal {
     this.chain.connect(UnionStep, this.graph, base, other, Traversal);
     return this;
   }
 
-  one() {
+  one(): unknown {
     const producer = this.chain.process();
     this.reset();
     return producer.next().value;
   }
 
-  all() {
+  all(): unknown[] {
+    console.log("here 3");
     const result = [...this.chain.process()];
     this.reset();
     //console.log(".all() output ------------------->" , result );
     return result;
   }
 
-  take(num: number): number[] {
+  take(num: number): unknown[] {
     const producer = this.chain.process();
     this.reset();
 
@@ -123,7 +133,7 @@ class Traversal {
     return result;
   }
 
-  run() {
+  run(): Generator<unknown> {
     return this.chain.process();
   }
 

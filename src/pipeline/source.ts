@@ -8,9 +8,19 @@ interface Step<Tin, Tout> {
   toString(): string;
 }
 
-type StepParams<T> = { source: Pipe<T> } | { pipe: Pipe<T> };
+interface hasProcess {
+  type: "hasProcess";
+  process(): Generator<unknown>;
+}
 
-type StepConstructor<Tin, Tout, U> = new (param: StepParams<Tin>, ...args: U[]) => Step<Tin, Tout>;
+export interface isStep {
+  pipe: hasProcess;
+  process(): Generator<unknown>;
+}
+
+//type StepParams<T> = { source: Pipe<T> } | { pipe: Pipe<T> };
+
+type StepConstructor = new (param1: hasProcess | isStep, ...param2: unknown[]) => hasProcess;
 
 // Notes : the correct typing on Pipe in Source is difficult , leave for now
 
@@ -39,28 +49,33 @@ class CollectionSource<T> implements Pipe<T> {
 //
 
 // difficult part of the port , will revisit
-class Source<T, U, StepIn, StepOut> {
+class Source {
   // this.pipe can be a collection source or a step , this.pipe.process must be valid , steps dont always
   // return the same type as they recived (sometimes they mutate before passing on) so pipe shouldnt have that constraint
-  pipe: Pipe<StepIn>;
+  pipe: hasProcess | isStep;
 
-  constructor(source: StepIn[]) {
-    //console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%% ", source);
+  constructor(source: unknown[]) {
     if (Array.isArray(source)) {
       this.pipe = new CollectionSource(source);
-      //console.log("&&&&&&&&&&&&&&>>>> " , this.pipe.process().next())
+      //console.log("------------At Source Creation-------->>> ", this.pipe);
+      //console.log("$$$$$$$---->>> ", this.pipe.process);
     } else {
       throw new Error("Source must be an array (for now)");
     }
   }
 
-  connect(step: StepConstructor<StepIn, StepOut, U>, ...args: U[]) {
-    console.log("------------$$$-------------->>>> ", this.pipe);
+  // connect is called on this.chain
+  connect(step: StepConstructor, ...args: unknown[]) {
+    //console.log("here x");
+    //console.log("------------Before connect-------------->>> ", this.pipe);
+    //console.log("$$$$$$$---->>> ", this.pipe.process);
 
     this.pipe = new step(this.pipe, ...args);
+    //console.log("------------After connect--------------->>> ", this.pipe);
+    //console.log("$$$$$$$---->>> ", this.pipe.process);
   }
 
-  *process() {
+  *process(): Generator<unknown> {
     yield* this.pipe.process();
   }
 }

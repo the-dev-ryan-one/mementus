@@ -21,6 +21,10 @@
 
     "strict": true,
 
+    //-----
+    "types": ["node"],
+    //-----
+
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
