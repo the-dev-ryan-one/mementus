@@ -13,11 +13,7 @@ export type ValidEdge<T extends propKVpairs = propKVpairs> = Edge<T> & {
 };
 
 function isValidEdge(edge: Edge): edge is ValidEdge {
-  return (
-    Number.isInteger(edge.id) &&
-    Number.isInteger(edge.from.id) &&
-    Number.isInteger(edge.to.id)
-  );
+  return Number.isInteger(edge.id) && Number.isInteger(edge.from.id) && Number.isInteger(edge.to.id);
 }
 
 class IncidenceList {
@@ -81,8 +77,7 @@ class IncidenceList {
   }
 
   setEdge(edge: Edge) {
-    if (!isValidEdge(edge))
-      throw new Error("setEdge : edge provided is not a ValidEdge");
+    if (!isValidEdge(edge)) throw new Error("setEdge : edge provided is not a ValidEdge");
 
     const edgeFromId = edge.from.id;
     const edgeToId = edge.to.id;
@@ -159,11 +154,7 @@ class IncidenceList {
     throw new Error("Edges: invalid match provided");
   }
 
-  adjacent(
-    id: number,
-    direction: boolean = DIR_OUT,
-    label: string | null = null,
-  ): ConnectedNode[] {
+  adjacent(id: number, direction: boolean = DIR_OUT, label: string | null = null): ConnectedNode[] {
     // console.log("------------------>>>" , id);
     // console.log("------------------>>>" ,direction);
     // console.log("------------------>>>" ,label);
@@ -186,32 +177,25 @@ class IncidenceList {
       return edgeList.map((adj) => {
         const retrivedNode = this._nodes.get(adj);
         if (retrivedNode === undefined) {
-          throw new Error(
-            `adjacent: node with id : ${adj} dosn't exist in graph`,
-          );
+          throw new Error(`adjacent: node with id : ${adj} dosn't exist in graph`);
         } else {
           return retrivedNode;
         }
       });
     }
 
-    return this.incidentEdges(id, direction).reduce<ConnectedNode[]>(
-      (result, edge) => {
-        if (edge.label === label) {
-          const node = direction === DIR_OUT ? edge.to : edge.from;
-          const connectedNode = this._nodes.get(node.id);
-          if (connectedNode === undefined) {
-            throw new Error(
-              `adjacent: node with id ${node.id} does not exist in graph`,
-            );
-          } else {
-            result.push(connectedNode);
-          }
+    return this.incidentEdges(id, direction).reduce<ConnectedNode[]>((result, edge) => {
+      if (edge.label === label) {
+        const node = direction === DIR_OUT ? edge.to : edge.from;
+        const connectedNode = this._nodes.get(node.id);
+        if (connectedNode === undefined) {
+          throw new Error(`adjacent: node with id ${node.id} does not exist in graph`);
+        } else {
+          result.push(connectedNode);
         }
-        return result;
-      },
-      [],
-    );
+      }
+      return result;
+    }, []);
   }
 
   outgoing(id: number, label: string | null = null): ConnectedNode[] {
@@ -239,9 +223,7 @@ class IncidenceList {
     return edgeList.map((adj) => {
       const edge = this._edges.get(adj);
       if (edge === undefined) {
-        throw new Error(
-          `incidentEdges: edge ${adj} is listed for node ${id} but missing from the graph`,
-        );
+        throw new Error(`incidentEdges: edge ${adj} is listed for node ${id} but missing from the graph`);
       }
       return edge;
     });
@@ -257,71 +239,48 @@ class IncidenceList {
 
   removeNode(node: Node | number) {
     const nodeId = node instanceof Node ? node.id : node;
-    if (nodeId === undefined)
-      throw new Error("removeNode: input node has no id");
+    if (nodeId === undefined) throw new Error("removeNode: input node has no id");
 
     const outgoingEdgeIds = this.outgoingE.get(nodeId);
-    if (outgoingEdgeIds === undefined)
-      throw new Error(`removeNode: node ${nodeId} not found`);
+    if (outgoingEdgeIds === undefined) throw new Error(`removeNode: node ${nodeId} not found`);
 
     for (const edgeId of outgoingEdgeIds) {
       const edge = this._edges.get(edgeId);
-      if (edge === undefined)
-        throw new Error(`removeNode: edge ${edgeId} missing from _edges`);
+      if (edge === undefined) throw new Error(`removeNode: edge ${edgeId} missing from _edges`);
 
       const toId = edge.to.id;
       const incomingEdge = this.incomingE.get(toId);
       const incomingNode = this._incoming.get(toId);
-      if (incomingNode === undefined || incomingEdge === undefined)
-        throw new Error(
-          `removeNode: node ${toId} missing from _incoming or incomingE`,
-        );
+      if (incomingNode === undefined || incomingEdge === undefined) throw new Error(`removeNode: node ${toId} missing from _incoming or incomingE`);
 
       const incomingNodeIndex = incomingNode.indexOf(nodeId);
-      if (incomingNodeIndex === -1)
-        throw new Error(
-          `removeNode: node ${nodeId} missing from incoming list of ${toId}`,
-        );
+      if (incomingNodeIndex === -1) throw new Error(`removeNode: node ${nodeId} missing from incoming list of ${toId}`);
       incomingNode.splice(incomingNodeIndex, 1);
 
       const incomingEdgeIndex = incomingEdge.indexOf(edgeId);
-      if (incomingEdgeIndex === -1)
-        throw new Error(
-          `removeNode: edge ${edgeId} missing from incoming edges of ${toId}`,
-        );
+      if (incomingEdgeIndex === -1) throw new Error(`removeNode: edge ${edgeId} missing from incoming edges of ${toId}`);
       incomingEdge.splice(incomingEdgeIndex, 1);
       this._edges.delete(edgeId);
     }
 
     const incomingEdges = this.incomingE.get(nodeId);
-    if (incomingEdges === undefined)
-      throw new Error(`removeNode: node ${nodeId} missing from incomingE`);
+    if (incomingEdges === undefined) throw new Error(`removeNode: node ${nodeId} missing from incomingE`);
 
     for (const edgeId of incomingEdges) {
       const edges = this._edges.get(edgeId);
-      if (edges === undefined)
-        throw new Error(`removeNode: edge ${edgeId} missing from _edges`);
+      if (edges === undefined) throw new Error(`removeNode: edge ${edgeId} missing from _edges`);
 
       const fromId = edges.from.id;
       const outgoingNode = this._outgoing.get(fromId);
       const outgoingEdge = this.outgoingE.get(fromId);
-      if (outgoingNode === undefined || outgoingEdge === undefined)
-        throw new Error(
-          `removeNode: node ${fromId} missing from _outgoing or outgoingE`,
-        );
+      if (outgoingNode === undefined || outgoingEdge === undefined) throw new Error(`removeNode: node ${fromId} missing from _outgoing or outgoingE`);
 
       const outgoingNodeIndex = outgoingNode.indexOf(nodeId);
-      if (outgoingNodeIndex === -1)
-        throw new Error(
-          `removeNode: node ${nodeId} missing from outgoing list of ${fromId}`,
-        );
+      if (outgoingNodeIndex === -1) throw new Error(`removeNode: node ${nodeId} missing from outgoing list of ${fromId}`);
       outgoingNode.splice(outgoingNodeIndex, 1);
 
       const outgoingEdgeIndex = outgoingEdge.indexOf(edgeId);
-      if (outgoingEdgeIndex === -1)
-        throw new Error(
-          `removeNode: edge ${edgeId} missing from outgoing edges of ${fromId}`,
-        );
+      if (outgoingEdgeIndex === -1) throw new Error(`removeNode: edge ${edgeId} missing from outgoing edges of ${fromId}`);
       outgoingEdge.splice(outgoingEdgeIndex, 1);
       this._edges.delete(edgeId);
     }
@@ -359,43 +318,24 @@ class IncidenceList {
     const incomingEdgeIds = this.incomingE.get(toId);
 
     // if the to and from node / edge ID's are not in the appropriate lists , no op
-    if (
-      !outgoingNeighborIds ||
-      !incomingNeighborIds ||
-      !outgoingEdgeIds ||
-      !incomingEdgeIds
-    ) {
-      throw new Error(
-        `removeEdge: to node: ${toId} and/or from node: ${fromId} missing from _outgoing, _incoming, outgoingE or incomingE`,
-      );
+    if (!outgoingNeighborIds || !incomingNeighborIds || !outgoingEdgeIds || !incomingEdgeIds) {
+      throw new Error(`removeEdge: to node: ${toId} and/or from node: ${fromId} missing from _outgoing, _incoming, outgoingE or incomingE`);
     }
 
     const toIndex = outgoingNeighborIds.indexOf(toId);
-    if (toIndex === -1)
-      throw new Error(
-        `removeEdge: node ${toId} missing from outgoing list of ${fromId}`,
-      );
+    if (toIndex === -1) throw new Error(`removeEdge: node ${toId} missing from outgoing list of ${fromId}`);
     outgoingNeighborIds.splice(toIndex, 1);
 
     const fromIndex = incomingNeighborIds.indexOf(fromId);
-    if (fromIndex === -1)
-      throw new Error(
-        `removeEdge: node ${fromId} missing from incoming list of ${toId}`,
-      );
+    if (fromIndex === -1) throw new Error(`removeEdge: node ${fromId} missing from incoming list of ${toId}`);
     incomingNeighborIds.splice(fromIndex, 1);
 
     const outgoingEdgeIndex = outgoingEdgeIds.indexOf(edgeId);
-    if (outgoingEdgeIndex === -1)
-      throw new Error(
-        `removeEdge: edge ${edgeId} missing from outgoing edges of ${fromId}`,
-      );
+    if (outgoingEdgeIndex === -1) throw new Error(`removeEdge: edge ${edgeId} missing from outgoing edges of ${fromId}`);
     outgoingEdgeIds.splice(outgoingEdgeIndex, 1);
 
     const incomingEdgeIndex = incomingEdgeIds.indexOf(edgeId);
-    if (incomingEdgeIndex === -1)
-      throw new Error(
-        `removeEdge: edge ${edgeId} missing from incoming edges of ${toId}`,
-      );
+    if (incomingEdgeIndex === -1) throw new Error(`removeEdge: edge ${edgeId} missing from incoming edges of ${toId}`);
     incomingEdgeIds.splice(incomingEdgeIndex, 1);
 
     this._edges.delete(edgeId);

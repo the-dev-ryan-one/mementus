@@ -12,7 +12,6 @@ import InStep from "./steps/in-step.ts";
 import OutEStep from "./steps/out-e-step.ts";
 import InEStep from "./steps/in-e-step.ts";
 
-import { isStep } from "./source.ts";
 import Graph from "../graph.ts";
 
 class Traversal {
@@ -34,7 +33,7 @@ class Traversal {
     // this.chain is a Source . connect is called and ||| this.pipe = new step(this.pipe, ...args);
     //console.log("before connect :     ", this.chain.pipe);
     this.chain.connect(IdStep);
-    //console.log("After connect :     ", this.chain.pipe);
+    //console.log("--===-----====----====---====---===----===---===> ", this);
     return this;
   }
 
@@ -142,10 +141,24 @@ class Traversal {
     let pipe = this.chain.pipe;
     while (pipe != null) {
       out.unshift(pipe);
+      //console.log("-------------------------------------->>>> ", pipe);
       pipe = pipe.pipe;
     }
     return out.join("->");
   }
 }
+
+// export interface Pipe<T> {
+//   process(): Generator<T>;
+// }
+
+// // extends Pipe<Out> = Step has a process() which yeilds Out (ie process(): Generator<Out>)
+// export interface Step<In, Out> extends Pipe<Out> {
+//   pipe: Pipe<In>; // Step has a field called pipe of type Pipe<In>
+// }
+
+// function isStep(p: Pipe<unknown>): p is Step<unknown, unknown> {
+//   return "pipe" in p;
+// }
 
 export default Traversal;

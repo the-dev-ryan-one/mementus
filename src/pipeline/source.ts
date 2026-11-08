@@ -1,42 +1,24 @@
-interface Pipe<T> {
+// basically hasProcess
+export interface Pipe<T> {
   process(): Generator<T>;
 }
 
-interface Step<Tin, Tout> {
-  pipe: Pipe<Tin>;
-  process(): Generator<Tout>;
-  toString(): string;
+// extends Pipe<Out> = Step has a process() which yeilds Out (ie process(): Generator<Out>)
+export interface Step<In, Out> extends Pipe<Out> {
+  pipe: Pipe<In>; // Step has a field called pipe of type Pipe<In>
 }
 
-interface hasProcess {
-  type: "hasProcess";
-  process(): Generator<unknown>;
-}
-
-export interface isStep {
-  pipe: hasProcess;
-  process(): Generator<unknown>;
-}
-
-//type StepParams<T> = { source: Pipe<T> } | { pipe: Pipe<T> };
-
-type StepConstructor = new (param1: hasProcess | isStep, ...param2: unknown[]) => hasProcess;
-
-// Notes : the correct typing on Pipe in Source is difficult , leave for now
+// type StepConstructor<In, Out> = new (param1: Pipe<In>, ...param2: unknown[]) => Step<In, Out>;
+type StepConstructor = new (pipe: any, ...args: any[]) => Pipe<unknown>;
 
 class CollectionSource<T> implements Pipe<T> {
   collection: T[];
 
   constructor(collection: T[]) {
-    // this.collection is an array because  new CollectionSource(source) in Source
     this.collection = collection;
-    // console.log("***************** example of this.collection: " , this.collection);
-    //console.log(Object.getOwnPropertyNames(Object.getPrototypeOf(this)));
   }
 
-  // the collection source class has a generator method which will yield
   *process(): Generator<T> {
-    // console.log("yield delegation: " , this.collection);
     yield* this.collection;
   }
 
@@ -45,14 +27,10 @@ class CollectionSource<T> implements Pipe<T> {
   }
 }
 
-// typing pipe.
-//
-
-// difficult part of the port , will revisit
 class Source {
-  // this.pipe can be a collection source or a step , this.pipe.process must be valid , steps dont always
-  // return the same type as they recived (sometimes they mutate before passing on) so pipe shouldnt have that constraint
-  pipe: hasProcess | isStep;
+  // typed as unknown on purpose, connect() mutates this.pipe and each step can change the
+  // type, so no single type fits the chain. revisit later
+  pipe: Pipe<unknown>;
 
   constructor(source: unknown[]) {
     if (Array.isArray(source)) {
@@ -66,13 +44,13 @@ class Source {
 
   // connect is called on this.chain
   connect(step: StepConstructor, ...args: unknown[]) {
-    //console.log("here x");
+    // console.log("here x");
     //console.log("------------Before connect-------------->>> ", this.pipe);
-    //console.log("$$$$$$$---->>> ", this.pipe.process);
+    // console.log("$$$$$$$---->>> ", this.pipe.process);
 
     this.pipe = new step(this.pipe, ...args);
     //console.log("------------After connect--------------->>> ", this.pipe);
-    //console.log("$$$$$$$---->>> ", this.pipe.process);
+    // console.log("$$$$$$$---->>> ", this.pipe.process);
   }
 
   *process(): Generator<unknown> {

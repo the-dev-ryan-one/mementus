@@ -1,5 +1,4 @@
-// checks test files also but more loosely
-
+// tsconfig.test.json
 {
   "extends": "./tsconfig.json",
   "include": ["src/**/*", "test/**/*"],
@@ -7,12 +6,9 @@
   "compilerOptions": {
     "rootDir": ".",
     "noEmit": true,
-    "declaration": false,
     "emitDeclarationOnly": false,
-    "checkJs": true,
 
-    "noImplicitAny": false,
-    "strictNullChecks": false,
+    "checkJs": false,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "noUncheckedIndexedAccess": false,
