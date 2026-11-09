@@ -31,19 +31,7 @@ class Edge<edgePropsGeneric extends propKVpairs = propKVpairs> {
   readonly label?: string;
   readonly props: edgePropsGeneric;
 
-  constructor({
-    from,
-    to,
-    id,
-    label,
-    props,
-  }: {
-    from: Node | number;
-    to: Node | number;
-    id?: number;
-    label?: string;
-    props?: edgePropsGeneric;
-  }) {
+  constructor({ from, to, id, label, props }: { from: Node | number; to: Node | number; id?: number; label?: string; props?: edgePropsGeneric }) {
     this.from = from instanceof Node ? from : new Node({ id: from });
     this.to = to instanceof Node ? to : new Node({ id: to });
     this.id = id;
@@ -52,10 +40,7 @@ class Edge<edgePropsGeneric extends propKVpairs = propKVpairs> {
 
     for (const key of Object.keys(this.props)) {
       // prevent Edge feilds being corrupted by bad choice of prop key
-      if (reservedPropKeys.has(key))
-        throw new Error(
-          `Edge: prop key: ${key} is invalid , key cannot be one of : ${[...reservedPropKeys].join(",")}`,
-        );
+      if (reservedPropKeys.has(key)) throw new Error(`Edge: prop key: ${key} is invalid , key cannot be one of : ${[...reservedPropKeys].join(",")}`);
       Object.defineProperty(this, key, {
         enumerable: true,
         writable: false,

@@ -2,7 +2,7 @@
 type propValues = number | string | boolean | string[] | number[];
 
 // enforces the type/shape of props
-type propKVpairs = Record<string, propValues>;
+export type propKVpairs = Record<string, propValues>;
 
 const reservedPropKeys = new Set(["id", "label", "props"]);
 
@@ -19,10 +19,7 @@ class Node<propsGeneric extends propKVpairs = propKVpairs> {
     this.props = props ?? ({} as propsGeneric);
 
     for (let key of Object.keys(this.props)) {
-      if (reservedPropKeys.has(key))
-        throw new Error(
-          `Node: prop key: ${key} is invalid , key cannot be one of : ${[...reservedPropKeys].join(",")}`,
-        );
+      if (reservedPropKeys.has(key)) throw new Error(`Node: prop key: ${key} is invalid , key cannot be one of : ${[...reservedPropKeys].join(",")}`);
 
       Object.defineProperty(this, key, {
         enumerable: true,

@@ -6,3 +6,6 @@ API Extension Ideas
   for example if a user was making a graph of people or a social network they could call
   SET ( "coworker" , "friend" , "spouse" ) and then the only allowed edge properiets could be
   props : { relationship : "coworker"|"friend"|"spouse"} or something like that
+
+
+- make a mutable graph subtype (maybe)

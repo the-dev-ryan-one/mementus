@@ -1,6 +1,9 @@
 import IncidenceList from "./structure/incidence-list.ts";
 import IntegerId from "./integer-id.js";
 import Mutators from "./mutators.js";
+import { type mutatorMixinType } from "./mutators.ts";
+
+interface GraphBuilder extends mutatorMixinType {}
 
 class GraphBuilder {
   structure: IncidenceList;

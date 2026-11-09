@@ -1,4 +1,4 @@
-import Node from "./node.ts";
+import Node, { type propKVpairs } from "./node.ts";
 import Edge from "./edge.ts";
 //import GraphBuilder from "./graph-builder.ts";
 //import Graph from "./graph.ts";
@@ -15,7 +15,7 @@ interface HasNodeIds {
 
 //---------------
 interface HasEdgeIds {
-  edgeIds: IntegerId;
+  edgeIds?: IntegerId;
 }
 
 interface HasAddNode {
@@ -24,7 +24,12 @@ interface HasAddNode {
 
 //----------------
 
-type NodeDraft = Partial<NodeParams>;
+//export type NodeDraft = Partial<NodeParams>;
+export type NodeDraft = {
+  id?: number;
+  label?: string;
+  props: propKVpairs;
+};
 type EdgeDraft = Partial<EdgeParams>;
 
 type NodeParams = ConstructorParameters<typeof Node>[0];
@@ -57,6 +62,7 @@ const Mutators = {
   // -----------------------------------
   // ADDED ALL THESE CHECKS FOR NOW BUT WILL REVISIT
   addEdge(this: HasStructure & HasEdgeIds & HasAddNode, object: EdgeDraft = {}) {
+    if (!this.edgeIds) throw new Error("Graph is not mutable");
     if (!object.id) {
       object.id = this.edgeIds.nextId();
     }
@@ -104,7 +110,7 @@ const Mutators = {
   },
 };
 
-function assertNodeParams(draft: NodeDraft): asserts draft is NodeParams {
+function assertNodeParams(draft: NodeDraft): void {
   if (draft === undefined) return;
   if (!(draft.id === undefined || Number.isInteger(draft.id))) {
     throw new Error(`createNode: "id" must be an integer if set`);
@@ -112,10 +118,7 @@ function assertNodeParams(draft: NodeDraft): asserts draft is NodeParams {
   if (!(draft.label === undefined || typeof draft.label === "string")) {
     throw new Error(`createNode: "label" must be a string if set`);
   }
-  if (!(
-    draft.props === undefined ||
-    (typeof draft.props === "object" && draft.props !== null && !Array.isArray(draft.props))
-  )) {
+  if (!(draft.props === undefined || (typeof draft.props === "object" && draft.props !== null && !Array.isArray(draft.props)))) {
     throw new Error(`createNode: "props" must be an object if set`);
   }
 }
@@ -129,4 +132,5 @@ function assertEdgeParams(draft: EdgeDraft): asserts draft is EdgeParams {
   }
 }
 
+export type mutatorMixinType = typeof Mutators;
 export default Mutators;

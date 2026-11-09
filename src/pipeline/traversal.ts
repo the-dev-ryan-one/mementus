@@ -49,14 +49,13 @@ class Traversal {
 
   prop(name: string): Traversal {
     //console.log("-----------------");
-    console.log("here 2");
     this.chain.connect(PropStep, name);
     //console.log("----------this-------> ", this);
     //console.log("-----------------");
     return this;
   }
 
-  out(label = null): Traversal {
+  out(label: string | null = null): Traversal {
     //console.log("333333333333333333", label);
     this.chain.connect(OutStep, this.graph, label);
     return this;
@@ -110,7 +109,6 @@ class Traversal {
   }
 
   all(): unknown[] {
-    console.log("here 3");
     const result = [...this.chain.process()];
     this.reset();
     //console.log(".all() output ------------------->" , result );

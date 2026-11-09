@@ -6,6 +6,7 @@ import IncidenceList, { type ValidEdge } from "./structure/incidence-list.ts";
 import Edge, { type propKVpairs } from "./edge.ts";
 import ConnectedNode from "./connected-node.ts";
 import Node from "./node.ts";
+import { type mutatorMixinType } from "./mutators.ts";
 
 interface GraphOptions {
   isMutable?: boolean;
@@ -17,13 +18,15 @@ const defaultOptions: GraphOptions = {
   isDirected: true,
 };
 
+interface Graph extends mutatorMixinType {}
+
 class Graph {
   structure: IncidenceList;
   index: Map<any, any>;
   nodeIds?: IntegerId;
   edgeIds?: IntegerId;
 
-  constructor(initializer?: (builder: GraphBuilder) => void, options: object = {}) {
+  constructor(initializer?: false | ((builder: GraphBuilder) => void), options: object = {}) {
     const initialOptions = Object.assign(defaultOptions, options);
     const builder = new GraphBuilder();
 
@@ -99,7 +102,6 @@ class Graph {
   }
 
   n(match: null | number | string | propKVpairs = null): Traversal {
-    console.log("here 1");
     const sequence = typeof match === "number" ? [this.structure.node(match)] : this.structure.nodes(match);
 
     return new Traversal(sequence, this);
