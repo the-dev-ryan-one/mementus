@@ -24,4 +24,24 @@ const fanOutEdges = new Graph((g) => {
   g.setEdge(edge3to6());
 });
 
-export { fanOutEdges };
+const labeled_edge1to2 = () => new Edge({ id: 10, label: "label1", from: node1(), to: node2() });
+const labeled_edge1to3 = () => new Edge({ id: 20, label: "label2", from: node1(), to: node3() });
+const labeled_edge1to4 = () => new Edge({ id: 30, label: "label3", from: node1(), to: node4() });
+const labeled_edge2to5 = () => new Edge({ id: 40, label: "label4", from: node2(), to: node5() });
+const labeled_edge3to5 = () => new Edge({ id: 50, label: "label5", from: node3(), to: node5() });
+const labeled_edge3to6 = () => new Edge({ id: 60, label: "label6", from: node3(), to: node6() });
+const labeled_edge1to5 = () => new Edge({ id: 70, label: "label1", from: node1(), to: node5() });
+const labeled_edge1to6 = () => new Edge({ id: 80, label: "label2", from: node1(), to: node6() });
+
+const labeledFanOutEdges = new Graph((g) => {
+  g.setEdge(labeled_edge1to2());
+  g.setEdge(labeled_edge1to3());
+  g.setEdge(labeled_edge1to4());
+  g.setEdge(labeled_edge2to5());
+  g.setEdge(labeled_edge3to5());
+  g.setEdge(labeled_edge3to6());
+  g.setEdge(labeled_edge1to5());
+  g.setEdge(labeled_edge1to6());
+});
+
+export { fanOutEdges, labeledFanOutEdges };

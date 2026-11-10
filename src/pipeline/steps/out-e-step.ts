@@ -14,19 +14,17 @@ interface Pipe<T> {
 class OutEStep<Tin extends { id: number }> implements Pipe<Edge> {
   pipe: Pipe<Tin>;
   graph: Graph;
+  label: string | null;
 
-  constructor(pipe: Pipe<Tin>, graph: Graph) {
+  constructor(pipe: Pipe<Tin>, graph: Graph, label: string | null = null) {
     this.pipe = pipe;
     this.graph = graph;
-    //console.log("+++++++++++++++++++++>" , this.graph )
+    this.label = label;
   }
 
   *process(): Generator<Edge> {
     for (const node of this.pipe.process()) {
-      //console.log("+++++++++++++++++++++>" , node )
-      //console.log("**********************>>> " , this.graph.outgoingEdges(node.id))
-
-      yield* this.graph.outgoingEdges(node.id);
+      yield* this.graph.outgoingEdges(node.id, this.label);
     }
   }
 

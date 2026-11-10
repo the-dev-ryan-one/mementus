@@ -93,12 +93,12 @@ class Graph {
     return this.structure.incoming(id, label);
   }
 
-  outgoingEdges(id: number): ValidEdge[] {
-    return this.structure.outgoingEdges(id);
+  outgoingEdges(id: number, label: string | null = null): ValidEdge[] {
+    return this.structure.outgoingEdges(id, label);
   }
 
-  incomingEdges(id: number): ValidEdge[] {
-    return this.structure.incomingEdges(id);
+  incomingEdges(id: number, label: string | null = null): ValidEdge[] {
+    return this.structure.incomingEdges(id, label);
   }
 
   /**

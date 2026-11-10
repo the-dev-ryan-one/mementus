@@ -10,13 +10,10 @@ const socialNetworkGraph = new Graph((g) => {
 
   g.addEdge({ id: 10, from: 1, to: 2, props: { relationship: "friend" }, label: "canopy" });
   g.addEdge({ id: 20, from: 1, to: 2, props: { relationship: "coworker" } });
-  g.addEdge({ id: 30, from: 2, to: 3, props: { relationship: "friend" } });
+  g.addEdge({ id: 30, from: 2, to: 3, props: { relationship: "friend" }, label: "canopy" });
   g.addEdge({ id: 40, from: 2, to: 3, props: { relationship: "spouse" } });
 });
 
-const querry1 = socialNetworkGraph
-  .n()
-  .filter((x) => x.id >= 2)
-  .all();
+const querry1 = socialNetworkGraph.n().outE("canopy").all();
 
 console.log(querry1);

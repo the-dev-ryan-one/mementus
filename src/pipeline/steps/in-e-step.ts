@@ -8,15 +8,17 @@ interface Pipe<T> {
 class InEStep<T extends { id: number }> implements Pipe<Edge> {
   pipe: Pipe<T>;
   graph: Graph;
+  label: string | null;
 
-  constructor(pipe: Pipe<T>, graph: Graph) {
+  constructor(pipe: Pipe<T>, graph: Graph, label: string | null = null) {
     this.pipe = pipe;
     this.graph = graph;
+    this.label = label;
   }
 
   *process(): Generator<Edge> {
     for (const node of this.pipe.process()) {
-      yield* this.graph.incomingEdges(node.id);
+      yield* this.graph.incomingEdges(node.id, this.label);
     }
   }
 

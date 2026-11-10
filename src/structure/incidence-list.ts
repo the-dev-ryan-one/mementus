@@ -135,10 +135,6 @@ class IncidenceList {
   }
 
   adjacent(id: number, direction: boolean = DIR_OUT, label: string | null = null): ConnectedNode[] {
-    // console.log("------------------>>>" , id);
-    // console.log("------------------>>>" ,direction);
-    // console.log("------------------>>>" ,label);
-
     let directionalIndex;
     if (direction === DIR_OUT) directionalIndex = this._outgoing;
     if (direction === DIR_IN) directionalIndex = this._incoming;
@@ -186,7 +182,7 @@ class IncidenceList {
     return this.adjacent(id, DIR_IN, label);
   }
 
-  incidentEdges(id: number, direction: boolean = DIR_OUT): ValidEdge[] {
+  incidentEdges(id: number, direction: boolean = DIR_OUT, label: string | null = null): ValidEdge[] {
     let directionalIndex;
     if (direction === DIR_OUT) directionalIndex = this.outgoingE;
     if (direction === DIR_IN) directionalIndex = this.incomingE;
@@ -200,21 +196,23 @@ class IncidenceList {
       throw new Error(`incidentEdges: no node with id ${id} in the graph`);
     }
 
-    return edgeList.map((adj) => {
+    let toReturn = edgeList.map((adj) => {
       const edge = this._edges.get(adj);
       if (edge === undefined) {
         throw new Error(`incidentEdges: edge ${adj} is listed for node ${id} but missing from the graph`);
       }
       return edge;
     });
+    if (label) toReturn = toReturn.filter((edge) => edge.label === label);
+    return toReturn;
   }
 
-  outgoingEdges(id: number): ValidEdge[] {
-    return this.incidentEdges(id, DIR_OUT);
+  outgoingEdges(id: number, label: string | null = null): ValidEdge[] {
+    return this.incidentEdges(id, DIR_OUT, label);
   }
 
-  incomingEdges(id: number): ValidEdge[] {
-    return this.incidentEdges(id, DIR_IN);
+  incomingEdges(id: number, label: string | null = null): ValidEdge[] {
+    return this.incidentEdges(id, DIR_IN, label);
   }
 
   removeNode(node: ValidNode | number) {

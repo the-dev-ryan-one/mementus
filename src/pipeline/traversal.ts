@@ -101,7 +101,7 @@ class Traversal {
    * graph.n(3).in().all();         // nodes that point to node 3
    * graph.n(3).in("canopy").all(); // only via edges labelled "canopy"
    */
-  in(label = null): Traversal {
+  in(label: string | null = null): Traversal {
     this.chain.connect(InStep, this.graph, label);
     return this;
   }
@@ -109,7 +109,7 @@ class Traversal {
   /**
    * Alias of `in()`.
    */
-  inc(label = null): Traversal {
+  inc(label: string | null = null): Traversal {
     this.chain.connect(InStep, this.graph, label);
     return this;
   }
@@ -120,8 +120,8 @@ class Traversal {
    * @example
    * graph.n(1).outE().all(); // the edges leaving node 1
    */
-  outE(): Traversal {
-    this.chain.connect(OutEStep, this.graph);
+  outE(label: string | null = null): Traversal {
+    this.chain.connect(OutEStep, this.graph, label);
     return this;
   }
 
@@ -131,8 +131,8 @@ class Traversal {
    * @example
    * graph.n(3).inE().all(); // the edges arriving at node 3
    */
-  inE(): Traversal {
-    this.chain.connect(InEStep, this.graph);
+  inE(label: string | null = null): Traversal {
+    this.chain.connect(InEStep, this.graph, label);
     return this;
   }
 
