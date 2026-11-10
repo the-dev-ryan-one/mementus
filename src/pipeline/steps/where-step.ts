@@ -5,19 +5,13 @@ interface Pipe<T> {
   process(): Generator<T>;
 }
 
-// if it takes and returns connected nodes only maybe i can just use Pipe<ConnectedNode>
 class WhereStep<T> implements Pipe<T> {
   pipe: Pipe<T>;
   predicate: (input: Traversal) => boolean;
   graph: Graph;
   traverser: typeof Traversal;
 
-  constructor(
-    source: Pipe<T>,
-    predicate: (input: Traversal) => boolean,
-    graph: Graph,
-    traverser: typeof Traversal,
-  ) {
+  constructor(source: Pipe<T>, predicate: (input: Traversal) => boolean, graph: Graph, traverser: typeof Traversal) {
     this.pipe = source;
     this.predicate = predicate;
     this.graph = graph;

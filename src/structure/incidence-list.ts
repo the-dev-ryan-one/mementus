@@ -1,20 +1,9 @@
-import Node from "../node.ts";
-import Edge from "../edge.ts";
+import Node, { isValidNode, ValidNode } from "../node.ts";
+import Edge, { isValidEdge, type ValidEdge, type propKVpairs } from "../edge.ts";
 import ConnectedNode from "../connected-node.ts";
-import type { propKVpairs } from "../edge.ts";
 
 const DIR_OUT: boolean = true;
 const DIR_IN: boolean = false;
-
-export type ValidEdge<T extends propKVpairs = propKVpairs> = Edge<T> & {
-  readonly id: number;
-  readonly from: Node & { readonly id: number };
-  readonly to: Node & { readonly id: number };
-};
-
-function isValidEdge(edge: Edge): edge is ValidEdge {
-  return Number.isInteger(edge.id) && Number.isInteger(edge.from.id) && Number.isInteger(edge.to.id);
-}
 
 class IncidenceList {
   _outgoing: Map<number, number[]>;
@@ -44,16 +33,9 @@ class IncidenceList {
   }
 
   hasNode(node: number | Node | ConnectedNode): boolean {
-    if (node instanceof Node || node instanceof ConnectedNode) {
-      //-----
-      if (node.id === undefined) {
-        throw new Error("hasNode: node must have an ID");
-      }
-      //------
-      return this._nodes.get(node.id) === node;
-    } else {
-      return this._nodes.has(node);
-    }
+    if (typeof node === "number") return this._nodes.has(node);
+    if (!isValidNode(node)) return false;
+    return this._nodes.has(node.id);
   }
 
   hasEdge(edge: Edge | number, target: number | null = null): boolean {
@@ -99,9 +81,7 @@ class IncidenceList {
   }
 
   setNode(node: Node) {
-    if (node.id === undefined) {
-      throw new Error("Cannot set node with no id");
-    }
+    if (!isValidNode(node)) throw new Error("Cannot set node with no id");
 
     this._nodes.set(node.id, new ConnectedNode(node, this));
     this._outgoing.set(node.id, []);
@@ -237,9 +217,8 @@ class IncidenceList {
     return this.incidentEdges(id, DIR_IN);
   }
 
-  removeNode(node: Node | number) {
+  removeNode(node: ValidNode | number) {
     const nodeId = node instanceof Node ? node.id : node;
-    if (nodeId === undefined) throw new Error("removeNode: input node has no id");
 
     const outgoingEdgeIds = this.outgoingE.get(nodeId);
     if (outgoingEdgeIds === undefined) throw new Error(`removeNode: node ${nodeId} not found`);
@@ -288,9 +267,8 @@ class IncidenceList {
     this._nodes.delete(nodeId);
   }
 
-  removeEdge(edge: number | Edge) {
+  removeEdge(edge: ValidEdge | number) {
     const edgeId = edge instanceof Edge ? edge.id : edge;
-    if (edgeId === undefined) return;
 
     const retrivedEdge = this._edges.get(edgeId);
     if (retrivedEdge === undefined) {

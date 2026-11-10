@@ -2,8 +2,8 @@ import GraphBuilder from "./graph-builder.ts";
 import Traversal from "./pipeline/traversal.js";
 import Mutators from "./mutators.js";
 import IntegerId from "./integer-id.ts";
-import IncidenceList, { type ValidEdge } from "./structure/incidence-list.ts";
-import Edge, { type propKVpairs } from "./edge.ts";
+import IncidenceList from "./structure/incidence-list.ts";
+import Edge, { type ValidEdge, type propKVpairs } from "./edge.ts";
 import ConnectedNode from "./connected-node.ts";
 import Node from "./node.ts";
 import { type mutatorMixinType } from "./mutators.ts";
@@ -101,12 +101,40 @@ class Graph {
     return this.structure.incomingEdges(id);
   }
 
+  /**
+   * Starts a traversal at a set of nodes. This is the entry point of a query;
+   * steps like `out()` are chained onto the result.
+   *
+   * @param match - Selects the starting nodes:
+   *   - omitted or `null`: every node
+   *   - a number: the node with that id
+   *   - a string: every node with that label
+   *   - an object: every node whose props match all the given key/value pairs
+   *
+   * @example
+   * graph.n().all();               // every node
+   * graph.n(1).all();              // the node with id 1
+   * graph.n("twig").all();         // nodes labelled "twig"
+   * graph.n({ num: "one" }).all(); // nodes with props.num === "one"
+   */
   n(match: null | number | string | propKVpairs = null): Traversal {
     const sequence = typeof match === "number" ? [this.structure.node(match)] : this.structure.nodes(match);
 
     return new Traversal(sequence, this);
   }
 
+  /**
+   * Starts a traversal at a set of edges. This is the entry point of a query;
+   * steps like `outE()` are chained onto the result.
+   *
+   * @param match - Selects the starting edges:
+   *   - omitted or `null`: every edge
+   *   - a number: the edge with that id
+   *
+   * @example
+   * graph.e().all();   // every edge
+   * graph.e(10).all(); // the edge with id 10
+   */
   e(match: null | number = null): Traversal {
     const sequence = typeof match === "number" ? [this.structure.edge(match)] : this.structure.edges(match);
 

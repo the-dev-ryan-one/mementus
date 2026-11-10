@@ -29,92 +29,221 @@ class Traversal {
     this.chain = new Source(this.input);
   }
 
+  /** Replaces each item with its id.
+   *
+   * @example
+   * graph.n().id().all(); // [2, 3]
+   */
   id(): Traversal {
-    // this.chain is a Source . connect is called and ||| this.pipe = new step(this.pipe, ...args);
-    //console.log("before connect :     ", this.chain.pipe);
     this.chain.connect(IdStep);
-    //console.log("--===-----====----====---====---===----===---===> ", this);
     return this;
   }
 
+  /**
+   * Replaces each item with its label.
+   *
+   * @example
+   * graph.n().label().all(); // the label of every node
+   */
   label(): Traversal {
     this.chain.connect(LabelStep);
     return this;
   }
 
+  /**
+   * Replaces each item with its props object.
+   *
+   * @example
+   * graph.e(10).props().one(); // { tag: "marked" }
+   */
   props(): Traversal {
     this.chain.connect(PropsStep);
     return this;
   }
 
+  /**
+   * Replaces each item with the value of one of its props.
+   *
+   * @param name - The key of the prop to read.
+   *
+   * @example
+   * graph.n(1).outE().prop("age").all(); // ["35", "21", "18"]
+   */
   prop(name: string): Traversal {
-    //console.log("-----------------");
     this.chain.connect(PropStep, name);
-    //console.log("----------this-------> ", this);
-    //console.log("-----------------");
     return this;
   }
 
+  /**
+   * Moves from each node to the nodes at the end of its outgoing edges.
+   *
+   * @param label - Selects which outgoing edges to follow:
+   *   - omitted or `null`: all of them
+   *   - a string: only edges with that label
+   *
+   * @example
+   * graph.n(1).out().all();         // nodes that node 1 points to
+   * graph.n(1).out("canopy").all(); // only via edges labelled "canopy"
+   */
   out(label: string | null = null): Traversal {
-    //console.log("333333333333333333", label);
     this.chain.connect(OutStep, this.graph, label);
     return this;
   }
 
-  inc(label = null): Traversal {
-    this.chain.connect(InStep, this.graph, label);
-    //console.log(".inc() output -------------------> " , this );
-    return this;
-  }
-
+  /**
+   * Moves from each node to the nodes at the start of its incoming edges.
+   *
+   * @param label - Selects which incoming edges to follow:
+   *   - omitted or `null`: all of them
+   *   - a string: only edges with that label
+   *
+   * @example
+   * graph.n(3).in().all();         // nodes that point to node 3
+   * graph.n(3).in("canopy").all(); // only via edges labelled "canopy"
+   */
   in(label = null): Traversal {
     this.chain.connect(InStep, this.graph, label);
     return this;
   }
 
+  /**
+   * Alias of `in()`.
+   */
+  inc(label = null): Traversal {
+    this.chain.connect(InStep, this.graph, label);
+    return this;
+  }
+
+  /**
+   * Moves from each node to its outgoing edges.
+   *
+   * @example
+   * graph.n(1).outE().all(); // the edges leaving node 1
+   */
   outE(): Traversal {
     this.chain.connect(OutEStep, this.graph);
     return this;
   }
 
+  /**
+   * Moves from each node to its incoming edges.
+   *
+   * @example
+   * graph.n(3).inE().all(); // the edges arriving at node 3
+   */
   inE(): Traversal {
     this.chain.connect(InEStep, this.graph);
     return this;
   }
 
+  /**
+   * Replaces each item with the result of a function.
+   *
+   * @param transform - Called with each item; whatever it returns is passed on.
+   *
+   * @example
+   * graph.n().id().map((id) => id * 10).all(); // each node id multiplied by 10
+   */
   map<InType, OutType>(transform: (input: InType) => OutType): Traversal {
     this.chain.connect(MapStep, transform);
     return this;
   }
 
+  /**
+   * Keeps only the nodes (or edges) for which a small query returns true.
+   *
+   * @param predicate - Receives a traversal that starts at the current node.
+   *   Run a query from it and return true to keep the node, false to drop it.
+   *
+   * @example
+   * // nodes that have at least one outgoing edge labeled "canopy"
+   * graph
+   *   .n()
+   *   .where((t) => t.out("canopy").all().length > 0)
+   *   .id()
+   *   .all(); // [1, 2]
+   */
   where(predicate: (input: Traversal) => boolean): Traversal {
     this.chain.connect(WhereStep, predicate, this.graph, Traversal);
     return this;
   }
 
+  /**
+   * Keeps only the items (nodes, edges or values) for which a function returns
+   * true.
+   *
+   * @param predicate - Receives the current item itself. Return true to keep it,
+   *   false to drop it.
+   *
+   * @example
+   * // nodes with an id greater than or equal to 2
+   * graph
+   *   .n()
+   *   .filter((node) => node.id >= 2)
+   *   .id()
+   *   .all(); // [2, 3]
+   */
   filter(predicate: (input: Traversal) => boolean): Traversal {
     this.chain.connect(FilterStep, predicate);
     return this;
   }
 
+  /**
+   * Runs two subqueries starting from each node (or edge) that reaches this
+   * step, and merges their results into one list.
+   *
+   * @param base - Receives a traversal that starts at the current node. Returns
+   *   the value or array of values to include in the output.
+   * @param other - Same as `base`. Its results come after those of `base`.
+   *
+   * @example
+   * // for node 2: the nodes it points to, then the nodes that point to it
+   * graph
+   *   .n(2)
+   *   .union(
+   *     (t) => t.out().id().all(),
+   *     (t) => t.in().id().all(),
+   *   )
+   *   .all(); // [3, 1]
+   */
   union<Tout>(base: (input: Traversal) => Tout | Tout[], other: (input: Traversal) => Tout | Tout[]): Traversal {
     this.chain.connect(UnionStep, this.graph, base, other, Traversal);
     return this;
   }
 
+  /**
+   * Runs the traversal and returns the first result, or `undefined` if there
+   * are none.
+   *
+   * @example
+   * graph.n().id().one(); // [1]
+   */
   one(): unknown {
     const producer = this.chain.process();
     this.reset();
     return producer.next().value;
   }
 
+  /**
+   * Runs the traversal and returns every result as an array.
+   *
+   * @example
+   * graph.n().id().all(); // [2, 3, 4]
+   */
   all(): unknown[] {
     const result = [...this.chain.process()];
     this.reset();
-    //console.log(".all() output ------------------->" , result );
     return result;
   }
 
+  /**
+   * Runs the traversal and returns at most the first `num` results.
+   *
+   * @param num - The maximum number of results to return.
+   *
+   * @example
+   * graph.n().id().take(2); // [1, 2]
+   */
   take(num: number): unknown[] {
     const producer = this.chain.process();
     this.reset();
@@ -130,6 +259,13 @@ class Traversal {
     return result;
   }
 
+  /**
+   * Runs the traversal lazily, returning an iterator that produces one result
+   * at a time.
+   *
+   * @example
+   * for (const id of graph.n().id().run()) { ... }
+   */
   run(): Generator<unknown> {
     return this.chain.process();
   }
@@ -139,24 +275,10 @@ class Traversal {
     let pipe = this.chain.pipe;
     while (pipe != null) {
       out.unshift(pipe);
-      //console.log("-------------------------------------->>>> ", pipe);
       pipe = pipe.pipe;
     }
     return out.join("->");
   }
 }
-
-// export interface Pipe<T> {
-//   process(): Generator<T>;
-// }
-
-// // extends Pipe<Out> = Step has a process() which yeilds Out (ie process(): Generator<Out>)
-// export interface Step<In, Out> extends Pipe<Out> {
-//   pipe: Pipe<In>; // Step has a field called pipe of type Pipe<In>
-// }
-
-// function isStep(p: Pipe<unknown>): p is Step<unknown, unknown> {
-//   return "pipe" in p;
-// }
 
 export default Traversal;

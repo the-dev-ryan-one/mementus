@@ -1,8 +1,16 @@
+import ConnectedNode from "./connected-node.ts";
+
 // these are the allowed types for the prop keys
 type propValues = number | string | boolean | string[] | number[];
 
 // enforces the type/shape of props
 export type propKVpairs = Record<string, propValues>;
+
+export function isValidNode(node: Node | ConnectedNode): node is ValidNode {
+  return Number.isInteger(node.id);
+}
+
+export type ValidNode<P extends propKVpairs = propKVpairs> = Node<P> & { readonly id: number };
 
 const reservedPropKeys = new Set(["id", "label", "props"]);
 

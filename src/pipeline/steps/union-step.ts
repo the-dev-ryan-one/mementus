@@ -17,17 +17,10 @@ class UnionStep<Tin, Tout> implements Pipe<Tout> {
   other: (input: Traversal) => Tout | Tout[];
   traverser: typeof Traversal;
 
-  constructor(
-    source: Pipe<Tin>,
-    graph: Graph,
-    base: (input: Traversal) => Tout | Tout[],
-    other: (input: Traversal) => Tout | Tout[],
-    traverser: typeof Traversal,
-  ) {
+  constructor(source: Pipe<Tin>, graph: Graph, base: (input: Traversal) => Tout | Tout[], other: (input: Traversal) => Tout | Tout[], traverser: typeof Traversal) {
     this.pipe = source;
     this.graph = graph;
     this.base = base;
-    // console.log("---------------> " , this.base )
     this.other = other;
     this.traverser = traverser;
   }
@@ -37,16 +30,8 @@ class UnionStep<Tin, Tout> implements Pipe<Tout> {
     let _other: Tout[] = [];
 
     for (const element of this.pipe.process()) {
-      // console.log("1---------------> " , [element] )
-      // console.log("2---------------> " , this.graph )
-      //console.log("input to base ---------------> " , new this.traverser([element], this.graph))
-      //console.log("output from base --------------->" , this.base(new this.traverser([element], this.graph)))
-      _base = _base.concat(
-        this.base(new this.traverser([element], this.graph)),
-      );
-      _other = _other.concat(
-        this.other(new this.traverser([element], this.graph)),
-      );
+      _base = _base.concat(this.base(new this.traverser([element], this.graph)));
+      _other = _other.concat(this.other(new this.traverser([element], this.graph)));
     }
 
     yield* new Set([..._base, ..._other]);

@@ -21,6 +21,16 @@ import Node from "./node.ts";
 export type propValues = number | string | boolean | string[] | number[];
 export type propKVpairs = Record<string, propValues>;
 
+export type ValidEdge<T extends propKVpairs = propKVpairs> = Edge<T> & {
+  readonly id: number;
+  readonly from: Node & { readonly id: number };
+  readonly to: Node & { readonly id: number };
+};
+
+export function isValidEdge(edge: Edge): edge is ValidEdge {
+  return Number.isInteger(edge.id) && Number.isInteger(edge.from.id) && Number.isInteger(edge.to.id);
+}
+
 const reservedPropKeys = new Set(["to", "from", "id", "label", "props"]);
 
 class Edge<edgePropsGeneric extends propKVpairs = propKVpairs> {

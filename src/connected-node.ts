@@ -1,4 +1,4 @@
-import Node from "./node.ts";
+import Node, { type ValidNode } from "./node.ts";
 
 type propValues = number | string | boolean | string[] | number[];
 type propKVpairs = Record<string, propValues>;
