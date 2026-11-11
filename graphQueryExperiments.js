@@ -14,10 +14,25 @@ const socialNetworkGraph = new Graph((g) => {
   g.addEdge({ id: 40, from: 2, to: 3, props: { relationship: "spouse" } });
 });
 
-const query = socialNetworkGraph.n(1).out().out().all();
+const query = socialNetworkGraph.n(1).out();
 
 // console.log("query: ", query);
 // console.log(query[0] === query[1]);
+
+console.log("---------------->", [...query.chain.process()]);
+
+const key = (item) => item;
+
+const isNumeric = (val) => !isNaN(val) && Number.isFinite(+val);
+const nums = [];
+
+for (const item of query.chain.process()) {
+  const keyed = key(item);
+  if (!isNumeric(keyed)) throw new Error("Cannot aggregate not numeric vlaues : check your key function returns a number");
+  nums.push(keyed);
+}
+
+const toReturn = Math.max(...nums);
 
 //console.log("socialNetworkGraph.n().outE():", socialNetworkGraph.n().outE("canopy"));
 

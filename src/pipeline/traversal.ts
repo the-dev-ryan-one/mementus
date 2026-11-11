@@ -14,6 +14,16 @@ import InEStep from "./steps/in-e-step.ts";
 
 import Graph from "../graph.ts";
 
+// module level, above the class
+const toNumber = (val: unknown): number | undefined => {
+  if (typeof val === "number") return Number.isFinite(val) ? val : undefined;
+  if (typeof val === "string" && val.trim() !== "") {
+    const n = Number(val);
+    return Number.isFinite(n) ? n : undefined;
+  }
+  return undefined;
+};
+
 class Traversal {
   chain!: Source;
   graph?: Graph;
@@ -308,6 +318,25 @@ class Traversal {
     }
     this.reset();
     return seen.size;
+  }
+
+  max(key: (item: any) => unknown = (item) => item): number | undefined {
+    let largest: number | undefined;
+    try {
+      for (const item of this.chain.process()) {
+        const keyed = key(item);
+        if (keyed === undefined || keyed === null) continue;
+
+        const n = toNumber(keyed);
+        if (n === undefined) {
+          throw new Error(`Cannot aggregate non-numeric value: ${String(keyed)}. Check your key function returns numbers.`);
+        }
+        if (largest === undefined || n > largest) largest = n;
+      }
+    } finally {
+      this.reset();
+    }
+    return largest;
   }
 
   /**

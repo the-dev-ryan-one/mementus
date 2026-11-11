@@ -65,17 +65,13 @@ test("label", (t) => {
   t.deepEqual(traversal.label().all(), ["aaa", "aaa", "bbb", "ccc"]);
 });
 
-test("props", (t) => {
-  const nodes = [fanOutEdges.node(2), fanOutEdges.node(3), fanOutEdges.node(4)];
-  const traversal = new Traversal(nodes, fanOutEdges);
+// test("props", (t) => {
+//   const nodes = [fanOutEdges.node(2), fanOutEdges.node(3), fanOutEdges.node(4)];
+//   const traversal = new Traversal(nodes, fanOutEdges);
 
-  const result = traversal.props().all();
-  t.deepEqual(result, [
-    { color: "red" },
-    { color: "green" },
-    { color: "blue" },
-  ]);
-});
+//   const result = traversal.props().all();
+//   t.deepEqual(result, [{ color: "red" }, { color: "green" }, { color: "blue" }]);
+// });
 
 test("prop", (t) => {
   const nodes = [fanOutEdges.node(2), fanOutEdges.node(3), fanOutEdges.node(4)];

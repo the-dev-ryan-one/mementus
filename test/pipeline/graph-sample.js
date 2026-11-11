@@ -2,10 +2,10 @@ import Graph from "../../src/graph.js";
 import Node from "../../src/node.ts";
 import Edge from "../../src/edge.js";
 
-const node1 = () => new Node({ id: 1 });
-const node2 = () => new Node({ id: 2, props: { color: "red" } });
-const node3 = () => new Node({ id: 3, props: { color: "green" } });
-const node4 = () => new Node({ id: 4, props: { color: "blue" } });
+const node1 = () => new Node({ id: 1, props: { age: 10 } });
+const node2 = () => new Node({ id: 2, props: { color: "red", age: "5" } });
+const node3 = () => new Node({ id: 3, props: { color: "green", age: 5.5 } });
+const node4 = () => new Node({ id: 4, props: { color: "blue", age: "0" } });
 const node5 = () => new Node({ id: 5 });
 const node6 = () => new Node({ id: 6 });
 const edge1to2 = () => new Edge({ id: 10, from: node1(), to: node2() });

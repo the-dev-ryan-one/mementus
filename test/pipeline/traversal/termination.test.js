@@ -300,3 +300,130 @@ test("e(): resets the traversal so the next query starts fresh", (t) => {
     [10, 20, 30, 40, 50, 60],
   );
 });
+
+//------------------------
+//------------------------
+const age = (n) => n.props?.age;
+const sorted = (xs) => [...xs].sort((a, b) => a - b);
+
+test("max(): finds the max across mixed number and string values", (t) => {
+  // 10, "5", 5.5, "0", then two nodes with no age
+  t.is(fanOutEdges.n().max(age), 10);
+});
+
+test("max(): converts a numeric string to a number", (t) => {
+  // t.is is strict, so this fails if "5" comes back as a string
+  t.is(fanOutEdges.n(2).max(age), 5);
+});
+
+test("max(): a string zero is a valid value, not a missing one", (t) => {
+  t.is(fanOutEdges.n(4).max(age), 0);
+});
+
+test("max(): keeps decimals", (t) => {
+  t.is(fanOutEdges.n(3).max(age), 5.5);
+});
+
+test("max(): compares as numbers, not as strings", (t) => {
+  // as strings "5" > "10", so a lexicographic comparison would return 5
+  t.is(
+    fanOutEdges
+      .n()
+      .filter((n) => n.id <= 2)
+      .max(age),
+    10,
+  );
+});
+
+test("max(): returns undefined when no item has the value", (t) => {
+  t.is(fanOutEdges.n(5).max(age), undefined);
+});
+
+test("max(): returns undefined for an empty traversal", (t) => {
+  // node 1 has no incoming edges
+  t.is(fanOutEdges.n(1).in().max(age), undefined);
+});
+
+test("max(): skips undefined keys instead of failing", (t) => {
+  // nodes 3, 4, 5 and 6: 5.5, "0", and two with no age
+  t.is(
+    fanOutEdges
+      .n()
+      .filter((n) => n.id >= 3)
+      .max(age),
+    5.5,
+  );
+});
+
+test("max(): skips null keys", (t) => {
+  t.is(
+    fanOutEdges.n().max((n) => (n.id > 3 ? null : n.id)),
+    3,
+  );
+});
+
+test("max(): handles all-negative values", (t) => {
+  // catches a result that starts from 0 instead of from the first value
+  t.is(
+    fanOutEdges.n().max((n) => -n.id),
+    -1,
+  );
+});
+
+test("max(): uses the item itself when no key is given", (t) => {
+  t.is(fanOutEdges.n().id().max(), 6);
+});
+
+test("max(): works after traversal steps", (t) => {
+  // out() from node 1 reaches nodes 2, 3 and 4: "5", 5.5 and "0"
+  t.is(fanOutEdges.n(1).out().max(age), 5.5);
+});
+
+test("max(): respects a label filter", (t) => {
+  // label1 from node 1 reaches node 2 ("5") and node 5 (no age)
+  t.is(labeledFanOutEdges.n(1).out("label1").max(age), 5);
+});
+
+test("max(): works on edges", (t) => {
+  t.is(
+    fanOutEdges.e().max((e) => e.id),
+    60,
+  );
+  t.is(
+    labeledFanOutEdges.e().max((e) => e.id),
+    80,
+  );
+});
+
+test("max(): throws on a non-numeric value", (t) => {
+  const error = t.throws(() => fanOutEdges.n().max((n) => n.props?.color));
+
+  t.regex(error.message, /non-numeric/);
+  // the message names the offending value
+  t.regex(error.message, /red/);
+});
+
+test("max(): throws when the default key meets node objects", (t) => {
+  t.throws(() => fanOutEdges.n().max(), { message: /non-numeric/ });
+});
+
+test("max(): rejects NaN and Infinity", (t) => {
+  t.throws(() => fanOutEdges.n().max(() => NaN));
+  t.throws(() => fanOutEdges.n().max(() => Infinity));
+});
+
+test("max(): resets the traversal after a successful run", (t) => {
+  const traversal = fanOutEdges.n();
+
+  t.is(traversal.max(age), 10);
+  // without a reset, the old steps would still be connected
+  t.deepEqual(sorted(traversal.id().all()), [1, 2, 3, 4, 5, 6]);
+});
+
+test("max(): resets the traversal even when it throws", (t) => {
+  const traversal = fanOutEdges.n();
+
+  t.throws(() => traversal.max((n) => n.props?.color));
+  // this is the try/finally case
+  t.deepEqual(sorted(traversal.id().all()), [1, 2, 3, 4, 5, 6]);
+});
