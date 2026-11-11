@@ -16,4 +16,19 @@ const socialNetworkGraph = new Graph((g) => {
 
 const querry1 = socialNetworkGraph.n().outE("canopy").all();
 
-console.log(querry1);
+//console.log("socialNetworkGraph.n().outE():", socialNetworkGraph.n().outE("canopy"));
+
+// console.log(querry1);
+
+const generator = socialNetworkGraph.n().outE("canopy").chain.process();
+
+const collection = [];
+
+for (const item of generator) {
+  collection.push(item);
+}
+
+const asSet = new Set(collection);
+const size = asSet.size;
+
+console.log(size);

@@ -269,6 +269,13 @@ class Traversal {
     return result;
   }
 
+  count(): number {
+    let count = 0;
+    for (const _ of this.chain.process()) count++;
+    this.reset();
+    return count;
+  }
+
   /**
    * Runs the traversal lazily, returning an iterator that produces one result
    * at a time.
