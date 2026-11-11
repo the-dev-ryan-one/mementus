@@ -117,8 +117,13 @@ class Traversal {
   /**
    * Moves from each node to its outgoing edges.
    *
+   * @param label - Selects which outgoing edges to return:
+   *   - omitted or `null`: all of them
+   *   - a string: only edges with that label
+   *
    * @example
-   * graph.n(1).outE().all(); // the edges leaving node 1
+   * graph.n(1).outE().all();         // the edges leaving node 1
+   * graph.n(1).outE("canopy").all(); // only edges labelled "canopy"
    */
   outE(label: string | null = null): Traversal {
     this.chain.connect(OutEStep, this.graph, label);
@@ -128,8 +133,13 @@ class Traversal {
   /**
    * Moves from each node to its incoming edges.
    *
+   * @param label - Selects which incoming edges to return:
+   *   - omitted or `null`: all of them
+   *   - a string: only edges with that label
+   *
    * @example
-   * graph.n(3).inE().all(); // the edges arriving at node 3
+   * graph.n(3).inE().all();         // the edges arriving at node 3
+   * graph.n(3).inE("canopy").all(); // only edges labelled "canopy"
    */
   inE(label: string | null = null): Traversal {
     this.chain.connect(InEStep, this.graph, label);

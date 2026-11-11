@@ -4,7 +4,7 @@ import OutEStep from "../../../src/pipeline/steps/out-e-step.js";
 import { fanOutEdges, labeledFanOutEdges } from "../graph-sample.js";
 
 test("Enumerates outgoing edges as a flat map", (t) => {
-  const source = new Source([fanOutEdges.node(1)], fanOutEdges);
+  const source = new Source([fanOutEdges.node(1)]);
   const outEStep = new OutEStep(source, fanOutEdges);
 
   const producer = outEStep.process();
@@ -19,7 +19,8 @@ test("Enumerates outgoing edges as a flat map", (t) => {
 //------------------------------
 // ids of the outgoing edges of a node in the labelled graph, optionally filtered by label
 const outEIds = (nodeId, label) => {
-  const source = new Source([labeledFanOutEdges.node(nodeId)], labeledFanOutEdges);
+  const source = new Source([labeledFanOutEdges.node(nodeId)]);
+
   const step = label === undefined ? new OutEStep(source, labeledFanOutEdges) : new OutEStep(source, labeledFanOutEdges, label);
   return [...step.process()].map((edge) => edge.id);
 };
@@ -56,14 +57,14 @@ test("With a label, yields nothing for a node with no outgoing edges", (t) => {
 });
 
 test("Unlabelled edges are not matched by a label", (t) => {
-  const source = new Source([fanOutEdges.node(1)], fanOutEdges);
+  const source = new Source([fanOutEdges.node(1)]);
   const outEStep = new OutEStep(source, fanOutEdges, "label1");
 
   t.deepEqual([...outEStep.process()], []);
 });
 
 test("Enumerates outgoing edges for several input nodes in order", (t) => {
-  const source = new Source([labeledFanOutEdges.node(2), labeledFanOutEdges.node(3)], labeledFanOutEdges);
+  const source = new Source([labeledFanOutEdges.node(2), labeledFanOutEdges.node(3)]);
   const outEStep = new OutEStep(source, labeledFanOutEdges);
 
   t.deepEqual(
