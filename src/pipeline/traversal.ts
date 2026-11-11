@@ -269,11 +269,45 @@ class Traversal {
     return result;
   }
 
+  /**
+   * Runs the traversal and returns how many results it produced. Duplicates
+   * are counted, and an empty traversal returns `0`.
+   *
+   * @example
+   * graph.n().count();       // 3
+   * graph.n(1).out().count(); // how many nodes node 1 points to
+   */
   count(): number {
     let count = 0;
     for (const _ of this.chain.process()) count++;
     this.reset();
     return count;
+  }
+
+  /**
+   * Runs the traversal and returns how many different results it produced.
+   * Results that map to the same key are counted once. Results whose key is
+   * `undefined` or `null` are skipped, and an empty traversal returns `0`.
+   *
+   * @param key - Called with each result; whatever it returns decides which
+   *   results count as the same. Omitted: the result itself, so objects are
+   *   compared by reference and plain values by value.
+   *
+   * @example
+   * graph.n(1).out().out().countDistinct();    // each node once, however many paths reach it
+   * graph.n().countDistinct((n) => n.label);   // how many different labels
+   * graph.e().countDistinct((e) => e.id);      // edges compared by id
+   */
+  countDistinct(key: (item: unknown) => unknown = (item) => item): number {
+    const seen = new Set<unknown>();
+    for (const item of this.chain.process()) {
+      const keyed = key(item);
+      if (!(keyed === undefined || keyed === null)) {
+        seen.add(keyed);
+      }
+    }
+    this.reset();
+    return seen.size;
   }
 
   /**

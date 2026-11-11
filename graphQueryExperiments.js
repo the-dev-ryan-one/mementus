@@ -14,21 +14,24 @@ const socialNetworkGraph = new Graph((g) => {
   g.addEdge({ id: 40, from: 2, to: 3, props: { relationship: "spouse" } });
 });
 
-const querry1 = socialNetworkGraph.n().outE("canopy").all();
+const query = socialNetworkGraph.n(1).out().out().all();
+
+// console.log("query: ", query);
+// console.log(query[0] === query[1]);
 
 //console.log("socialNetworkGraph.n().outE():", socialNetworkGraph.n().outE("canopy"));
 
 // console.log(querry1);
 
-const generator = socialNetworkGraph.n().outE("canopy").chain.process();
+// const generator = socialNetworkGraph.n().outE("canopy").chain.process();
 
-const collection = [];
+// const collection = [];
 
-for (const item of generator) {
-  collection.push(item);
-}
+// for (const item of generator) {
+//   collection.push(item);
+// }
 
-const asSet = new Set(collection);
-const size = asSet.size;
+// const asSet = new Set(collection);
+// const size = asSet.size;
 
-console.log(size);
+// console.log(size);

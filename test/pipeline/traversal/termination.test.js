@@ -89,3 +89,214 @@ test("Resets the traversal so the next query starts fresh", (t) => {
   // without a reset, the old out() step would still be connected and this would give [2, 3, 4]
   t.deepEqual(traversal.id().all(), [1]);
 });
+
+//-----------------------------
+// count distinct tests below
+//-----------------------------
+
+test("Counts each node once when no key is given", (t) => {
+  // 1 -> 2, 3, 4, then 2 -> 5, 3 -> 5, 3 -> 6, so node 5 is reached twice
+  const traversal = () => fanOutEdges.n(1).out().out();
+
+  t.is(traversal().count(), 3);
+  t.is(traversal().countDistinct(), 2);
+});
+
+test("Counts distinct plain values", (t) => {
+  // ids are [5, 5, 6]
+  t.is(fanOutEdges.n(1).out().out().id().countDistinct(), 2);
+});
+
+test("A key function decides what counts as the same", (t) => {
+  t.is(
+    fanOutEdges
+      .n(1)
+      .out()
+      .out()
+      .countDistinct((n) => n.id),
+    2,
+  );
+  t.is(
+    fanOutEdges.n().countDistinct((n) => n.id),
+    6,
+  );
+});
+
+test("A constant key collapses everything to one", (t) => {
+  t.is(
+    fanOutEdges.n().countDistinct(() => "same"),
+    1,
+  );
+});
+
+test("Dedupes edges by id with a key function", (t) => {
+  // n(1).out().out() reaches nodes [5, 5, 6], so inE() yields [40, 50, 40, 50, 60]
+  const traversal = () => fanOutEdges.n(1).out().out().inE();
+
+  t.is(traversal().count(), 5);
+  t.is(
+    traversal().countDistinct((e) => e.id),
+    3,
+  );
+});
+
+test("Counts distinct labels", (t) => {
+  // node 1's outgoing edges are 10, 20, 30, 70, 80 with labels
+  // label1, label2, label3, label1, label2
+  const traversal = () => labeledFanOutEdges.n(1).outE();
+
+  t.is(traversal().count(), 5);
+  t.is(
+    traversal().countDistinct((e) => e.label),
+    3,
+  );
+});
+
+test("Items with a missing key are not counted", (t) => {
+  // only nodes 2, 3 and 4 have a color. Nodes 1, 5 and 6 key to undefined and are skipped
+  t.is(
+    fanOutEdges.n().countDistinct((n) => n.props?.color),
+    3,
+  );
+});
+
+test("Returns 0 when there are no results (countDistinct)", (t) => {
+  t.is(fanOutEdges.n(1).in().countDistinct(), 0);
+  t.is(
+    fanOutEdges
+      .n(1)
+      .in()
+      .countDistinct((n) => n.id),
+    0,
+  );
+});
+
+test("Never exceeds count()", (t) => {
+  const traversal = () => fanOutEdges.n(1).out().out();
+
+  t.true(traversal().countDistinct() <= traversal().count());
+});
+
+test("Calls the key function once per result", (t) => {
+  const seen = [];
+  fanOutEdges
+    .n(1)
+    .out()
+    .out()
+    .countDistinct((n) => {
+      seen.push(n.id);
+      return n.id;
+    });
+
+  t.deepEqual(seen, [5, 5, 6]);
+});
+
+test("Resets the traversal so the next query starts fresh (countDistinct)", (t) => {
+  const traversal = fanOutEdges.n(1);
+
+  t.is(traversal.out().countDistinct(), 3);
+  // without a reset, the old out() step would still be connected
+  t.deepEqual(traversal.id().all(), [1]);
+});
+
+test("Edges without a key function (depends on Graph returning the same instance)", (t) => {
+  // passes only if Graph hands back the same Edge object for the same id.
+  // If this returns 5, edges are rebuilt on each lookup and you need the key form above.
+  t.is(fanOutEdges.n(1).out().out().inE().countDistinct(), 3);
+});
+
+test("e(): counts every edge once", (t) => {
+  t.is(fanOutEdges.e().count(), 6);
+  t.is(fanOutEdges.e().countDistinct(), 6);
+});
+
+test("e(): distinct by id matches the number of edges", (t) => {
+  t.is(
+    fanOutEdges.e().countDistinct((e) => e.id),
+    6,
+  );
+  t.is(
+    labeledFanOutEdges.e().countDistinct((e) => e.id),
+    8,
+  );
+});
+
+test("e(): a single edge counts as one", (t) => {
+  t.is(fanOutEdges.e(10).countDistinct(), 1);
+  t.is(
+    fanOutEdges.e(10).countDistinct((e) => e.id),
+    1,
+  );
+});
+
+test("e(): collapses edges that share a label", (t) => {
+  // labeled graph: 8 edges, but label1 is on 10 and 70, label2 on 20 and 80
+  const traversal = () => labeledFanOutEdges.e();
+
+  t.is(traversal().count(), 8);
+  t.is(
+    traversal().countDistinct((e) => e.label),
+    6,
+  );
+});
+
+test("e(): counts distinct plain values after label()", (t) => {
+  t.is(labeledFanOutEdges.e().label().count(), 8);
+  t.is(labeledFanOutEdges.e().label().countDistinct(), 6);
+});
+
+test("e(): counts distinct plain values after id()", (t) => {
+  t.is(fanOutEdges.e().id().countDistinct(), 6);
+});
+
+test("e(): unlabelled edges are not counted by a label key", (t) => {
+  // assumes an edge created without a label has label undefined or null
+  t.is(
+    fanOutEdges.e().countDistinct((e) => e.label),
+    0,
+  );
+});
+
+test("e(): a constant key collapses everything to one", (t) => {
+  t.is(
+    fanOutEdges.e().countDistinct(() => "same"),
+    1,
+  );
+});
+
+test("e(): counts after a filter step", (t) => {
+  // label1 is on edges 10 and 70, label2 on 20 and 80
+  const traversal = () => labeledFanOutEdges.e().filter((e) => e.label === "label1" || e.label === "label2");
+
+  t.is(traversal().count(), 4);
+  t.is(
+    traversal().countDistinct((e) => e.label),
+    2,
+  );
+});
+
+test("e(): never exceeds count()", (t) => {
+  const traversal = () => labeledFanOutEdges.e();
+
+  t.true(traversal().countDistinct((e) => e.label) <= traversal().count());
+});
+
+test("e(): a missing edge id yields 0 with the default key", (t) => {
+  // documents current behaviour: e(999) wraps undefined in an array, and
+  // countDistinct skips undefined keys. count() would return 1 here.
+  t.is(fanOutEdges.e(999).countDistinct(), 0);
+});
+
+test("e(): resets the traversal so the next query starts fresh", (t) => {
+  const traversal = fanOutEdges.e();
+
+  t.is(traversal.countDistinct(), 6);
+  // without a reset, the old steps would still be connected
+  t.deepEqual(
+    traversal
+      .id()
+      .all()
+      .sort((a, b) => a - b),
+    [10, 20, 30, 40, 50, 60],
+  );
+});
