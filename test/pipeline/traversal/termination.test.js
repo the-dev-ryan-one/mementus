@@ -1,5 +1,5 @@
 import test from "ava";
-import Traversal from "../../../src/pipeline/traversal.js";
+import Traversal, { toNumber } from "../../../src/pipeline/traversal.js";
 import { fanOutEdges, labeledFanOutEdges } from "../graph-sample.js";
 
 test("Terminate with empty source", (t) => {
@@ -301,8 +301,6 @@ test("e(): resets the traversal so the next query starts fresh", (t) => {
   );
 });
 
-//------------------------
-//------------------------
 const age = (n) => n.props?.age;
 const sorted = (xs) => [...xs].sort((a, b) => a - b);
 
@@ -426,4 +424,126 @@ test("max(): resets the traversal even when it throws", (t) => {
   t.throws(() => traversal.max((n) => n.props?.color));
   // this is the try/finally case
   t.deepEqual(sorted(traversal.id().all()), [1, 2, 3, 4, 5, 6]);
+});
+
+test("max: default key returns the largest value in a stream of numbers", (t) => {
+  const traversal = new Traversal([3, 9, 4]);
+
+  t.is(traversal.max(), 9);
+});
+
+test("max: string key reads from props", (t) => {
+  const traversal = new Traversal([
+    { id: 1, props: { age: 30 } },
+    { id: 2, props: { age: 45 } },
+    { id: 3, props: { age: 22 } },
+  ]);
+
+  t.is(traversal.max("age"), 45);
+});
+
+test("max: function key is used as-is", (t) => {
+  const traversal = new Traversal([
+    { id: 1, props: { age: 30 } },
+    { id: 2, props: { age: 45 } },
+  ]);
+
+  t.is(
+    traversal.max((x) => x.id),
+    2,
+  );
+});
+
+test("max: handles all-negative values (largest starts undefined, not 0)", (t) => {
+  const traversal = new Traversal([
+    { id: 1, props: { temp: -10 } },
+    { id: 2, props: { temp: -3 } },
+    { id: 3, props: { temp: -7 } },
+  ]);
+
+  t.is(traversal.max("temp"), -3);
+});
+
+test("max: converts numeric strings via toNumber", (t) => {
+  const traversal = new Traversal([
+    { id: 1, props: { age: "35" } },
+    { id: 2, props: { age: 9 } },
+    { id: 3, props: { age: " 20 " } },
+  ]);
+
+  t.is(traversal.max("age"), 35);
+});
+
+test("max: skips items where the key is missing, null or undefined", (t) => {
+  const traversal = new Traversal([
+    { id: 1, props: { age: 30 } },
+    { id: 2 }, // no props
+    { id: 3, props: {} }, // prop missing
+    { id: 4, props: { age: null } },
+    { id: 5, props: { age: undefined } },
+  ]);
+
+  t.is(traversal.max("age"), 30);
+});
+
+test("max: returns undefined for an empty stream or when nothing has the key", (t) => {
+  t.is(new Traversal([]).max("age"), undefined);
+
+  const noKey = new Traversal([{ id: 1 }, { id: 2, props: { name: "x" } }]);
+  t.is(noKey.max("age"), undefined);
+});
+
+test("max: throws on non-numeric values, naming the offending value", (t) => {
+  const traversal = new Traversal([
+    { id: 1, props: { age: 30 } },
+    { id: 2, props: { age: "abc" } },
+  ]);
+
+  const error = t.throws(() => traversal.max("age"));
+  t.regex(error.message, /Cannot aggregate non-numeric value: abc/);
+});
+
+//-----------------------
+// to number tests below
+//-----------------------
+
+test("toNumber: returns finite numbers unchanged", (t) => {
+  t.is(toNumber(42), 42);
+  t.is(toNumber(-3.5), -3.5);
+  t.is(toNumber(0), 0);
+});
+
+test("toNumber: rejects NaN and ±Infinity numbers", (t) => {
+  t.is(toNumber(NaN), undefined);
+  t.is(toNumber(Infinity), undefined);
+  t.is(toNumber(-Infinity), undefined);
+});
+
+test("toNumber: parses numeric strings, including decimals, exponents and whitespace", (t) => {
+  t.is(toNumber("35"), 35);
+  t.is(toNumber("-2.5"), -2.5);
+  t.is(toNumber("1e3"), 1000);
+  t.is(toNumber("  7  "), 7);
+});
+
+test("toNumber: returns undefined for empty and whitespace-only strings (not 0)", (t) => {
+  t.is(toNumber(""), undefined);
+  t.is(toNumber("   "), undefined);
+  t.is(toNumber("\t\n"), undefined);
+});
+
+test("toNumber: returns undefined for non-numeric or non-finite strings", (t) => {
+  t.is(toNumber("abc"), undefined);
+  t.is(toNumber("12px"), undefined);
+  t.is(toNumber("NaN"), undefined);
+  t.is(toNumber("Infinity"), undefined);
+});
+
+test("toNumber: returns undefined for every other type, even ones Number() would coerce", (t) => {
+  t.is(toNumber(null), undefined);
+  t.is(toNumber(undefined), undefined);
+  t.is(toNumber(true), undefined); // Number(true) === 1
+  t.is(toNumber([5]), undefined); // Number([5]) === 5
+  t.is(toNumber({}), undefined);
+  t.is(toNumber(10n), undefined);
 });

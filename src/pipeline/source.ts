@@ -35,8 +35,6 @@ class Source {
   constructor(source: unknown[]) {
     if (Array.isArray(source)) {
       this.pipe = new CollectionSource(source);
-      //console.log("------------At Source Creation-------->>> ", this.pipe);
-      //console.log("$$$$$$$---->>> ", this.pipe.process);
     } else {
       throw new Error("Source must be an array (for now)");
     }
@@ -44,13 +42,7 @@ class Source {
 
   // connect is called on this.chain
   connect(step: StepConstructor, ...args: unknown[]) {
-    // console.log("here x");
-    //console.log("------------Before connect-------------->>> ", this.pipe);
-    // console.log("$$$$$$$---->>> ", this.pipe.process);
-
     this.pipe = new step(this.pipe, ...args);
-    //console.log("------------After connect--------------->>> ", this.pipe);
-    // console.log("$$$$$$$---->>> ", this.pipe.process);
   }
 
   *process(): Generator<unknown> {

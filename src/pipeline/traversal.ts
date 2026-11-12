@@ -15,7 +15,7 @@ import InEStep from "./steps/in-e-step.ts";
 import Graph from "../graph.ts";
 
 // module level, above the class
-const toNumber = (val: unknown): number | undefined => {
+export const toNumber = (val: unknown): number | undefined => {
   if (typeof val === "number") return Number.isFinite(val) ? val : undefined;
   if (typeof val === "string" && val.trim() !== "") {
     const n = Number(val);
@@ -320,7 +320,31 @@ class Traversal {
     return seen.size;
   }
 
-  max(key: (item: any) => unknown = (item) => item): number | undefined {
+  /**
+   * Runs the traversal and returns the largest numeric value it produced.
+   * Numeric strings such as `"35"` are converted to numbers. Results whose key
+   * is `undefined` or `null` are skipped, and an empty traversal returns
+   * `undefined`.
+   *
+   * @param key - Decides which value to compare for each result:
+   *   - omitted: the result itself
+   *   - a string: shorthand for a function, so `"age"` is the same as
+   *     `(x) => x?.props?.age`
+   *   - a function: whatever it returns is compared
+   *
+   * @throws If a key is not `undefined`, `null`, a number or a numeric string.
+   *
+   * @example
+   * graph.n().max("age");                  // maximum "age" prop
+   * graph.n().max((n) => n?.props?.age);   // maximum "age" prop
+   */
+  max(key: string | (item: any) => unknown = (item) => item): number | undefined {
+
+    if (typeof(key) === "string") {
+      const propKeyName = key
+      key = (x) => x?.props?.[propKeyName]
+    }
+
     let largest: number | undefined;
     try {
       for (const item of this.chain.process()) {
