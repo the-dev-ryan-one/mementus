@@ -231,6 +231,10 @@ class Traversal {
     return this;
   }
 
+  repeat( toRepeat: (t : Traversal) => Traversal , times:number): Traversal {
+    return new Traversal()
+  }
+
   /**
    * Runs the traversal and returns the first result, or `undefined` if there
    * are none.
