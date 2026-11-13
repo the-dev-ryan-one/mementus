@@ -363,6 +363,133 @@ class Traversal {
     return largest;
   }
 
+    /**
+   * Returns the smallest number among the results, or `undefined` if there are
+   * none. Numeric strings like `"35"` are converted, and `null` or `undefined`
+   * values are skipped.
+   *
+   * @param key - What to compare: omitted (the result itself), a prop name
+   *   (`"age"` is shorthand for `(x) => x?.props?.age`), or a function.
+   *
+   * @throws If a value is not a number or numeric string.
+   *
+   * @example
+   * graph.n().min("age");         // the lowest age
+   * graph.n().prop("age").min();  // same, on plain values
+   */
+  min(key: string | (item: any) => unknown = (item) => item): number | undefined {
+
+    if (typeof(key) === "string") {
+      const propKeyName = key
+      key = (x) => x?.props?.[propKeyName]
+    }
+
+    let smallest: number | undefined;
+    try {
+      for (const item of this.chain.process()) {
+        const keyed = key(item);
+        if (keyed === undefined || keyed === null) continue;
+
+        const n = toNumber(keyed);
+        if (n === undefined) {
+          throw new Error(`Cannot aggregate non-numeric value: ${String(keyed)}. Check your key function returns numbers.`);
+        }
+        if (smallest === undefined || n < smallest) smallest = n;
+      }
+    } finally {
+      this.reset();
+    }
+    return smallest;
+  }
+
+  /**
+   * Returns the mean of the numbers among the results, or `undefined` if
+   * there are none. Numeric strings like `"35"` are converted, and `null` or
+   * `undefined` values are skipped (they don't count toward the average).
+   *
+   * @param key - What to average: omitted (the result itself), a prop name
+   *   (`"age"` is shorthand for `(x) => x?.props?.age`), or a function.
+   *
+   * @throws If a value is not a number or numeric string.
+   *
+   * @example
+   * graph.n().mean("age");         // the average age
+   * graph.n().prop("age").mean();  // same, on plain values
+   */
+  mean(key: string | (item: any) => unknown = (item) => item): number | undefined {
+
+    if (typeof(key) === "string") {
+      const propKeyName = key
+      key = (x) => x?.props?.[propKeyName]
+    }
+
+    let accum: number = 0;
+    let count: number = 0;
+    try {
+      for (const item of this.chain.process()) {
+        const keyed = key(item);
+        if (keyed === undefined || keyed === null) continue;
+
+        const n = toNumber(keyed);
+        if (n === undefined) {
+          throw new Error(`Cannot aggregate non-numeric value: ${String(keyed)}. Check your key function returns numbers.`);
+        }
+        accum += n;
+        count++;
+      }
+    } finally {
+      this.reset();
+    }
+
+    if (count === 0) return undefined;
+    return (accum/count);
+  }
+
+  /**
+   * Returns the total of the numbers among the results, or `undefined` if
+   * there is nothing to add. Numeric strings like `"35"` are converted, and
+   * `null` or `undefined` values are skipped.
+   *
+   * @param key - What to add: omitted (the result itself), a prop name
+   *   (`"age"` is shorthand for `(x) => x?.props?.age`), or a function.
+   *
+   * @throws If a value is not a number or numeric string.
+   *
+   * @example
+   * graph.n().sum("age");         // the total of all ages
+   * graph.n().prop("age").sum();  // same, on plain values
+   */
+  sum(key: string | (item: any) => unknown = (item) => item): number | undefined {
+
+    if (typeof(key) === "string") {
+      const propKeyName = key
+      key = (x) => x?.props?.[propKeyName]
+    }
+
+    let sum: number = 0;
+    let count: number = 0;
+    try {
+      for (const item of this.chain.process()) {
+        const keyed = key(item);
+        if (keyed === undefined || keyed === null) continue;
+
+        const n = toNumber(keyed);
+        if (n === undefined) {
+          throw new Error(`Cannot aggregate non-numeric value: ${String(keyed)}. Check your key function returns numbers.`);
+        }
+        sum += n;
+        count++;
+      }
+    } finally {
+      this.reset();
+    }
+
+    if (count === 0) return undefined;
+    return sum;
+  }
+
+  
+
   /**
    * Runs the traversal lazily, returning an iterator that produces one result
    * at a time.

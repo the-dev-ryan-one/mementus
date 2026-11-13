@@ -426,13 +426,13 @@ test("max(): resets the traversal even when it throws", (t) => {
   t.deepEqual(sorted(traversal.id().all()), [1, 2, 3, 4, 5, 6]);
 });
 
-test("max: default key returns the largest value in a stream of numbers", (t) => {
+test("max(): default key returns the largest value in a stream of numbers", (t) => {
   const traversal = new Traversal([3, 9, 4]);
 
   t.is(traversal.max(), 9);
 });
 
-test("max: string key reads from props", (t) => {
+test("max(): string key reads from props", (t) => {
   const traversal = new Traversal([
     { id: 1, props: { age: 30 } },
     { id: 2, props: { age: 45 } },
@@ -442,7 +442,7 @@ test("max: string key reads from props", (t) => {
   t.is(traversal.max("age"), 45);
 });
 
-test("max: function key is used as-is", (t) => {
+test("max(): function key is used as-is", (t) => {
   const traversal = new Traversal([
     { id: 1, props: { age: 30 } },
     { id: 2, props: { age: 45 } },
@@ -454,7 +454,7 @@ test("max: function key is used as-is", (t) => {
   );
 });
 
-test("max: handles all-negative values (largest starts undefined, not 0)", (t) => {
+test("max(): handles all-negative values (largest starts undefined, not 0)", (t) => {
   const traversal = new Traversal([
     { id: 1, props: { temp: -10 } },
     { id: 2, props: { temp: -3 } },
@@ -464,7 +464,7 @@ test("max: handles all-negative values (largest starts undefined, not 0)", (t) =
   t.is(traversal.max("temp"), -3);
 });
 
-test("max: converts numeric strings via toNumber", (t) => {
+test("max(): converts numeric strings via toNumber", (t) => {
   const traversal = new Traversal([
     { id: 1, props: { age: "35" } },
     { id: 2, props: { age: 9 } },
@@ -474,7 +474,7 @@ test("max: converts numeric strings via toNumber", (t) => {
   t.is(traversal.max("age"), 35);
 });
 
-test("max: skips items where the key is missing, null or undefined", (t) => {
+test("max(): skips items where the key is missing, null or undefined", (t) => {
   const traversal = new Traversal([
     { id: 1, props: { age: 30 } },
     { id: 2 }, // no props
@@ -486,14 +486,14 @@ test("max: skips items where the key is missing, null or undefined", (t) => {
   t.is(traversal.max("age"), 30);
 });
 
-test("max: returns undefined for an empty stream or when nothing has the key", (t) => {
+test("max(): returns undefined for an empty stream or when nothing has the key", (t) => {
   t.is(new Traversal([]).max("age"), undefined);
 
   const noKey = new Traversal([{ id: 1 }, { id: 2, props: { name: "x" } }]);
   t.is(noKey.max("age"), undefined);
 });
 
-test("max: throws on non-numeric values, naming the offending value", (t) => {
+test("max(): throws on non-numeric values, naming the offending value", (t) => {
   const traversal = new Traversal([
     { id: 1, props: { age: 30 } },
     { id: 2, props: { age: "abc" } },
@@ -501,6 +501,438 @@ test("max: throws on non-numeric values, naming the offending value", (t) => {
 
   const error = t.throws(() => traversal.max("age"));
   t.regex(error.message, /Cannot aggregate non-numeric value: abc/);
+});
+
+test("max(): handles a mix of negative, zero and positive values", (t) => {
+  const traversal = new Traversal([
+    { id: 1, props: { temp: -5 } },
+    { id: 2, props: { temp: 8 } },
+    { id: 3, props: { temp: 0 } },
+    { id: 4, props: { temp: 2 } },
+    { id: 5, props: { temp: -12 } },
+  ]);
+
+  t.is(traversal.max("temp"), 8);
+});
+
+test("max(): compares numerically across numbers and numeric strings on real nodes", (t) => {
+  // as strings, "5.5" would beat "10"
+  const traversal = new Traversal(
+    [1, 2, 3, 4].map((id) => fanOutEdges.node(id)),
+    fanOutEdges,
+  );
+
+  t.is(traversal.max("age"), 10);
+});
+
+test("min(): finds a numeric-string zero among real nodes", (t) => {
+  const traversal = new Traversal(
+    [1, 2, 3, 4].map((id) => fanOutEdges.node(id)),
+    fanOutEdges,
+  );
+
+  t.is(traversal.min("age"), 0);
+});
+
+test("min(): default key returns the smallest value in a stream of numbers", (t) => {
+  const traversal = new Traversal([3, 9, 4]);
+
+  t.is(traversal.min(), 3);
+});
+
+test("min(): string key reads from props", (t) => {
+  const traversal = new Traversal([
+    { id: 1, props: { age: 30 } },
+    { id: 2, props: { age: 45 } },
+    { id: 3, props: { age: 22 } },
+  ]);
+
+  t.is(traversal.min("age"), 22);
+});
+
+test("min(): function key is used as-is", (t) => {
+  const traversal = new Traversal([
+    { id: 5, props: { age: 30 } },
+    { id: 2, props: { age: 45 } },
+    { id: 9, props: { age: 22 } },
+  ]);
+
+  t.is(
+    traversal.min((x) => x.id),
+    2,
+  );
+});
+
+test("min(): handles all-positive values (smallest starts undefined, not 0)", (t) => {
+  const traversal = new Traversal([
+    { id: 1, props: { height: 180 } },
+    { id: 2, props: { height: 165 } },
+    { id: 3, props: { height: 172 } },
+  ]);
+
+  t.is(traversal.min("height"), 165);
+});
+
+test("min(): handles all-negative values", (t) => {
+  const traversal = new Traversal([
+    { id: 1, props: { temp: -10 } },
+    { id: 2, props: { temp: -3 } },
+    { id: 3, props: { temp: -7 } },
+  ]);
+
+  t.is(traversal.min("temp"), -10);
+});
+
+test("min(): zero is a valid value, not skipped as falsy", (t) => {
+  const traversal = new Traversal([
+    { id: 1, props: { score: 5 } },
+    { id: 2, props: { score: 0 } },
+    { id: 3, props: { score: 3 } },
+  ]);
+
+  t.is(traversal.min("score"), 0);
+});
+
+test("min(): converts numeric strings via toNumber", (t) => {
+  const traversal = new Traversal([
+    { id: 1, props: { age: "35" } },
+    { id: 2, props: { age: 40 } },
+    { id: 3, props: { age: " 20 " } },
+  ]);
+
+  t.is(traversal.min("age"), 20);
+});
+
+test("min(): compares numerically, not as strings", (t) => {
+  // as strings "10" < "9", as numbers 9 < 10
+  const traversal = new Traversal([
+    { id: 1, props: { n: "10" } },
+    { id: 2, props: { n: "9" } },
+  ]);
+
+  t.is(traversal.min("n"), 9);
+});
+
+test("min(): skips items where the key is missing, null or undefined", (t) => {
+  const traversal = new Traversal([
+    { id: 1, props: { age: 30 } },
+    { id: 2 }, // no props
+    { id: 3, props: {} }, // prop missing
+    { id: 4, props: { age: null } },
+    { id: 5, props: { age: undefined } },
+    { id: 6, props: { age: 41 } },
+  ]);
+
+  t.is(traversal.min("age"), 30);
+});
+
+test("min(): returns undefined for an empty stream or when nothing has the key", (t) => {
+  t.is(new Traversal([]).min("age"), undefined);
+
+  const noKey = new Traversal([{ id: 1 }, { id: 2, props: { name: "x" } }]);
+  t.is(noKey.min("age"), undefined);
+});
+
+test("min(): throws on non-numeric values, naming the offending value", (t) => {
+  const traversal = new Traversal([
+    { id: 1, props: { age: 30 } },
+    { id: 2, props: { age: "abc" } },
+  ]);
+
+  const error = t.throws(() => traversal.min("age"));
+  t.regex(error.message, /Cannot aggregate non-numeric value: abc/);
+});
+
+test("min(): resets the traversal so it can be run again, including after a throw", (t) => {
+  const ok = new Traversal([
+    { id: 1, props: { age: 30 } },
+    { id: 2, props: { age: 22 } },
+  ]);
+  t.is(ok.min("age"), 22);
+  t.is(ok.min("age"), 22); // would be undefined if reset() never ran
+
+  const bad = new Traversal([{ id: 1, props: { age: "abc" } }]);
+  t.throws(() => bad.min("age"));
+  t.throws(() => bad.min("age")); // would return undefined if the finally block didn't reset
+});
+
+test("min(): handles a mix of negative, zero and positive values", (t) => {
+  const traversal = new Traversal([
+    { id: 1, props: { temp: 5 } },
+    { id: 2, props: { temp: -8 } },
+    { id: 3, props: { temp: 0 } },
+    { id: 4, props: { temp: -2 } },
+    { id: 5, props: { temp: 12 } },
+  ]);
+
+  t.is(traversal.min("temp"), -8);
+});
+
+test("mean(): default key averages a stream of numbers", (t) => {
+  const traversal = new Traversal([2, 4, 9]);
+
+  t.is(traversal.mean(), 5);
+});
+
+test("mean(): string key reads from props", (t) => {
+  const traversal = new Traversal([
+    { id: 1, props: { age: 20 } },
+    { id: 2, props: { age: 30 } },
+    { id: 3, props: { age: 40 } },
+  ]);
+
+  t.is(traversal.mean("age"), 30);
+});
+
+test("mean(): function key is used as-is", (t) => {
+  const traversal = new Traversal([
+    { id: 2, props: { age: 99 } },
+    { id: 4, props: { age: 99 } },
+    { id: 6, props: { age: 99 } },
+  ]);
+
+  t.is(
+    traversal.mean((x) => x.id),
+    4,
+  );
+});
+
+test("mean(): returns a non-integer result without rounding", (t) => {
+  const traversal = new Traversal([
+    { id: 1, props: { n: 1 } },
+    { id: 2, props: { n: 2 } },
+  ]);
+
+  t.is(traversal.mean("n"), 1.5);
+});
+
+test("mean(): handles a mix of negative, zero and positive values", (t) => {
+  const traversal = new Traversal([
+    { id: 1, props: { temp: -5 } },
+    { id: 2, props: { temp: 10 } },
+    { id: 3, props: { temp: 0 } },
+    { id: 4, props: { temp: -1 } },
+    { id: 5, props: { temp: 6 } },
+  ]);
+
+  t.is(traversal.mean("temp"), 2);
+});
+
+test("mean(): zero is a real value and counts toward the average", (t) => {
+  // a falsy check on the key would skip the zeros and give 6 instead of 2
+  const traversal = new Traversal([
+    { id: 1, props: { score: 0 } },
+    { id: 2, props: { score: 0 } },
+    { id: 3, props: { score: 6 } },
+  ]);
+
+  t.is(traversal.mean("score"), 2);
+});
+
+test("mean(): converts numeric strings via toNumber", (t) => {
+  const traversal = new Traversal([
+    { id: 1, props: { age: "10" } },
+    { id: 2, props: { age: 20 } },
+    { id: 3, props: { age: " 30 " } },
+  ]);
+
+  t.is(traversal.mean("age"), 20);
+});
+
+test("mean(): skipped items don't count toward the denominator", (t) => {
+  // if the 3 skipped items were counted, this would be 30 / 5 = 6
+  const traversal = new Traversal([
+    { id: 1, props: { age: 10 } },
+    { id: 2 }, // no props
+    { id: 3, props: { age: null } },
+    { id: 4, props: { age: undefined } },
+    { id: 5, props: { age: 20 } },
+  ]);
+
+  t.is(traversal.mean("age"), 15);
+});
+
+test("mean(): duplicate values are each counted", (t) => {
+  // a distinct-values bug would give (2 + 8) / 2 = 5
+  const traversal = new Traversal([
+    { id: 1, props: { n: 2 } },
+    { id: 2, props: { n: 2 } },
+    { id: 3, props: { n: 8 } },
+  ]);
+
+  t.is(traversal.mean("n"), 4);
+});
+
+test("mean(): returns undefined for an empty stream or when nothing has the key", (t) => {
+  // not NaN (0 / 0) and not 0
+  t.is(new Traversal([]).mean("age"), undefined);
+
+  const noKey = new Traversal([{ id: 1 }, { id: 2, props: { name: "x" } }]);
+  t.is(noKey.mean("age"), undefined);
+});
+
+test("mean(): throws on non-numeric values, naming the offending value", (t) => {
+  const traversal = new Traversal([
+    { id: 1, props: { age: 30 } },
+    { id: 2, props: { age: "abc" } },
+  ]);
+
+  const error = t.throws(() => traversal.mean("age"));
+  t.regex(error.message, /Cannot aggregate non-numeric value: abc/);
+});
+
+test("mean(): resets the traversal so it can be run again, including after a throw", (t) => {
+  const ok = new Traversal([
+    { id: 1, props: { age: 30 } },
+    { id: 2, props: { age: 20 } },
+  ]);
+  t.is(ok.mean("age"), 25);
+  t.is(ok.mean("age"), 25); // would be undefined if reset() never ran
+
+  const bad = new Traversal([{ id: 1, props: { age: "abc" } }]);
+  t.throws(() => bad.mean("age"));
+  t.throws(() => bad.mean("age")); // would return undefined if the finally block didn't reset
+});
+
+test("mean(): averages a prop across real nodes, mixing numbers and numeric strings", (t) => {
+  // node 1's children: "5", 5.5, "0" -> (5 + 5.5 + 0) / 3
+  const traversal = new Traversal([fanOutEdges.node(1)], fanOutEdges);
+
+  t.is(traversal.out().mean("age"), 3.5);
+});
+
+test("mean(): a numeric string of zero counts as a value", (t) => {
+  // node 4 has age "0": non-empty so it isn't skipped, and toNumber gives 0
+  const traversal = new Traversal([fanOutEdges.node(4)], fanOutEdges);
+
+  t.is(traversal.mean("age"), 0);
+});
+
+test("mean(): skips real nodes with no props and doesn't count them in the denominator", (t) => {
+  // nodes 5 and 6 have no age; if counted, this would be 10 / 3
+  const traversal = new Traversal([fanOutEdges.node(5), fanOutEdges.node(1), fanOutEdges.node(6)], fanOutEdges);
+
+  t.is(traversal.mean("age"), 10);
+});
+
+test("mean(): returns undefined when no node in the stream has the prop", (t) => {
+  // node 3 points to nodes 5 and 6, neither of which has an age
+  const traversal = new Traversal([fanOutEdges.node(3)], fanOutEdges);
+
+  t.is(traversal.out().mean("age"), undefined);
+});
+
+test("mean(): default key works on the output of prop()", (t) => {
+  const traversal = new Traversal([fanOutEdges.node(1)], fanOutEdges);
+
+  t.is(traversal.out().prop("age").mean(), 3.5);
+});
+
+test("mean(): function key works on edges", (t) => {
+  // node 1's outgoing edge ids are 10, 20, 30
+  const traversal = new Traversal([fanOutEdges.node(1)], fanOutEdges);
+
+  t.is(
+    traversal.outE().mean((e) => e.id),
+    20,
+  );
+});
+
+test("mean(): mixing positive and negative values can give a negative mean", (t) => {
+  // sum is -12, so a sign or absolute-value bug would give 3 (or 10) instead
+  const traversal = new Traversal([
+    { id: 1, props: { temp: 10 } },
+    { id: 2, props: { temp: -20 } },
+    { id: 3, props: { temp: 4 } },
+    { id: 4, props: { temp: -6 } },
+  ]);
+
+  t.is(traversal.mean("temp"), -3);
+});
+
+test("sum(): default key sums a stream of numbers", (t) => {
+  t.is(new Traversal([2, 4, 9]).sum(), 15);
+});
+
+test("sum(): string key reads from props", (t) => {
+  const traversal = new Traversal([
+    { id: 1, props: { age: 20 } },
+    { id: 2, props: { age: 30 } },
+    { id: 3, props: { age: 40 } },
+  ]);
+
+  t.is(traversal.sum("age"), 90);
+});
+
+test("sum(): function key is used as-is", (t) => {
+  const traversal = new Traversal([
+    { id: 2, props: { age: 99 } },
+    { id: 4, props: { age: 99 } },
+  ]);
+
+  t.is(
+    traversal.sum((x) => x.id),
+    6,
+  );
+});
+
+test("sum(): handles a mix of positive and negative values", (t) => {
+  const traversal = new Traversal([
+    { id: 1, props: { n: 10 } },
+    { id: 2, props: { n: -20 } },
+    { id: 3, props: { n: 4 } },
+  ]);
+
+  t.is(traversal.sum("n"), -6);
+});
+
+test("sum(): a total of zero returns 0, not undefined", (t) => {
+  const cancels = new Traversal([
+    { id: 1, props: { n: 5 } },
+    { id: 2, props: { n: -5 } },
+  ]);
+  t.is(cancels.sum("n"), 0);
+
+  t.is(new Traversal([{ id: 1, props: { n: 0 } }]).sum("n"), 0);
+});
+
+test("sum(): adds numbers and numeric strings across real nodes", (t) => {
+  // node 1's children have ages "5", 5.5 and "0"
+  const traversal = new Traversal([fanOutEdges.node(1)], fanOutEdges);
+
+  t.is(traversal.out().sum("age"), 10.5);
+});
+
+test("sum(): skips items where the key is missing, null or undefined", (t) => {
+  const traversal = new Traversal([
+    { id: 1, props: { age: 10 } },
+    { id: 2 }, // no props
+    { id: 3, props: { age: null } },
+    { id: 4, props: { age: undefined } },
+    { id: 5, props: { age: 20 } },
+  ]);
+
+  t.is(traversal.sum("age"), 30);
+});
+
+test("sum(): returns undefined for an empty stream or when nothing has the key", (t) => {
+  t.is(new Traversal([]).sum("age"), undefined);
+
+  const noKey = new Traversal([{ id: 1 }, { id: 2, props: { name: "x" } }]);
+  t.is(noKey.sum("age"), undefined);
+});
+
+test("sum(): throws on non-numeric values, and resets so it can run again", (t) => {
+  const traversal = new Traversal([
+    { id: 1, props: { age: 30 } },
+    { id: 2, props: { age: "abc" } },
+  ]);
+
+  const error = t.throws(() => traversal.sum("age"));
+  t.regex(error.message, /Cannot aggregate non-numeric value: abc/);
+
+  // would return 30 or undefined if the finally block didn't reset
+  t.throws(() => traversal.sum("age"));
 });
 
 //-----------------------
